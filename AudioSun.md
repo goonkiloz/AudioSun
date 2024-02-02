@@ -40,7 +40,7 @@ AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simul
 
 ## Database Schema
 
-![AudioSun](https://github.com/edison914/project-ab-express-sequelize-with-auth/assets/101605994/64ca2fe7-116d-45f3-a221-a4d628ed4978)
+![AudioSun (1)](https://github.com/goonkiloz/AudioSun/assets/101605994/e67e8351-1318-44e9-9122-9b56dd15dedd)
 
 
 ```
@@ -59,12 +59,19 @@ Table Users {
 Table Songs {
   id integer [primary key]
   title varchar
-  album varchar
+  albumId varchar
   genre varchar
   description varchar
-  songImage url
   filePath url
-  userId integer [Foreign Key referencing Users.id]
+  userId integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table Albums {
+  id integer [primary key]
+  albumTitle varchar
+  albumImage url
   created_at timestamp
   updated_at timestamp
 }
