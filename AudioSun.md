@@ -40,7 +40,7 @@ AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simul
 
 ## Database Schema
 
-![AudioSun (2)](https://github.com/goonkiloz/AudioSun/assets/101605994/7d1c17fb-c01e-407e-bc28-60dea7d2f779)
+![AudioSun (2)](img/AudioSun.png)
 
 
 
