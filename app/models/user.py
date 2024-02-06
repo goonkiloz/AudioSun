@@ -1,7 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+# from .song import Song
+# from .playlist import Playlist
+# from .like import Like
+# from .comment import Comment
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -10,9 +13,19 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    #one user can have many songs, playlist, and likes
+    songs = db.relationship('Song', back_populates='user')
+    playlists = db.relationship('Playlist', back_populates='user')
+    likes = db.relationship('Like', back_populates='user')
+
+    #one user can have many comments
+    comments = db.relationship('Comment', back_populates='user')
 
     @property
     def password(self):
@@ -28,6 +41,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'username': self.username,
             'email': self.email
         }
