@@ -58,4 +58,6 @@ class Song(db.Model):
             'privacy': self.privacy,
             'user_id': self.user_id,
             'album_id': self.album_id,
-        }
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+    }
