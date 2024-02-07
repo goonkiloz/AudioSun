@@ -102,7 +102,13 @@ def upgrade():
 
     # to be manually added for each migration
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE album SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE playlist_songs SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
