@@ -1,19 +1,56 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from faker import Faker
 
+fake = Faker()
+users = []
+for i in range(50):
+    users.append(
+        dict(
+            username=fake.user_name(),
+            email=fake.email(),
+            password="password",
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+        )
+    )
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', first_name='Demo', last_name='User')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', first_name='Marnie', last_name='Mae')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', first_name='Bobbi', last_name='Dong')
-
+        username="Demo",
+        email="demo@aa.io",
+        password="password",
+        first_name="Demo",
+        last_name="User",
+    )
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+
+    # marnie = User(
+    #     username="marnie",
+    #     email="marnie@aa.io",
+    #     password="password",
+    #     first_name="Marnie",
+    #     last_name="Mae",
+    # )
+    # bobbie = User(
+    #     username="bobbie",
+    #     email="bobbie@aa.io",
+    #     password="password",
+    #     first_name="Bobbi",
+    #     last_name="Dong",
+    # )
+
+    for user in users:
+        new_user = User(
+            username=user["username"],
+            email=user["email"],
+            password=user["password"],
+            first_name=user["first_name"],
+            last_name=user["last_name"],
+        )
+        db.session.add(new_user)
+
     db.session.commit()
 
 
