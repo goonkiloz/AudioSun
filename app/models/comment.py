@@ -21,3 +21,13 @@ class Comment(db.Model):
     #one user can have many comments and one song can have many comments
     user = db.relationship('User', back_populates='comments')
     song = db.relationship('Song', back_populates='comments')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'comment_text': self.comment_text,
+            'user_id': self.user_id,
+            'song_id': self.user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+    }
