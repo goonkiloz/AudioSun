@@ -113,3 +113,13 @@ Table Playlist_Songs { [Many to Many between Playlists and Songs]
 ```
 
 ## User stories
+
+As a non-registed User, I want to be able to search songs so I can find music that fits my preference.
+
+As a non-registed User, I want to be able to Sign Up, so that I can share content with other users.
+
+As a registered User, I want to be able to manage content I created, so I can keep my content up to date and custom to me.
+
+As a registered User, I want to be able to create and manage playlists, so that I can connect with others who share my tastes.
+
+As a registered User, I want to be able to comment and like other users content, so that I can help support and encourage other that add content to the community.
