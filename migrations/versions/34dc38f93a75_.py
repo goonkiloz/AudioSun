@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e94c9e913dec
+Revision ID: 34dc38f93a75
 Revises:
-Create Date: 2024-02-06 15:23:40.118334
+Create Date: 2024-02-08 10:28:29.203188
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e94c9e913dec'
+revision = '34dc38f93a75'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -79,8 +79,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('comment_text')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -100,9 +99,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('playlist_id', 'song_id')
     )
 
-    # to be manually added for each migration
     if environment == "production":
-        op.execute(f"ALTER TABLE album SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE albums SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")

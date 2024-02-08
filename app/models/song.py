@@ -10,11 +10,12 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 playlist_songs = db.Table(
     'playlist_songs',
-    db.Model.metadata,
-    db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id'), primary_key=True),
-    db.Column('song_id', db.Integer, db.ForeignKey('songs.id'), primary_key=True)
-
+    db.Column('playlist_id', db.Integer, db.ForeignKey(add_prefix_for_prod('playlists.id')), primary_key=True),
+    db.Column('song_id', db.Integer, db.ForeignKey(add_prefix_for_prod('songs.id')), primary_key=True)
 )
+
+if environment == "production":
+    playlist_songs.schema = SCHEMA
 
 class Song(db.Model):
     __tablename__ = 'songs'
@@ -58,4 +59,6 @@ class Song(db.Model):
             'privacy': self.privacy,
             'user_id': self.user_id,
             'album_id': self.album_id,
-        }
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+    }

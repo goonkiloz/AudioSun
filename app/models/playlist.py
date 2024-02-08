@@ -37,4 +37,6 @@ class Playlist(db.Model):
             'playlist_image': self.playlist_image,
             'privacy': self.privacy,
             'user_id': self.user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
         }
