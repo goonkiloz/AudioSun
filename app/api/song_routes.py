@@ -13,6 +13,16 @@ def songs():
     songs = Song.query.all()
     return {'songs': [song.to_dict() for song in songs]}
 
+@song_routes.route('/current')
+@login_required
+def songs():
+    """
+    Query for all songs owned by current user and returns them in a list of song dictionaries
+    """
+    user = current_user.to_dict()
+    songs = Song.query.filter(Song.user_id == user["id"])
+    return {'songs': [song.to_dict() for song in songs]}
+
 @song_routes.route('/new', methods=["POST"])
 @login_required
 def new_song():
@@ -26,9 +36,43 @@ def new_song():
             description=data["description"],
             file_path=data["title"],
             privacy=data["privacy"],
-            user_id=1
+            user_id=user["id"]
         )
         db.session.add(new_song)
         db.session.commit()
         return redirect("/")
     return form.errors, 401
+
+
+@song_routes.route('/<int:id>', methods=["PATCH", "PUT"])
+@login_required
+def update_song(id):
+    form = NewSongForm()
+    song = Song.query.get(id)
+    user = current_user.to_dict()
+    if song["user_id"] != user["id"]:
+        return {'error': "Not Authorized"}
+    if form.validate_on_submit():
+        data = form.data
+        song.title=data["title"]
+        song.genre=data["genre"]
+        song.description=data["description"]
+        song.file_path=data["title"]
+        song.privacy=data["privacy"]
+
+        db.session.commit()
+        return redirect("/")
+    return form.errors, 401
+
+
+@song_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_song(id):
+    song = Song.query.get(id)
+    user = current_user.to_dict()
+    if song["user_id"] != user["id"]:
+        return {'error': "Not Authorized"}
+
+    db.session.delete(song)
+    db.session.commit()
+    return redirect("/")
