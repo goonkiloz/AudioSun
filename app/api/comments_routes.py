@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify, redirect, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Song, User, db, Comment
+from app.models import db, Comment
 from ..forms import NewCommentForm
 
 comments_routes = Blueprint('comments', __name__)
@@ -31,6 +31,7 @@ def update_comment(comment_id):
     if form.validate_on_submit():
         current_comment.comment_text=form.data['comment_text']
         db.session.commit()
+        return current_comment.to_dict()
 
     return form.errors, 401
 
@@ -57,4 +58,3 @@ def delete_comment(comment_id):
     db.session.commit()
 
     return {'message':'succcessfully deleted'}
-
