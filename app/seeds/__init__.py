@@ -3,7 +3,8 @@ from .users import seed_users, undo_users
 from .songs import seed_songs, undo_songs
 from .playlists import seed_playlists, undo_playlists
 from .likes import seed_likes, undo_likes
-# from .playlist_songs import seed_playlist_songs, undo_playlist_songs
+from .playlist_songs import seed_playlist_songs, undo_playlist_songs
+from .comments import seed_comments, undo_comments
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -23,13 +24,14 @@ def seed():
         undo_songs()
         undo_playlists()
         undo_likes()
-        # undo_playlist_songs()
-
+        undo_playlist_songs()
+        undo_comments()
     seed_users()
     seed_songs()
     seed_playlists()
     seed_likes()
-    # seed_playlist_songs()
+    seed_playlist_songs()
+    seed_comments()
     # Add other seed functions here
 
 
@@ -40,5 +42,6 @@ def undo():
     undo_songs()
     undo_playlists()
     undo_likes()
-    # undo_playlist_songs()
+    undo_playlist_songs()
+    undo_comments()
     # Add other undo functions here
