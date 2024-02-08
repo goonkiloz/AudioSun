@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, redirect
+from flask import Blueprint, jsonify, redirect, request
 from flask_login import login_required, current_user
-from app.models import Song, User, db
-from ..forms import NewSongForm
+from app.models import Song, User, db, Comment
+from ..forms import NewSongForm, NewCommentForm
 
 song_routes = Blueprint('songs', __name__)
 

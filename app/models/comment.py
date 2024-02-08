@@ -27,7 +27,7 @@ class Comment(db.Model):
             'id': self.id,
             'comment_text': self.comment_text,
             'user_id': self.user_id,
-            'song_id': self.user_id,
+            'song_id': self.song_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
     }
