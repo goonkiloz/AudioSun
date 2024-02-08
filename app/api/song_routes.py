@@ -15,19 +15,17 @@ def songs():
 
 @song_routes.route('/current')
 @login_required
-def songs():
+def current_songs():
     """
     Query for all songs owned by current user and returns them in a list of song dictionaries
     """
-    user = current_user.to_dict()
-    songs = Song.query.filter(Song.user_id == user["id"])
+    songs = Song.query.filter(Song.user_id == current_user.id)
     return {'songs': [song.to_dict() for song in songs]}
 
-@song_routes.route('/new', methods=["POST"])
+@song_routes.route('/', methods=["POST"])
 @login_required
 def new_song():
     form = NewSongForm()
-    user = current_user.to_dict()
     if form.validate_on_submit():
         data = form.data
         new_song = Song(
@@ -36,7 +34,7 @@ def new_song():
             description=data["description"],
             file_path=data["title"],
             privacy=data["privacy"],
-            user_id=user["id"]
+            user_id=current_user.id
         )
         db.session.add(new_song)
         db.session.commit()
@@ -49,8 +47,7 @@ def new_song():
 def update_song(id):
     form = NewSongForm()
     song = Song.query.get(id)
-    user = current_user.to_dict()
-    if song["user_id"] != user["id"]:
+    if song["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
     if form.validate_on_submit():
         data = form.data
@@ -69,8 +66,7 @@ def update_song(id):
 @login_required
 def delete_song(id):
     song = Song.query.get(id)
-    user = current_user.to_dict()
-    if song["user_id"] != user["id"]:
+    if song["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
 
     db.session.delete(song)

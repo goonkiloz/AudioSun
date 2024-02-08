@@ -35,6 +35,40 @@ Retrieves all songs regardless of the sign-in status.
     }
     ```
 
+### Get all songs by current user
+
+Retrieves all songs owned by the current user.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: api/songs/current
+  * Headers: none
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "songs": [
+            {
+                "id": 1,
+                "title": "Song title",
+                "albumn": "albumb name",
+                "genre": "pop",
+                "descrtiption": "great pop song",
+                "songImage": "https:songimage.img",
+                "filePath": "https:awgpe.mp3",
+                "userId": 1,
+            }
+        ]
+    }
+    ```
+
 <!-- * Error Response: Invalid credentials
   * Status Code: 401
   * Headers:
@@ -95,7 +129,7 @@ update a song based on songId when signed in
 
 * Require Authentication: true
 * Request
-  * Method: UPDATE/PUT
+  * Method: PATCH/PUT
   * URL: api/songs/:songId
   * Headers: application/json
   * Body:
