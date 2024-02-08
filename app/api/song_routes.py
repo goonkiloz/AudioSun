@@ -25,6 +25,9 @@ def current_songs():
 @song_routes.route('/', methods=["POST"])
 @login_required
 def new_song():
+    """
+    Create a new song
+    """
     form = NewSongForm()
     if form.validate_on_submit():
         data = form.data
@@ -45,6 +48,9 @@ def new_song():
 @song_routes.route('/<int:id>', methods=["PATCH", "PUT"])
 @login_required
 def update_song(id):
+    """
+    Update song if owned by current user
+    """
     form = NewSongForm()
     song = Song.query.get(id)
     if song["user_id"] != current_user.id:
@@ -65,6 +71,9 @@ def update_song(id):
 @song_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_song(id):
+    """
+    Delete song if owned by current user
+    """
     song = Song.query.get(id)
     if song["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
