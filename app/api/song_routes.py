@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, redirect, request
 from flask_login import login_required, current_user
-from app.models import Song, User, db, Comment
+from app.models import Song, db, Comment
 from ..forms import NewSongForm, NewCommentForm
 
 song_routes = Blueprint('songs', __name__)
@@ -13,11 +13,22 @@ def songs():
     songs = Song.query.all()
     return {'songs': [song.to_dict() for song in songs]}
 
-@song_routes.route('/new', methods=["POST"])
+@song_routes.route('/current')
+@login_required
+def current_songs():
+    """
+    Query for all songs owned by current user and returns them in a list of song dictionaries
+    """
+    songs = Song.query.filter(Song.user_id == current_user.id)
+    return {'songs': [song.to_dict() for song in songs]}
+
+@song_routes.route('/', methods=["POST"])
 @login_required
 def new_song():
+    """
+    Create a new song
+    """
     form = NewSongForm()
-    user = current_user.to_dict()
     if form.validate_on_submit():
         data = form.data
         new_song = Song(
@@ -26,12 +37,50 @@ def new_song():
             description=data["description"],
             file_path=data["title"],
             privacy=data["privacy"],
-            user_id=1
+            user_id=current_user.id
         )
         db.session.add(new_song)
         db.session.commit()
         return redirect("/")
     return form.errors, 401
+
+
+@song_routes.route('/<int:id>', methods=["PATCH", "PUT"])
+@login_required
+def update_song(id):
+    """
+    Update song if owned by current user
+    """
+    form = NewSongForm()
+    song = Song.query.get(id)
+    if song["user_id"] != current_user.id:
+        return {'error': "Not Authorized"}
+    if form.validate_on_submit():
+        data = form.data
+        song.title=data["title"]
+        song.genre=data["genre"]
+        song.description=data["description"]
+        song.file_path=data["title"]
+        song.privacy=data["privacy"]
+
+        db.session.commit()
+        return redirect("/")
+    return form.errors, 401
+
+
+@song_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_song(id):
+    """
+    Delete song if owned by current user
+    """
+    song = Song.query.get(id)
+    if song["user_id"] != current_user.id:
+        return {'error': "Not Authorized"}
+
+    db.session.delete(song)
+    db.session.commit()
+    return redirect("/")
 
 #Eddie GET comments from a song
 @song_routes.route('/<int:song_id>/comments', methods=['GET'])
