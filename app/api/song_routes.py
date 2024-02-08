@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, redirect, request
+from flask import Blueprint, redirect, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment
 from ..forms import NewSongForm, NewCommentForm
