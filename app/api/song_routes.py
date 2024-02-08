@@ -29,6 +29,7 @@ def new_song():
     Create a new song
     """
     form = NewSongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         new_song = Song(
@@ -41,7 +42,7 @@ def new_song():
         )
         db.session.add(new_song)
         db.session.commit()
-        return redirect("/")
+        return new_song.to_dict()
     return form.errors, 401
 
 
@@ -52,6 +53,7 @@ def update_song(id):
     Update song if owned by current user
     """
     form = NewSongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     song = Song.query.get(id)
     if song["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
@@ -64,7 +66,7 @@ def update_song(id):
         song.privacy=data["privacy"]
 
         db.session.commit()
-        return redirect("/")
+        return song.to_dict()
     return form.errors, 401
 
 
@@ -80,7 +82,7 @@ def delete_song(id):
 
     db.session.delete(song)
     db.session.commit()
-    return redirect("/")
+    return {'message':'succcessfully deleted'}
 
 #Eddie GET comments from a song
 @song_routes.route('/<int:song_id>/comments', methods=['GET'])
