@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalButton/OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../Login/LoginFormModal"
+import SignupFormModal from "../Signup/SignupFormModal";
 
 function ProfileButton() {
   const dispatch = useDispatch();
