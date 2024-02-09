@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, request
 from flask_login import login_required, current_user
-from app.models import Song, db, Comment
+from app.models import Song, db, Comment, Like
 from ..forms import NewSongForm, NewCommentForm
 
 song_routes = Blueprint('songs', __name__)
@@ -104,9 +104,6 @@ def add_comments_for_song(song_id):
     """
     current_song = Song.query.get(song_id)
 
-    if current_user.id != current_song.user_id:
-        return {'error': 'Not Authorized'}, 403
-
     form = NewCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     #how do i test for this in postman??????
@@ -121,3 +118,46 @@ def add_comments_for_song(song_id):
         return new_comment.to_dict()
 
     return form.errors, 401
+
+@song_routes.route('/<int:song_id>/likes', menthods=['GET'])
+def get_likes_for_song(song_id):
+    """
+    Query for all likes based on song id and returns likes for that song id
+    """
+
+    current_song_likes = Like.query.filter(Like.song_id == song_id).all()
+
+    if not current_song_likes:
+        return {'error': 'no comment is found'}, 404
+    return {'likes': [like.to_dict() for like in current_song_likes]}
+
+
+@song_routes.route('/<int:song_id>/likes', methods=['POST'])
+@login_required
+def add_like_for_song(song_id):
+    """
+    add a like based on the song id and user id
+    """
+    new_like = Like(
+        song_id=song_id,
+        user_id=current_user.id
+    )
+    db.session.add(new_like)
+    db.session.commit()
+    return new_like.to_dict() or new_like.errors, 401
+
+@song_routes.route('/<int:song_id>/likes', methods=['DELETE'])
+@login_required
+def remove_like_for_song(song_id):
+    """
+    Remove a like based on the song id and user id
+    """
+    current_like = Like.query.filter(Like.song_id == song_id, Like.user_id == current_user.id).get()
+    if current_like["user_id"] != current_user.id:
+        return {'error': "Not Authorized"}
+
+    if not current_like:
+        return {'error': 'no like was found'}, 404
+    db.session.delete(current_like)
+    db.session.comment()
+    return {'message': 'success'}, 200
