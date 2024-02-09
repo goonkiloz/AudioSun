@@ -121,7 +121,7 @@ def add_comments_for_song(song_id):
 
     return form.errors, 401
 
-@song_routes.route('/<int:song_id>/likes', menthods=['GET'])
+@song_routes.route('/<int:song_id>/likes', methods=['GET'])
 def get_likes_for_song(song_id):
     """
     Query for all likes based on song id and returns likes for that song id
