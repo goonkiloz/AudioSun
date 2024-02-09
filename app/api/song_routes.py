@@ -36,7 +36,7 @@ def new_song():
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=data["title"],
+            file_path=data["file_path"],
             privacy=data["privacy"],
             user_id=current_user.id
         )
@@ -52,17 +52,22 @@ def update_song(id):
     """
     Update song if owned by current user
     """
+    song = Song.query.get(id)
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
+
     form = NewSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
     if form.validate_on_submit():
         data = form.data
         song.title=data["title"]
         song.genre=data["genre"]
         song.description=data["description"]
-        song.file_path=data["title"]
+        song.file_path=data["file_path"]
         song.privacy=data["privacy"]
 
         db.session.commit()
@@ -77,8 +82,13 @@ def delete_song(id):
     Delete song if owned by current user
     """
     song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
 
     db.session.delete(song)
     db.session.commit()

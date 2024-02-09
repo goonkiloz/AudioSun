@@ -43,14 +43,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: false
 * Request
-  <!--!!START SILENT -->
   * Method: GET
   * URL: /api/session
-  <!--!!END -->
-  <!--!!ADD -->
-  <!-- * Method: ? -->
-  <!-- * URL: ? -->
-  <!--!!END_ADD -->
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -90,14 +84,8 @@ information.
 
 * Require Authentication: false
 * Request
-  <!--!!START SILENT -->
   * Method: POST
   * URL: /api/session
-  <!--!!END -->
-  <!--!!ADD -->
-  <!-- * Method: ? -->
-  <!-- * URL: ? -->
-  <!--!!END_ADD -->
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -284,7 +272,6 @@ Retrieves all songs regardless of the sign-in status.
     }
     ```
 
-<<<<<<< Updated upstream
 ### Get all songs by current user
 
 Retrieves all songs owned by the current user.
@@ -346,8 +333,6 @@ Retrieves all songs owned by the current user.
       }
     }
     ``` -->
-=======
->>>>>>> Stashed changes
 
 ### Create/Upload a song
 
