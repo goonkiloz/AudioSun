@@ -1,34 +1,27 @@
-# from app.models import db, environment, SCHEMA, playlist_songs
-# from sqlalchemy.sql import text
+from app.models import db, environment, SCHEMA, Playlist, Song
+from sqlalchemy.sql import text
+import random
 
-# def seed_playlist_songs():
+def seed_playlist_songs():
+    #grab all the playlist in the seeder, 10
+    playlists = Playlist.query.all()
+    #grab all the songs in the seeder 20
+    songs = Song.query.all()
 
-#     playlist_song_entries = [
-#         {'playlist_id': 1, 'song_id': 2},
-#         {'playlist_id': 1, 'song_id': 3},
-#         {'playlist_id': 2, 'song_id': 5},
-#         {'playlist_id': 3, 'song_id': 2},
-#         {'playlist_id': 4, 'song_id': 2},
-#         {'playlist_id': 5, 'song_id': 4},
-#         {'playlist_id': 6, 'song_id': 4},
-#         {'playlist_id': 7, 'song_id': 5},
-#         {'playlist_id': 8, 'song_id': 1},
-#         {'playlist_id': 1, 'song_id': 4},
-#         {'playlist_id': 2, 'song_id': 8},
-#     ]
+    for playlist in playlists: #loop over the each playlist
+        #get random nums of songs
+        random_songs_number = random.randrange(1, 21)
+        #get a list of random songs based on the random songs num and all the songs
+        random_selected_songs = random.sample(songs, random_songs_number)
+        #assign list of random songs to the current playlist
+        playlist.songs.extend(random_selected_songs)
 
+    db.session.commit()
 
-#     for entry in playlist_song_entries:
-#         # playlist_song_entry = playlist_songs.insert().values(entry)
-#         # db.session.add(playlist_song_entry)
+def undo_playlist_songs():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.playlist_songs RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM playlist_songs"))
 
-
-#     db.session.commit()
-
-# def undo_playlist_songs():
-#     if environment == "production":
-#         db.session.execute(f"TRUNCATE table {SCHEMA}.playlist_songs RESTART IDENTITY CASCADE;")
-#     else:
-#         db.session.execute(text("DELETE FROM playlist_songs"))
-
-#     db.session.commit()
+    db.session.commit()

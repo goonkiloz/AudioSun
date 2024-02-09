@@ -12,7 +12,7 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    comment_text = db.Column(db.String(255), nullable=False, unique=True)
+    comment_text = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('songs.id')), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -27,7 +27,7 @@ class Comment(db.Model):
             'id': self.id,
             'comment_text': self.comment_text,
             'user_id': self.user_id,
-            'song_id': self.user_id,
+            'song_id': self.song_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
     }
