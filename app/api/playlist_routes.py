@@ -29,12 +29,11 @@ def get_playlists_by_user():
 
 # Get all playlists by particular song
 @playlist_routes.route("/<int:song_id>", methods=["GET"])
-@login_required
 def get_playlists_by_song_id(song_id):
     """
     Query for all playlists by song ID
     """
-    
+
     all_playlists_by_song_id = Playlist.query.filter(Playlist.songs.any(id=song_id)).all()
     return {"playlists": [playlist.to_dict() for playlist in all_playlists_by_song_id]}
 
@@ -61,7 +60,7 @@ def add_song_to_playlist(
 
     current_playlist.songs.append(song)
     db.session.commit()
-    return
+    return {'message':'song added to the current playlist'}
 
 
 # Remove a song from a playlist
