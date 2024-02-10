@@ -29,19 +29,20 @@ def new_song():
     Create a new song
     """
     form = NewSongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         new_song = Song(
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=data["title"],
+            file_path=data["file_path"],
             privacy=data["privacy"],
             user_id=current_user.id
         )
         db.session.add(new_song)
         db.session.commit()
-        return redirect("/")
+        return new_song.to_dict()
     return form.errors, 401
 
 
@@ -51,20 +52,26 @@ def update_song(id):
     """
     Update song if owned by current user
     """
-    form = NewSongForm()
     song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
+
+    form = NewSongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         song.title=data["title"]
         song.genre=data["genre"]
         song.description=data["description"]
-        song.file_path=data["title"]
+        song.file_path=data["file_path"]
         song.privacy=data["privacy"]
 
         db.session.commit()
-        return redirect("/")
+        return song.to_dict()
     return form.errors, 401
 
 
@@ -75,12 +82,17 @@ def delete_song(id):
     Delete song if owned by current user
     """
     song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
 
     db.session.delete(song)
     db.session.commit()
-    return redirect("/")
+    return {'message':'succcessfully deleted'}
 
 #Eddie GET comments from a song
 @song_routes.route('/<int:song_id>/comments', methods=['GET'])

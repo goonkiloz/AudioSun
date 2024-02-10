@@ -16,18 +16,15 @@ def update_comment(comment_id):
     """
     current_comment = Comment.query.get(comment_id)
 
+    #Check if there are any comments based on the comment Id
+    if not current_comment:
+        return {'error': 'no comment is found'}, 404
     #check if current comment belong to the current login user
     if current_comment.user_id != current_user.id:
         return {'error':'Not Authorized'}, 403
 
-    #Check if there are any comments based on the comment Id
-    if not current_comment:
-        return {'error': 'no comment is found'}, 404
-
-    #how do i test for this in postman??????
     form = NewCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
     if form.validate_on_submit():
         current_comment.comment_text=form.data['comment_text']
         db.session.commit()
@@ -44,15 +41,14 @@ def delete_comment(comment_id):
     only when the comment belongs to current user
     """
     current_comment = Comment.query.get(comment_id)
-    # print(current_user.id)
-
-    #check if current comment belong to the current login user
-    if current_comment.user_id != current_user.id:
-        return {'error':'Not Authorized'}, 403
+    print(current_comment)
 
     #Check if there are any comments for the current song_id
     if not current_comment:
         return {'error': 'no comment is found'}, 404
+    #check if current comment belong to the current login user
+    if current_comment.user_id != current_user.id:
+        return {'error':'Not Authorized'}, 403
 
     db.session.delete(current_comment)
     db.session.commit()
