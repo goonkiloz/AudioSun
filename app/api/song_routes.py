@@ -22,6 +22,14 @@ def current_songs():
     songs = Song.query.filter(Song.user_id == current_user.id)
     return {'songs': [song.to_dict() for song in songs]}
 
+@song_routes.route('/<int:id>')
+def get_song(id):
+    """
+    Query for current song details
+    """
+    song = Song.query.filter(Song.id == id)
+    return song.to_dict()
+
 @song_routes.route('/', methods=["POST"])
 @login_required
 def new_song():
@@ -140,7 +148,7 @@ def get_likes_for_song(song_id):
     current_song_likes = Like.query.filter(Like.song_id == song_id).all()
 
     if not current_song_likes:
-        return {'error': 'no comment is found'}, 404
+        return {'error': 'no like was found'}, 404
     return {'likes': [like.to_dict() for like in current_song_likes]}
 
 
@@ -156,20 +164,22 @@ def add_like_for_song(song_id):
     )
     db.session.add(new_like)
     db.session.commit()
-    return new_like.to_dict() or new_like.errors, 401
+    return new_like.to_dict()
 
-@song_routes.route('/<int:song_id>/likes', methods=['DELETE'])
+@song_routes.route('/<int:song_id>/likes/', methods=['DELETE'])
 @login_required
 def remove_like_for_song(song_id):
     """
     Remove a like based on the song id and user id
     """
-    current_like = Like.query.filter(Like.song_id == song_id, Like.user_id == current_user.id).get()
+    current_like = Like.query.filter(Like.user_id == current_user.id).get(song_id)
+
     if current_like["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
 
     if not current_like:
         return {'error': 'no like was found'}, 404
+
     db.session.delete(current_like)
-    db.session.comment()
+    db.session.commit()
     return {'message': 'success'}, 200
