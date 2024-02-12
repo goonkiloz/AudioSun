@@ -158,6 +158,11 @@ def add_like_for_song(song_id):
     """
     add a like based on the song id and user id
     """
+    like_check = Like.query.filter(Like.song_id == song_id, Like.user_id == current_user.id).all()
+
+    if like_check:
+        return {"error": "like already exists"}
+
     new_like = Like(
         song_id=song_id,
         user_id=current_user.id
@@ -166,13 +171,13 @@ def add_like_for_song(song_id):
     db.session.commit()
     return new_like.to_dict()
 
-@song_routes.route('/<int:song_id>/likes/', methods=['DELETE'])
+@song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=['DELETE'])
 @login_required
-def remove_like_for_song(song_id):
+def remove_like_for_song(like_id):
     """
     Remove a like based on the song id and user id
     """
-    current_like = Like.query.filter(Like.user_id == current_user.id).get(song_id)
+    current_like = Like.query.get(like_id)
 
     if current_like["user_id"] != current_user.id:
         return {'error': "Not Authorized"}

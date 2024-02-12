@@ -174,7 +174,6 @@ def add_like_for_playlist(playlist_id):
     """
     like_check = Like.query.filter(Like.playlist_id == playlist_id, Like.user_id == current_user.id).all()
 
-    print(like_check)
     if like_check:
         return {"error": "like already exists"}
 
