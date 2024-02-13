@@ -1,6 +1,7 @@
 
 
 const GET_ALL_SONGS = "songs/getAll";
+const GET_CURRENT_SONGS = "songs/getCurrent";
 const POST_SONG = "songs/post";
 
 const getSongs = (songs) => {
@@ -8,20 +9,33 @@ const getSongs = (songs) => {
         type: GET_ALL_SONGS,
         payload: songs
     }
-}
+};
+
+const getCurrentSongs = (songs) => {
+    return {
+        type: GET_CURRENT_SONGS,
+        payload: songs
+    }
+};
 
 const postSong = (song) => {
     return {
         type: POST_SONG,
         payload: song
     }
-}
+};
 
 export const getSongsThunk = () => async (dispatch) => {
     const res = await fetch("/api/songs");
     const data = await res.json();
     dispatch(getSongs(data.songs))
-}
+};
+
+export const getCurrentSongsThunk = () => async (dispatch) => {
+    const res = await fetch("/api/songs/current");
+    const data = await res.json();
+    dispatch(getCurrentSongs(data.songs))
+};
 
 export const postSongThunk = (song) => async (dispatch) => {
 
@@ -53,13 +67,19 @@ export const postSongThunk = (song) => async (dispatch) => {
     }
 };
 
-const initialState = { allSongs: [], byId: {} };
+const initialState = { allSongs: [], byId: {}, currentUserSongs: [] };
 
 const songsReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
         case GET_ALL_SONGS:
             newState.allSongs = action.payload
+            action.payload.forEach(song => {
+                newState.byId[song.id] = song;
+            })
+            return newState;
+        case GET_CURRENT_SONGS:
+            newState.currentUserSongs = action.payload
             action.payload.forEach(song => {
                 newState.byId[song.id] = song;
             })

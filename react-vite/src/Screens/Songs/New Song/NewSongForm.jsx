@@ -1,5 +1,4 @@
 import { memo, useState } from "react";
-// import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { postSongThunk } from "../../../redux/songs";
@@ -17,7 +16,7 @@ function NewSongForm() {
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    // if (sessionUser) return <Navigate to="/" replace={true} />;
+    if (!user) return <Navigate to="/login" replace={true} />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();

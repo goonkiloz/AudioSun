@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
-// import { selectSongsArray } from "../../../redux/songs"
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import "./SongsView.css";
 import { NavLink } from "react-router-dom";
 
 const SongsView = () => {
     const dispatch = useDispatch();
-    const songs = useSelector(state => state.songs.allSongs)
-    console.log(songs);
+    const songs = useSelector(state => state.songs.allSongs);
 
     useEffect(() => {
         dispatch(getSongsThunk());
@@ -32,4 +30,4 @@ const SongsView = () => {
     )
 };
 
-export default SongsView;
+export default memo(SongsView);

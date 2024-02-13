@@ -5,6 +5,7 @@ import SongsView from '../Screens/Songs/AllSongs/SongsView';
 import NewSongForm from '../Screens/Songs/New Song'
 import Layout from './Layout';
 import SingleSongView from '../Screens/Songs/AllSongs/SingleSongView';
+import ProfileView from '../Screens/Profile/ProfileView';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "songs/:songId",
         element: <SingleSongView />
+      },
+      {
+        path: "profile",
+        element: <ProfileView />
       },
     ],
   },
