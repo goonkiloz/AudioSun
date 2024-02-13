@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
-import { selectSongsArray } from "../../../redux/songs"
+// import { selectSongsArray } from "../../../redux/songs"
 import { useEffect } from "react";
 import SingleSongView from "./SingleSongView";
 import "./SongsView.css";
@@ -8,7 +8,8 @@ import { NavLink } from "react-router-dom";
 
 const SongsView = () => {
     const dispatch = useDispatch();
-    const songs = useSelector(selectSongsArray);
+    const songs = useSelector(state => state.songs.allSongs)
+    console.log(songs);
 
     useEffect(() => {
         dispatch(getSongsThunk());

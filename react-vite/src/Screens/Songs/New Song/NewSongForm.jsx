@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 // import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ function NewSongForm() {
 
         const newSong = {
             title,
-            "user_id": user.id,
+            userId: user.id,
             genre,
             description,
             filePath,
@@ -36,15 +36,16 @@ function NewSongForm() {
 
         if (!validationErrors.length) {
             song = await dispatch(postSongThunk(newSong))
-            // .catch(async (res) => {
-            //     const err = await res.json();
+                .catch(async (res) => {
+                    const err = await res.json();
+                    // console.log("songform", err);
 
-            //     if (err && err.errors) {
-            //         setValidationErrors(err.errors);
-            //     }
-            // });
+                    if (err) {
+                        setValidationErrors(err);
+                    }
+                });
         }
-        navigate(`/${song.id}`)
+        // navigate(`/${song.id}`)
     };
 
     return (
@@ -111,4 +112,4 @@ function NewSongForm() {
     );
 }
 
-export default NewSongForm;
+export default memo(NewSongForm);

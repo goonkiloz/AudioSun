@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment, Like
 from ..forms import NewSongForm, NewCommentForm
@@ -51,7 +51,8 @@ def new_song():
         db.session.add(new_song)
         db.session.commit()
         return new_song.to_dict()
-    return form.errors, 401
+    print(form.errors)
+    return jsonify(form.errors), 401
 
 
 @song_routes.route('/<int:id>', methods=["PATCH", "PUT"])
