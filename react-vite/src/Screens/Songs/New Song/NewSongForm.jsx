@@ -91,8 +91,7 @@ function NewSongForm() {
                         <p className="error">{validationErrors.filePath}</p>}
                     <label>Privacy
                         <input
-                            type="text"
-                            placeholder="Privacy"
+                            type="checkbox"
                             value={privacy}
                             onChange={(e) => setPrivacy(e.target.value)}
                         />

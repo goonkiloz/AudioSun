@@ -52,7 +52,7 @@ def new_song():
         db.session.commit()
         return new_song.to_dict()
     print(form.errors)
-    return jsonify(form.errors), 401
+    return form.errors, 401
 
 
 @song_routes.route('/<int:id>', methods=["PATCH", "PUT"])
