@@ -1,5 +1,4 @@
-import { useState } from "react";
-// import { thunkLogin } from "../../redux/session";
+import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { postSongThunk } from "../../../redux/songs";
@@ -17,7 +16,7 @@ function NewSongForm() {
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    // if (sessionUser) return <Navigate to="/" replace={true} />;
+    if (!user) return <Navigate to="/login" replace={true} />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,26 +24,21 @@ function NewSongForm() {
 
         const newSong = {
             title,
-            "user_id": user.id,
+            userId: user.id,
             genre,
             description,
             filePath,
             privacy,
         };
 
-        let song
-
         if (!validationErrors.length) {
-            song = await dispatch(postSongThunk(newSong))
-            // .catch(async (res) => {
-            //     const err = await res.json();
-
-            //     if (err && err.errors) {
-            //         setValidationErrors(err.errors);
-            //     }
-            // });
+            const res = await dispatch(postSongThunk(newSong))
+            if (!res.ok) {
+                const errors = await res.json()
+                setValidationErrors(errors)
+            }
         }
-        navigate(`/${song.id}`)
+        navigate(`/`)
     };
 
     return (
@@ -96,8 +90,7 @@ function NewSongForm() {
                         <p className="error">{validationErrors.filePath}</p>}
                     <label>Privacy
                         <input
-                            type="text"
-                            placeholder="Privacy"
+                            type="checkbox"
                             value={privacy}
                             onChange={(e) => setPrivacy(e.target.value)}
                         />
@@ -111,4 +104,4 @@ function NewSongForm() {
     );
 }
 
-export default NewSongForm;
+export default memo(NewSongForm);

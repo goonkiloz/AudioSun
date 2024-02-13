@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkLogout } from "../../redux/session";
+import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "./OpenModalButton/OpenModalMenuItem";
 import LoginFormModal from "../Login/LoginFormModal"
 import SignupFormModal from "../Signup/SignupFormModal";
 
 function ProfileButton() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
@@ -51,6 +53,12 @@ function ProfileButton() {
               <li>{user.email}</li>
               <li>
                 <button onClick={logout}>Log Out</button>
+              </li>
+              <li>
+                <button onClick={() => {
+                  closeMenu();
+                  navigate("/songs/new")
+                }}>Upload Song</button>
               </li>
             </>
           ) : (
