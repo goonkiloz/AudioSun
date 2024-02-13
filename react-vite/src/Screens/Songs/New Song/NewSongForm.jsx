@@ -39,7 +39,7 @@ function NewSongForm() {
                 setValidationErrors(errors)
             }
         }
-        // navigate(`/${song.id}`)
+        navigate(`/`)
     };
 
     return (

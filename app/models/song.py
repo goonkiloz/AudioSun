@@ -24,7 +24,7 @@ class Song(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False, unique=True)
+    title = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     file_path = db.Column(db.String(255), nullable=False)
