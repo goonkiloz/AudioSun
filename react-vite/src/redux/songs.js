@@ -43,11 +43,12 @@ export const postSongThunk = (song) => async (dispatch) => {
             console.log("res ok");
             const newSong = await res.json();
             dispatch(postSong(newSong));
-            return newSong;
+            return res;
         }
         throw res
     } catch (e) {
-        console.log("res not ok", res);
+        // const errors = await e.json();
+
         return e
     }
 };

@@ -32,18 +32,12 @@ function NewSongForm() {
             privacy,
         };
 
-        let song
-
         if (!validationErrors.length) {
-            song = await dispatch(postSongThunk(newSong))
-                .catch(async (res) => {
-                    const err = await res.json();
-                    // console.log("songform", err);
-
-                    if (err) {
-                        setValidationErrors(err);
-                    }
-                });
+            const res = await dispatch(postSongThunk(newSong))
+            if (!res.ok) {
+                const errors = await res.json()
+                setValidationErrors(errors)
+            }
         }
         // navigate(`/${song.id}`)
     };
