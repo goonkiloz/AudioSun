@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+
 
 const GET_ALL_SONGS = "songs/getAll";
 const POST_SONG = "songs/post";
@@ -18,44 +18,55 @@ const postSong = (song) => {
 }
 
 export const getSongsThunk = () => async (dispatch) => {
-    const res = await fetch("api/songs");
+    const res = await fetch("/api/songs");
     const data = await res.json();
     dispatch(getSongs(data.songs))
 }
 
 export const postSongThunk = (song) => async (dispatch) => {
-    const res = await fetch('api/songs', {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(song)
-    });
 
-    if (res.ok) {
-        const newSong = await res.json();
-        dispatch(postSong(newSong));
-        return newSong;
-    } else {
-        const err = await res.json();
-        return err;
+    try {
+        const res = await fetch("/api/songs/", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: song.title,
+                genre: song.genre,
+                description: song.description,
+                file_path: song.filePath,
+                privacy: song.privacy,
+                user_id: song.userId
+            })
+        });
+
+        if (res.ok) {
+            console.log("res ok");
+            const newSong = await res.json();
+            dispatch(postSong(newSong));
+            return res;
+        }
+        throw res
+    } catch (e) {
+        // const errors = await e.json();
+
+        return e
     }
 };
 
-const selectSongs = (state) => state.songs;
-export const selectSongsArray = createSelector(selectSongs, (songs) => Object.values(songs));
-export const selectSongById = (id) => (state) => state.songs[id];
-
-const initialState = {};
+const initialState = { allSongs: [], byId: {} };
 
 const songsReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
         case GET_ALL_SONGS:
+            newState.allSongs = action.payload
             action.payload.forEach(song => {
-                newState[song.id] = song;
+                newState.byId[song.id] = song;
             })
             return newState;
         case POST_SONG:
-            newState[action.payload.id] = action.payload;
+            newState.allSongs.push(action.payload)
+            newState.byId[action.payload.id] = action.payload;
             return newState;
         default:
             return state;

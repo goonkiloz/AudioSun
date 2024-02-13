@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 // import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -25,26 +25,21 @@ function NewSongForm() {
 
         const newSong = {
             title,
-            "user_id": user.id,
+            userId: user.id,
             genre,
             description,
             filePath,
             privacy,
         };
 
-        let song
-
         if (!validationErrors.length) {
-            song = await dispatch(postSongThunk(newSong))
-            // .catch(async (res) => {
-            //     const err = await res.json();
-
-            //     if (err && err.errors) {
-            //         setValidationErrors(err.errors);
-            //     }
-            // });
+            const res = await dispatch(postSongThunk(newSong))
+            if (!res.ok) {
+                const errors = await res.json()
+                setValidationErrors(errors)
+            }
         }
-        navigate(`/${song.id}`)
+        // navigate(`/${song.id}`)
     };
 
     return (
@@ -96,8 +91,7 @@ function NewSongForm() {
                         <p className="error">{validationErrors.filePath}</p>}
                     <label>Privacy
                         <input
-                            type="text"
-                            placeholder="Privacy"
+                            type="checkbox"
                             value={privacy}
                             onChange={(e) => setPrivacy(e.target.value)}
                         />
@@ -111,4 +105,4 @@ function NewSongForm() {
     );
 }
 
-export default NewSongForm;
+export default memo(NewSongForm);
