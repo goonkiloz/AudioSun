@@ -2,9 +2,10 @@ import "./SongsView.css"
 import CommentsView from "../../Comments/AllComments/CommentsView"
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { memo } from "react";
 
 const SingleSongView = () => {
-    const {songId} = useParams();
+    const { songId } = useParams();
     const currentSong = useSelector(state => state.songs.byId[songId])
     console.log(currentSong)
 
@@ -21,4 +22,4 @@ const SingleSongView = () => {
     )
 }
 
-export default SingleSongView;
+export default memo(SingleSongView);
