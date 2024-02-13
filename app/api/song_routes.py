@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment, Like
 from ..forms import NewSongForm, NewCommentForm
@@ -22,6 +22,14 @@ def current_songs():
     songs = Song.query.filter(Song.user_id == current_user.id)
     return {'songs': [song.to_dict() for song in songs]}
 
+@song_routes.route('/<int:id>')
+def get_song(id):
+    """
+    Query for current song details
+    """
+    song = Song.query.filter(Song.id == id)
+    return song.to_dict()
+
 @song_routes.route('/', methods=["POST"])
 @login_required
 def new_song():
@@ -36,13 +44,14 @@ def new_song():
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=data["title"],
+            file_path=data["file_path"],
             privacy=data["privacy"],
             user_id=current_user.id
         )
         db.session.add(new_song)
         db.session.commit()
         return new_song.to_dict()
+    print(form.errors)
     return form.errors, 401
 
 
@@ -52,17 +61,22 @@ def update_song(id):
     """
     Update song if owned by current user
     """
+    song = Song.query.get(id)
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
+
     form = NewSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
     if form.validate_on_submit():
         data = form.data
         song.title=data["title"]
         song.genre=data["genre"]
         song.description=data["description"]
-        song.file_path=data["title"]
+        song.file_path=data["file_path"]
         song.privacy=data["privacy"]
 
         db.session.commit()
@@ -77,8 +91,13 @@ def delete_song(id):
     Delete song if owned by current user
     """
     song = Song.query.get(id)
-    if song["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+
+    #Check if song exists
+    if not song:
+        return {'error': 'Song not found'}, 404
+    #Check if song belongs to the current logged in user
+    if song.user_id != current_user.id:
+        return {'error': "Not Authorized"}, 403
 
     db.session.delete(song)
     db.session.commit()
@@ -130,7 +149,7 @@ def get_likes_for_song(song_id):
     current_song_likes = Like.query.filter(Like.song_id == song_id).all()
 
     if not current_song_likes:
-        return {'error': 'no comment is found'}, 404
+        return {'error': 'no like was found'}, 404
     return {'likes': [like.to_dict() for like in current_song_likes]}
 
 
@@ -140,26 +159,33 @@ def add_like_for_song(song_id):
     """
     add a like based on the song id and user id
     """
+    like_check = Like.query.filter(Like.song_id == song_id, Like.user_id == current_user.id).all()
+
+    if like_check:
+        return {"error": "like already exists"}
+
     new_like = Like(
         song_id=song_id,
         user_id=current_user.id
     )
     db.session.add(new_like)
     db.session.commit()
-    return new_like.to_dict() or new_like.errors, 401
+    return new_like.to_dict()
 
-@song_routes.route('/<int:song_id>/likes', methods=['DELETE'])
+@song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=['DELETE'])
 @login_required
-def remove_like_for_song(song_id):
+def remove_like_for_song(like_id):
     """
     Remove a like based on the song id and user id
     """
-    current_like = Like.query.filter(Like.song_id == song_id, Like.user_id == current_user.id).get()
+    current_like = Like.query.get(like_id)
+
     if current_like["user_id"] != current_user.id:
         return {'error': "Not Authorized"}
 
     if not current_like:
         return {'error': 'no like was found'}, 404
+
     db.session.delete(current_like)
-    db.session.comment()
+    db.session.commit()
     return {'message': 'success'}, 200
