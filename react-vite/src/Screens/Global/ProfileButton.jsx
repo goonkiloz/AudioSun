@@ -57,6 +57,12 @@ function ProfileButton() {
               <li>
                 <button onClick={() => {
                   closeMenu();
+                  navigate("/profile")
+                }}>View Profile</button>
+              </li>
+              <li>
+                <button onClick={() => {
+                  closeMenu();
                   navigate("/songs/new")
                 }}>Upload Song</button>
               </li>

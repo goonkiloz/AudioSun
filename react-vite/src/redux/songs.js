@@ -3,6 +3,7 @@
 const GET_ALL_SONGS = "songs/getAll";
 const GET_SINGLE_SONG = "songs/getSingleSong"
 const GET_CURRENT_USER_SONGS = "songs/getCurrentUser";
+const PUT_SONG = "songs/putSong";
 const POST_SONG = "songs/post";
 
 const getSongs = (songs) => {
@@ -12,19 +13,26 @@ const getSongs = (songs) => {
     }
 };
 
-const getSingleSong = (songs) => {
+const getSingleSong = (songId) => {
     return {
         type: GET_SINGLE_SONG,
-        payload: songs
+        payload: songId
     }
 }
 
 const getCurrentUserSongs = (songs) => {
     return {
-        type: GET_CURRENT_SONGS,
+        type: GET_CURRENT_USER_SONGS,
         payload: songs
     }
 };
+
+const putSong = (songId) => {
+    return {
+        type: PUT_SONG,
+        payload: songId
+    }
+}
 
 const postSong = (song) => {
     return {
@@ -51,6 +59,36 @@ export const getCurrentUserSongsThunk = () => async (dispatch) => {
     dispatch(getCurrentUserSongs(data.songs))
 };
 
+export const putSongThunk = (song, songId) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/songs/${songId}`, {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: song.title,
+                genre: song.genre,
+                description: song.description,
+                file_path: song.filePath,
+                privacy: song.privacy,
+                // user_id: song.userId
+            })
+        });
+
+        if (res.ok) {
+            console.log(res);
+            const updatedSong = await res.json();
+            dispatch(putSong(updatedSong));
+            dispatch(getCurrentUserSongsThunk());
+            return res;
+        }
+        throw res
+    } catch (e) {
+        // const errors = await e.json();
+
+        return e
+    }
+};
+
 export const postSongThunk = (song) => async (dispatch) => {
 
     try {
@@ -68,7 +106,6 @@ export const postSongThunk = (song) => async (dispatch) => {
         });
 
         if (res.ok) {
-            console.log("res ok");
             const newSong = await res.json();
             dispatch(postSong(newSong));
             return res;
@@ -100,6 +137,11 @@ const songsReducer = (state = initialState, action) => {
             action.payload.forEach(song => {
                 newState.byId[song.id] = song;
             })
+            return newState;
+        case PUT_SONG:
+            const index = newState.allSongs.findIndex(song => song.id === action.payload.id);
+            newState.allSongs[index] = action.payload
+            newState.byId[action.payload.id] = action.payload;
             return newState;
         case POST_SONG:
             newState.allSongs.push(action.payload)

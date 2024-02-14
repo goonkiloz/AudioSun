@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
 
-const SingleSongView = () => {
+const SingleSongPage = () => {
     const dispatch = useDispatch();
     const { songId } = useParams();
     const currentSong = useSelector(state => state.songs.byId[songId])
@@ -28,4 +28,4 @@ const SingleSongView = () => {
     )
 }
 
-export default memo(SingleSongView);
+export default memo(SingleSongPage);
