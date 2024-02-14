@@ -15,9 +15,6 @@ const CommentsView = (song) => {
     console.log(`what is the current song`, currentSong)
     const comments = useSelector(state => state.comments?.allComments)
 
-    if(comments) {
-        console.log(`what is the current comment`, comments)
-    }
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,8 +36,8 @@ const CommentsView = (song) => {
                 {comments.map(comment => (
                     <div key={comment.id} className='commentBox'>
                         <div>{comment.comment_text}</div>
-
-                        {currentUser && currentUser.id === comment.user_id && (
+                        {console.log(`what is the comment`,comment)}
+                        {currentUser && (currentUser.id === comment.user_id) && (
                             <div>
                                 <OpenModalButton
                                 modalComponent={<RemoveComment commentId={comment.id} songId={currentSong.id} />}
