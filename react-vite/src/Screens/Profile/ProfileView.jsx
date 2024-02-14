@@ -1,9 +1,10 @@
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCurrentSongsThunk } from "../../redux/songs"
+import { getCurrentUserSongsThunk } from "../../redux/songs"
 import "./ProfileView.css";
 import { NavLink } from "react-router-dom";
+import SingleSongComponent from "../Songs/AllSongs/SingleSongComponent";
 
 const ProfileView = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ProfileView = () => {
 
 
     useEffect(() => {
-        dispatch(getCurrentSongsThunk());
+        dispatch(getCurrentUserSongsThunk());
     }, [dispatch]);
 
     if (!user) return <Navigate to="/login" replace={true} />;
@@ -27,9 +28,7 @@ const ProfileView = () => {
             <div className="songsContainer">
                 {songs.map((song) => (
                     <div key={song.id} className="songBox">
-                        <NavLink to={`/songs/${song.id}`}>
-                            {song.title}
-                        </NavLink>
+                        <SingleSongComponent song={song} />
                     </div>
                 ))}
             </div>

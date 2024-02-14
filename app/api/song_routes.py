@@ -27,7 +27,9 @@ def get_song(id):
     """
     Query for current song details
     """
-    song = Song.query.filter(Song.id == id)
+    song = Song.query.get(id)
+
+    print(song)
     return song.to_dict()
 
 @song_routes.route('/', methods=["POST"])
