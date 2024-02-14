@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import './CommentsView.css';
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import RemoveComment from "../RemoveCommentModal/RemoveCommentModal";
+import EditComment from "../EditCommentModal/EditCommentModal";
+import NewComment from "../NewComments/NewComment";
 // import { NavLink } from "react-router-dom";
 
 //should a SingleSongView Page, which pass on the songId
@@ -30,22 +32,27 @@ const CommentsView = (song) => {
 
     return (
         <div>
+
+            {(currentUser) && <NewComment song={song} />}
             <h2>Comments:</h2>
-            {(currentUser) && (
-                    <button>
-                        Add a comment
-                    </button>
-            )}
             <div className='commentsContainer'>
                 {comments.map(comment => (
                     <div key={comment.id} className='commentBox'>
                         <div>{comment.comment_text}</div>
-                        <button>Edit the comment</button>
-                        <OpenModalButton
-                        modalComponent={<RemoveComment commentId={comment.id} songId={currentSong.id} />}
-                        buttonText='Delete the Comment'
-                    />
 
+                        {currentUser && currentUser.id === comment.user_id && (
+                            <div>
+                                <OpenModalButton
+                                modalComponent={<RemoveComment commentId={comment.id} songId={currentSong.id} />}
+                                buttonText='Delete the Comment'
+                                />
+                                <OpenModalButton
+                                modalComponent={<EditComment comment={comment} songId={currentSong.id} />}
+                                buttonText='Edit the Comment'
+                                />
+                            </div>
+
+                        )}
                     </div>
             ))}
 
