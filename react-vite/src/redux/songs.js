@@ -1,7 +1,8 @@
 
 
 const GET_ALL_SONGS = "songs/getAll";
-const GET_CURRENT_SONGS = "songs/getCurrent";
+const GET_SINGLE_SONG = "songs/getSingleSong"
+const GET_CURRENT_USER_SONGS = "songs/getCurrentUser";
 const POST_SONG = "songs/post";
 
 const getSongs = (songs) => {
@@ -11,7 +12,14 @@ const getSongs = (songs) => {
     }
 };
 
-const getCurrentSongs = (songs) => {
+const getSingleSong = (songs) => {
+    return {
+        type: GET_SINGLE_SONG,
+        payload: songs
+    }
+}
+
+const getCurrentUserSongs = (songs) => {
     return {
         type: GET_CURRENT_SONGS,
         payload: songs
@@ -31,10 +39,16 @@ export const getSongsThunk = () => async (dispatch) => {
     dispatch(getSongs(data.songs))
 };
 
-export const getCurrentSongsThunk = () => async (dispatch) => {
+export const getSingleSongThunk = (songId) => async (dispatch) => {
+    const res = await fetch(`/api/songs/${songId}`);
+    const data = await res.json();
+    dispatch(getSingleSong(data))
+};
+
+export const getCurrentUserSongsThunk = () => async (dispatch) => {
     const res = await fetch("/api/songs/current");
     const data = await res.json();
-    dispatch(getCurrentSongs(data.songs))
+    dispatch(getCurrentUserSongs(data.songs))
 };
 
 export const postSongThunk = (song) => async (dispatch) => {
@@ -78,7 +92,10 @@ const songsReducer = (state = initialState, action) => {
                 newState.byId[song.id] = song;
             })
             return newState;
-        case GET_CURRENT_SONGS:
+        case GET_SINGLE_SONG:
+            newState.byId[action.payload.id] = action.payload;
+            return newState;
+        case GET_CURRENT_USER_SONGS:
             newState.currentUserSongs = action.payload
             action.payload.forEach(song => {
                 newState.byId[song.id] = song;
