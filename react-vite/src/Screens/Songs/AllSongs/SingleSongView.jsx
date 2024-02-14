@@ -1,13 +1,19 @@
 import "./SongsView.css"
 import CommentsView from "../../Comments/AllComments/CommentsView"
+import { getSingleSongThunk } from "../../../redux/songs";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { memo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { memo, useEffect } from "react";
 
 const SingleSongView = () => {
+    const dispatch = useDispatch();
     const { songId } = useParams();
     const currentSong = useSelector(state => state.songs.byId[songId])
-    console.log(currentSong)
+    // console.log(currentSong)
+
+    useEffect(() => {
+        dispatch(getSingleSongThunk(songId));
+    }, [dispatch]);
 
     if (!currentSong) return <h2>Loading...</h2>
 

@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCurrentSongsThunk } from "../../redux/songs"
+import { getCurrentUserSongsThunk } from "../../redux/songs"
 import "./ProfileView.css";
 import { NavLink } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const ProfileView = () => {
 
 
     useEffect(() => {
-        dispatch(getCurrentSongsThunk());
+        dispatch(getCurrentUserSongsThunk());
     }, [dispatch]);
 
     if (!user) return <Navigate to="/login" replace={true} />;
