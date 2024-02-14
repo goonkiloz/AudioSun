@@ -5,6 +5,7 @@ const GET_SINGLE_SONG = "songs/getSingleSong"
 const GET_CURRENT_USER_SONGS = "songs/getCurrentUser";
 const PUT_SONG = "songs/putSong";
 const POST_SONG = "songs/post";
+const DELETE_SONG = "songs/delete";
 
 const getSongs = (songs) => {
     return {
@@ -38,6 +39,13 @@ const postSong = (song) => {
     return {
         type: POST_SONG,
         payload: song
+    }
+};
+
+const deleteSong = (songId) => {
+    return {
+        type: DELETE_SONG,
+        payload: songId
     }
 };
 
@@ -118,6 +126,23 @@ export const postSongThunk = (song) => async (dispatch) => {
     }
 };
 
+export const deleteSongThunk = (songId) => async (dispatch) => {
+    try {
+        const res = await fetch(`api/songs/${songId}`, {
+            method: "DELETE",
+        });
+        if (res.ok) {
+            const data = await res.json();
+            dispatch(deleteSong(songId));
+            dispatch(getCurrentUserSongsThunk());
+            return data;
+        }
+        throw res;
+    } catch (e) {
+        return e;
+    }
+};
+
 const initialState = { allSongs: [], byId: {}, currentUserSongs: [] };
 
 const songsReducer = (state = initialState, action) => {
@@ -146,6 +171,12 @@ const songsReducer = (state = initialState, action) => {
         case POST_SONG:
             newState.allSongs.push(action.payload)
             newState.byId[action.payload.id] = action.payload;
+            return newState;
+        case DELETE_SONG:
+            newState.allSongs = newState.allSongs.filter(
+                (song) => song.id !== action.payload.songId
+            );
+            delete newState.byId[action.payload];
             return newState;
         default:
             return state;
