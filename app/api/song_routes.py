@@ -192,21 +192,22 @@ def add_like_for_song(song_id):
     db.session.commit()
     return new_like.to_dict()
 
-#to delete a like on a song
-@song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=['DELETE'])
-@login_required
-def remove_like_for_song(like_id):
-    """
-    Remove a like based on the song id and user id
-    """
-    current_like = Like.query.get(like_id)
+# to delete a like on a song
+# @song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=["DELETE"])
+# @login_required
+# def remove_like_for_song(like_id):
+#     """
+#     Remove a like based on the song id and user id
+#     """
+#     print('is deletion called')
+#     current_like = Like.query.get(like_id)
 
-    if current_like["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+#     if current_like["user_id"] != current_user.id:
+#         return {'error': "Not Authorized"}
 
-    if not current_like:
-        return {'error': 'no like was found'}, 404
+#     if not current_like:
+#         return {'error': 'no like was found'}, 404
 
-    db.session.delete(current_like)
-    db.session.commit()
-    return {'message': 'success'}, 200
+#     db.session.delete(current_like)
+#     db.session.commit()
+#     return {'message': 'success'}, 200

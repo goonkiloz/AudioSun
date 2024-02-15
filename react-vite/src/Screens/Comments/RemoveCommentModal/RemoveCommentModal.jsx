@@ -4,7 +4,7 @@ import { useModal } from '../../../context/Modal';
 import './RemoveCommentModal.css'
 import { deleteCommentThunk } from '../../../redux/comments';
 
-function RemoveComment ({commentId, songId}) {
+function RemoveComment ({commentId}) {
     //console.log(spotId)
     const dispatch = useDispatch();
     //const sessionUser = useSelector((state) => state.session.user);
@@ -16,7 +16,7 @@ function RemoveComment ({commentId, songId}) {
         e.preventDefault();
         setErrors({});
 
-        return dispatch(deleteCommentThunk(commentId, songId))
+        return dispatch(deleteCommentThunk(commentId))
           .then(closeModal)
           .catch(async (res) => {
             //const data = await res.json();

@@ -97,7 +97,7 @@ export const editCommentThunk =
     }
   };
 //thunk action to delete comment to a song
-export const deleteCommentThunk = (commentId, songId) => async (dispatch) => {
+export const deleteCommentThunk = (commentId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/comments/${commentId}`, {
       method: "DELETE",
@@ -106,7 +106,7 @@ export const deleteCommentThunk = (commentId, songId) => async (dispatch) => {
       const data = await res.json();
       dispatch(removeComment(commentId));
       console.log("is load comments called?");
-      dispatch(getCommentsThunk(songId));
+      // dispatch(getCommentsThunk(songId));
       return data;
     }
     throw res;
@@ -145,7 +145,7 @@ const commentsReducer = (state = initialState, action) => {
 
     case REMOVE_COMMENT:
       newState.allComments = newState.allComments.filter(
-        (comment) => comment.id !== action.payload.commentId
+        (comment) => comment.id !== action.payload
       );
       delete newState.byId[action.payload];
       return newState;

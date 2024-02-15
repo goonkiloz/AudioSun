@@ -18,15 +18,18 @@ const AllLikesView = (song) => {
     if (!likes) return <div>Loading...</div>
 
     if (likes.length === 0) {
-        return <div>No Likes for this song yet!</div>
+        return <h2>No like for this song yet!</h2>
     }
 
     return (
         <div>
-            <h2>Likes for the song</h2>
-            <div className='likesContainer'>
+            {/* <h2>{likes.length} {likes.length === 1 ? 'like' : 'likes'} </h2> */}
+            <div className='users-likes-container'>
+                <h2>Users who likes the song:</h2>
+
                 {likes.map(like => (
-                    <div key={like.id} className='likeBox'>
+                    <div key={like.id} className='like-Box'>
+
                         <div>UserID: {like.user_id}</div>
                     </div>
             ))}

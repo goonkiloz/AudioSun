@@ -12,7 +12,7 @@ import NewComment from "../NewComments/NewComment";
 const CommentsView = (song) => {
     const currentSong = song.song
     const currentUser = useSelector(state => state.session.user)
-    console.log(`what is the current song`, currentSong)
+    // console.log(`what is the current song`, currentSong)
     const comments = useSelector(state => state.comments?.allComments)
 
     const dispatch = useDispatch();
@@ -40,12 +40,12 @@ const CommentsView = (song) => {
                         {currentUser && (currentUser.id === comment.user_id) && (
                             <div>
                                 <OpenModalButton
-                                modalComponent={<RemoveComment commentId={comment.id} songId={currentSong.id} />}
-                                buttonText='Delete the Comment'
+                                modalComponent={<RemoveComment commentId={comment.id}/>}
+                                buttonText='Delete comment'
                                 />
                                 <OpenModalButton
                                 modalComponent={<EditComment comment={comment} songId={currentSong.id} />}
-                                buttonText='Edit the Comment'
+                                buttonText='Edit comment'
                                 />
                             </div>
 

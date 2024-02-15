@@ -37,13 +37,13 @@ def get_playlists_by_song_id(song_id):
     all_playlists_by_song_id = Playlist.query.filter(Playlist.songs.any(id=song_id)).all()
     return {"playlists": [playlist.to_dict() for playlist in all_playlists_by_song_id]}
 
-@playlist_routes.route("/<int:playlist_id>", methods=["GET"])
-def get_playlists_by_user(playlist_id):
-    """
-    Query for a playlist without login in
-    """
-    playlist = Playlist.query.get(playlist_id)
-    return {"playlists": playlist.to_dict()}
+# @playlist_routes.route("/<int:playlist_id>", methods=["GET"])
+# def get_playlists_by_user(playlist_id):
+#     """
+#     Query for a playlist without login in
+#     """
+#     playlist = Playlist.query.get(playlist_id)
+#     return {"playlists": playlist.to_dict()}
 
 @playlist_routes.route('/', methods=["POST"])
 @login_required
@@ -194,20 +194,20 @@ def add_like_for_playlist(playlist_id):
     return new_like.to_dict()
 
 
-@playlist_routes.route('/<int:playlist_id>/likes/<like_id>', methods=['DELETE'])
-@login_required
-def remove_like_for_song(like_id):
-    """
-    Remove a like based on the playlist id and user id
-    """
-    current_like = Like.query.get(like_id)
+# @playlist_routes.route('/<int:playlist_id>/likes/<like_id>', methods=['DELETE'])
+# @login_required
+# def remove_like_for_song(like_id):
+#     """
+#     Remove a like based on the playlist id and user id
+#     """
+#     current_like = Like.query.get(like_id)
 
-    if current_like.user_id != current_user.id:
-        return {'error': "Not Authorized"}
+#     if current_like.user_id != current_user.id:
+#         return {'error': "Not Authorized"}
 
-    if not current_like:
-        return {'error': 'no like was found'}, 404
+#     if not current_like:
+#         return {'error': 'no like was found'}, 404
 
-    db.session.delete(current_like)
-    db.session.commit()
-    return {'message': 'success'}, 200
+#     db.session.delete(current_like)
+#     db.session.commit()
+#     return {'message': 'success'}, 200
