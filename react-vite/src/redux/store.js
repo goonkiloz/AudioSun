@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import songsReducer from "./songs";
 import commentsReducer from "./comments";
-// import playlistsReducer from './playlists'
+import playlistsReducer from './playlists'
 import likesReducer from "./likes";
 
 
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
   comments: commentsReducer,
-  // playlists: playlistsReducer,
+  playlists: playlistsReducer,
   likes: likesReducer
 });
 
