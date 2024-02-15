@@ -1,7 +1,7 @@
 import "./SongsView.css"
 // import CommentsView from "../../Comments/AllComments/CommentsView"
 // import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import EditSongModal from "../Edit Song/EditSongModal";
 import DeleteSongModal from "../DeleteSong/DeleteSongModal";
