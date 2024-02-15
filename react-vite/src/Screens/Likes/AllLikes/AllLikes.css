@@ -1,0 +1,16 @@
+.likes-container {
+    display: flex;
+}
+
+.likes-container .filled {
+    color: #ff865a;
+    font-size: 20px;
+}
+.likes-container .empty {
+    color: #7b889e ;
+    font-size: 20px;
+}
+
+.like-count {
+    margin-left: 10px;
+}

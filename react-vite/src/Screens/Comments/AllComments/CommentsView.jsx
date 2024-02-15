@@ -41,11 +41,11 @@ const CommentsView = (song) => {
                             <div>
                                 <OpenModalButton
                                 modalComponent={<RemoveComment commentId={comment.id} songId={currentSong.id} />}
-                                buttonText='Delete the Comment'
+                                buttonText='Delete comment'
                                 />
                                 <OpenModalButton
                                 modalComponent={<EditComment comment={comment} songId={currentSong.id} />}
-                                buttonText='Edit the Comment'
+                                buttonText='Edit comment'
                                 />
                             </div>
 

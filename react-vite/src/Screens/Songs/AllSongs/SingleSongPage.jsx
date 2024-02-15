@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
 import AllLikesView from "../../Likes/AllLikes/AllLikesView";
+import LikeOrRemoveLike from "../../Likes/AllLikes/LikeOrRemoveLike";
 
 const SingleSongPage = () => {
     const dispatch = useDispatch();
@@ -21,10 +22,12 @@ const SingleSongPage = () => {
     return (
         <div className="songContainer">
             <h2>Title: {currentSong.title}</h2>
+            <LikeOrRemoveLike song={currentSong} />
             <div>Description: {currentSong.description}</div>
             <div>Genre: {currentSong.genre}</div>
             <div>Artist: {currentSong.user_id}</div>
             <CommentsView song={currentSong} />
+
             <AllLikesView song={currentSong} />
         </div>
     )

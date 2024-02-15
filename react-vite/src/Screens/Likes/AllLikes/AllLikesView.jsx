@@ -2,6 +2,7 @@ import './AllLikes.css';
 import { getLikesThunk } from "../../../redux/likes";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LikeOrRemoveLike from './LikeOrRemoveLike';
 
 const AllLikesView = (song) => {
 
@@ -23,10 +24,13 @@ const AllLikesView = (song) => {
 
     return (
         <div>
-            <h2>Likes for the song</h2>
-            <div className='likesContainer'>
+            {/* <h2>{likes.length} {likes.length === 1 ? 'like' : 'likes'} </h2> */}
+            <div className='users-likes-container'>
+                <h2>Users who likes the song:</h2>
+
                 {likes.map(like => (
-                    <div key={like.id} className='likeBox'>
+                    <div key={like.id} className='like-Box'>
+
                         <div>UserID: {like.user_id}</div>
                     </div>
             ))}

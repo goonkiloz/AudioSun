@@ -1,4 +1,3 @@
-import songsReducer from "./songs"
 
 const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
 const GET_ALL_PLAYLISTS_CURRENT_USER = "playlists/GET_ALL_PLAYLISTS_CURRENT_USER"
@@ -52,26 +51,26 @@ const putPlaylist = (playlistId) => {
     }
 }
 
-const addSong = (playlistId, songId) => {
-    return {
-        type: ADD_SONG,
-        payload: { playlistId, songId }
-    }
-}
+// const addSong = (playlistId, songId) => {
+//     return {
+//         type: ADD_SONG,
+//         payload: { playlistId, songId }
+//     }
+// }
 
-const removeSong = (playlistId, songId) => {
-    return {
-        type: REMOVE_SONG,
-        payload: { playlistId, songId }
-    }
-}
+// const removeSong = (playlistId, songId) => {
+//     return {
+//         type: REMOVE_SONG,
+//         payload: { playlistId, songId }
+//     }
+// }
 
-const removePlaylist = (playlistId) => {
-    return {
-        type: REMOVE_PLAYLIST,
-        payload: playlistId
-    }
-}
+// const removePlaylist = (playlistId) => {
+//     return {
+//         type: REMOVE_PLAYLIST,
+//         payload: playlistId
+//     }
+// }
 
 export const getPlaylistsThunk = () => async (dispatch) => {
     try {
@@ -225,26 +224,26 @@ export const putPlaylistThunk = (playlist, playlistId) => async (dispatch) => {
 
 // }
 
-export const removePlaylistThunk = (playlistId) => async (dispatch) => {
-    try {
-        const res = await fetch(`/api/playlists/${playlistId}`, {
-            method: "DELETE"
-        })
+// export const removePlaylistThunk = (playlistId) => async (dispatch) => {
+//     try {
+//         const res = await fetch(`/api/playlists/${playlistId}`, {
+//             method: "DELETE"
+//         })
 
-        if(res.ok) {
-            const data = await res.json()
-            dispatch(removePlaylist(playlistId))
-        }
+//         if(res.ok) {
+//             const data = await res.json()
+//             dispatch(removePlaylist(playlistId))
+//         }
 
-    } catch (e) {
-        return e;
-    }
+//     } catch (e) {
+//         return e;
+//     }
 
-}
+// }
 
 const initialState = { allPlaylists: [], byId: {}, currentUserPlaylists: [], currentPlaylistSongs: []};
 
-const playlistReducer = (state = initialState, action) => {
+const playlistsReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
         case GET_ALL_PLAYLISTS:
@@ -265,18 +264,18 @@ const playlistReducer = (state = initialState, action) => {
                 newState.byId[playlist.id] = playlist;
             });
             return newState;
-        case GET_PLAYLIST:
-            newState.byId[playlist.id] = playlist;
-            return newState;
-        case CREATE_PLAYLIST:
-            newState.allPlaylists.push(action.payload)
-            newState.byId[action.payload.id] = action.payload;
-            return newState;
-        case EDIT_PLAYLIST:
-            const index = newState.allPlaylists.findIndex(playlist => playlist.id === action.payload.id);
-            newState.allPlaylists[index] = action.payload
-            newState.byId[action.payload.id] = action.payload;
-            return newState;
+        // case GET_PLAYLIST:
+        //     newState.byId[playlist.id] = playlist;
+        //     return newState;
+        // case CREATE_PLAYLIST:
+        //     newState.allPlaylists.push(action.payload)
+        //     newState.byId[action.payload.id] = action.payload;
+        //     return newState;
+        // case EDIT_PLAYLIST:
+        //     const index = newState.allPlaylists.findIndex(playlist => playlist.id === action.payload.id);
+        //     newState.allPlaylists[index] = action.payload
+        //     newState.byId[action.payload.id] = action.payload;
+        //     return newState;
         // case ADD_SONG:
         //     newState.currentPlaylistSongs
         //     return newState;
@@ -294,4 +293,4 @@ const playlistReducer = (state = initialState, action) => {
     }
   }
 
-  export default sessionReducer;
+  export default playlistsReducer;
