@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment, Like
 from ..forms import NewSongForm, NewCommentForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename)
 
 song_routes = Blueprint('songs', __name__)
 
@@ -42,14 +43,31 @@ def new_song():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+        song = data["file_path"]
+        print(song)
+        # song = {}
+        # song.file_path =
+        # song.title = data.title
+        # song.genre = data.genre
+        # song.description = data.description
+        # song.privacy = data.privacy
         new_song = Song(
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=data["file_path"],
+            file_path=get_unique_filename(data["file_path"]),
             privacy=data["privacy"],
             user_id=current_user.id
         )
+        # upload = upload_file_to_s3(song)
+        # print(upload)
+
+        # if "url" not in upload:
+        #     return {"error": "The upload was unsuccessful"}
+
+        # url = upload["url"]
+        # new_song = Song(song= url)
+
         db.session.add(new_song)
         db.session.commit()
         return new_song.to_dict()
