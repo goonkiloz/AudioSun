@@ -49,21 +49,16 @@ function NewSongForm() {
         //     privacy,
         // };
 
-        console.log(formData);
-        await dispatch(postSongThunk(formData))
-            // if (!res.ok) {
-            //     const errors = await res.json()
-            //     console.log(errors);
-            //     setValidationErrors(errors)
-            // }
-            .catch(async (res) => {
-                const data = await res.json();
-                setValidationErrors(data)
-            })
-        // if (!validationErrors.length) {
-        // }
-        // navigate(`/songs`)
-    };
+        if (!validationErrors.length) {
+            const res = await dispatch(postSongThunk(formData))
+            if (!res.ok) {
+                const errors = await res.json()
+                console.log(errors);
+                setValidationErrors(errors)
+            }
+        }
+        navigate(`/songs`)
+    }
 
     return (
         <div className="pageContainer">
