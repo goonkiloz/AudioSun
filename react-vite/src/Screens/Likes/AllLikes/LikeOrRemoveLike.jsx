@@ -9,16 +9,16 @@ const LikeOrRemoveLike = (song) => {
     const [like, setLike] = useState(false)
     const [likeId, setLikeId] = useState(null)
     const currentSongId = song.song.id;
-    console.log(`songId`, currentSongId)
+    // console.log(`songId`, currentSongId)
     const likes = useSelector(state => state.likes?.allLikes);
-    console.log(`likes`, likes[0])
+    // console.log(`likes`, likes[0])
     const currentUserId = useSelector(state => state.session?.user?.id);
-    console.log(`currentUserId`,currentUserId)
+    // console.log(`currentUserId`,currentUserId)
 
     useEffect(() => {
         if(likes && currentUserId){
             const currentUserLike = likes.find(like => like.user_id === currentUserId)
-            console.log(`currentUserLike`,currentUserLike)
+            // console.log(`currentUserLike`,currentUserLike)
             if (currentUserLike) {
                 setLike(true);
                 setLikeId(currentUserLike.id)
@@ -28,13 +28,18 @@ const LikeOrRemoveLike = (song) => {
             }
         }
 
+        if(likes.length === 0) {
+            setLike(false);
+            setLikeId(null)
+        }
+
     },[currentUserId, likes, currentSongId])
 
     const handleLike = () => {
         if(!like) {
             dispatch(postLikeThunk(currentSongId))
         } else {
-            dispatch(removeLikeThunk(likeId, currentSongId))
+            dispatch(removeLikeThunk(likeId))
         }
     }
 

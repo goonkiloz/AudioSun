@@ -10,14 +10,14 @@ def remove_like_for_song(like_id):
     """
     Remove a like based on the song id and user id
     """
-    print('is deletion called')
+
     current_like = Like.query.get(like_id)
+    print(current_like)
+    if not current_like:
+        return {'error': 'no like was found'}, 404
 
     if current_like.user_id != current_user.id:
         return {'error': "Not Authorized"}
-
-    if not current_like:
-        return {'error': 'no like was found'}, 404
 
     db.session.delete(current_like)
     db.session.commit()

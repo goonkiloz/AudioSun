@@ -60,7 +60,7 @@ export const postLikeThunk = (songId) => async (dispatch) => {
 };
 
 //thunk action to remove like to a song
-export const removeLikeThunk = (likeId, songId) => async (dispatch) => {
+export const removeLikeThunk = (likeId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/likes/${likeId}`, {
       method: "DELETE",
@@ -69,7 +69,6 @@ export const removeLikeThunk = (likeId, songId) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(removeLike(likeId));
-      dispatch(getLikesThunk(songId));
       return data;
     }
     throw res;
@@ -96,9 +95,9 @@ const likesReducer = (state = initialState, action) => {
       newState.byId[action.payload.id] = action.payload;
       return newState;
 
-    case removeLike:
+    case REMOVE_LIKE:
       newState.allLikes = newState.allLikes.filter(
-        (like) => like.id !== action.payload.likeId
+        like => like.id !== action.payload
       );
       delete newState.byId[action.payload];
       return newState;
