@@ -36,7 +36,7 @@ const CommentsView = (song) => {
                 {comments.map(comment => (
                     <div key={comment.id} className='commentBox'>
                         <div>{comment.comment_text}</div>
-                        {console.log(`what is the comment`,comment)}
+
                         {currentUser && (currentUser.id === comment.user_id) && (
                             <div>
                                 <OpenModalButton

@@ -4,6 +4,7 @@ import { getSingleSongThunk } from "../../../redux/songs";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect } from "react";
+import AllLikesView from "../../Likes/AllLikes/AllLikesView";
 
 const SingleSongPage = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SingleSongPage = () => {
             <div>Genre: {currentSong.genre}</div>
             <div>Artist: {currentSong.user_id}</div>
             <CommentsView song={currentSong} />
+            <AllLikesView song={currentSong} />
         </div>
     )
 }

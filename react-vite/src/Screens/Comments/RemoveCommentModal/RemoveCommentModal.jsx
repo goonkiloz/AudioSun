@@ -34,7 +34,7 @@ function RemoveComment ({commentId, songId}) {
 
 
     return (
-        <div className='deletespot-container'>
+        <div className='delete-comment modal-container'>
             <h1>Confirm Delete</h1>
 
             {errors.message && (
@@ -46,7 +46,7 @@ function RemoveComment ({commentId, songId}) {
             </p>
 
             <button
-                className='delete-comment-confirm-button'
+                className='delete-comment comfirm-button'
                 type='button'
                 onClick={handleConfirmSubmit}
             >
@@ -54,7 +54,7 @@ function RemoveComment ({commentId, songId}) {
             </button>
 
             <button
-                className='delete-comment-cancel-button'
+                className='delete-comment cancel-button'
                 type='button'
                 onClick={handleCancelSubmit}
             >
