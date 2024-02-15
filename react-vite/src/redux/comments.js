@@ -12,10 +12,10 @@ const loadComments = (comments) => {
   };
 };
 
-const addComment = (songId, comment) => {
+const addComment = (comment) => {
   return {
     type: POST_COMMENT,
-    payload: { songId, comment },
+    payload: comment,
   };
 };
 
@@ -49,9 +49,9 @@ export const getCommentsThunk = (songId) => async (dispatch) => {
   }
 };
 //thunk action to add comment to a song
-export const postCommentThunk = (comment) => async (dispatch) => {
+export const postCommentThunk = (comment, songId) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/songs/${comment.songId}/comments`, {
+    const res = await fetch(`/api/songs/${songId}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -63,13 +63,39 @@ export const postCommentThunk = (comment) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(addComment(data));
+      dispatch(getCommentsThunk(songId));
       return data;
     }
     throw res;
   } catch (e) {
+    console.log(`e`, e);
     return e;
   }
 };
+
+//thunk action to edit comment on a song
+export const editCommentThunk =
+  (comment, commentId, songId) => async (dispatch) => {
+    try {
+      const res = await fetch(`/api/comments/${commentId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          comment_text: comment.commentText,
+        }),
+      });
+      if (res.ok) {
+        console.log(res);
+        const data = await res.json();
+        dispatch(editComment(data));
+        dispatch(getCommentsThunk(songId));
+        return data;
+      }
+      throw res;
+    } catch (e) {
+      return e;
+    }
+  };
 //thunk action to delete comment to a song
 export const deleteCommentThunk = (commentId, songId) => async (dispatch) => {
   try {
@@ -108,8 +134,14 @@ const commentsReducer = (state = initialState, action) => {
       newState.byId[action.payload.id] = action.payload;
       return newState;
 
-    case EDIT_COMMENT:
+    case EDIT_COMMENT: {
+      const index = newState.allComments.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      newState.allComments[index] = action.payload;
+      newState.byId[action.payload.id] = action.payload;
       return newState;
+    }
 
     case REMOVE_COMMENT:
       newState.allComments = newState.allComments.filter(

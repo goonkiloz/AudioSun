@@ -1,13 +1,13 @@
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { getCurrentUserSongsThunk } from "../../redux/songs"
 import "./ProfileView.css";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import SingleSongComponent from "../Songs/AllSongs/SingleSongComponent";
 
 const ProfileView = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     const songs = useSelector(state => state.songs.currentUserSongs)
