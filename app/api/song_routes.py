@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment, Like
 from ..forms import NewSongForm, NewCommentForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 song_routes = Blueprint('songs', __name__)
 
@@ -42,14 +43,26 @@ def new_song():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+        song = data["file_path"]
+        song.filename = get_unique_filename(song.filename)
+
+        upload = upload_file_to_s3(song)
+        print(upload)
+
+        if "url" not in upload:
+            return {"error": "The upload was unsuccessful"}
+
+        url = upload["url"]
+
         new_song = Song(
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=data["file_path"],
+            file_path=url,
             privacy=data["privacy"],
             user_id=current_user.id
         )
+
         db.session.add(new_song)
         db.session.commit()
         return new_song.to_dict()
@@ -93,6 +106,8 @@ def delete_song(id):
     Delete song if owned by current user
     """
     song = Song.query.get(id)
+    delete = remove_file_from_s3(song.file_path)
+    print(delete)
 
     #Check if song exists
     if not song:
@@ -174,21 +189,22 @@ def add_like_for_song(song_id):
     db.session.commit()
     return new_like.to_dict()
 
-#to delete a like on a song
-@song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=['DELETE'])
-@login_required
-def remove_like_for_song(like_id):
-    """
-    Remove a like based on the song id and user id
-    """
-    current_like = Like.query.get(like_id)
+# to delete a like on a song
+# @song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=["DELETE"])
+# @login_required
+# def remove_like_for_song(like_id):
+#     """
+#     Remove a like based on the song id and user id
+#     """
+#     print('is deletion called')
+#     current_like = Like.query.get(like_id)
 
-    if current_like["user_id"] != current_user.id:
-        return {'error': "Not Authorized"}
+#     if current_like["user_id"] != current_user.id:
+#         return {'error': "Not Authorized"}
 
-    if not current_like:
-        return {'error': 'no like was found'}, 404
+#     if not current_like:
+#         return {'error': 'no like was found'}, 404
 
-    db.session.delete(current_like)
-    db.session.commit()
-    return {'message': 'success'}, 200
+#     db.session.delete(current_like)
+#     db.session.commit()
+#     return {'message': 'success'}, 200

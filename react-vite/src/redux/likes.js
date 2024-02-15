@@ -40,15 +40,11 @@ export const getLikesThunk = (songId) => async (dispatch) => {
 };
 
 //thunk action to add like to a song
-export const postLikeThunk = (like, songId) => async (dispatch) => {
+export const postLikeThunk = (songId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/songs/${songId}/likes`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        song_id: like.songId,
-        user_id: like.userId,
-      }),
+      headers: { "Content-Type": "application/json" }
     });
     if (res.ok) {
       const data = await res.json();
@@ -64,15 +60,15 @@ export const postLikeThunk = (like, songId) => async (dispatch) => {
 };
 
 //thunk action to remove like to a song
-export const removeLikeThunk = (likeId, songId) => async (dispatch) => {
+export const removeLikeThunk = (likeId) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/songs/${songId}/likes/${likeId}`, {
+    const res = await fetch(`/api/likes/${likeId}`, {
       method: "DELETE",
     });
+    console.log(res)
     if (res.ok) {
       const data = await res.json();
       dispatch(removeLike(likeId));
-      dispatch(getLikesThunk(songId));
       return data;
     }
     throw res;
@@ -99,9 +95,9 @@ const likesReducer = (state = initialState, action) => {
       newState.byId[action.payload.id] = action.payload;
       return newState;
 
-    case removeLike:
+    case REMOVE_LIKE:
       newState.allLikes = newState.allLikes.filter(
-        (like) => like.id !== action.payload.likeId
+        like => like.id !== action.payload
       );
       delete newState.byId[action.payload];
       return newState;

@@ -8,16 +8,18 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import songsReducer from "./songs";
 import commentsReducer from "./comments";
-import playlistReducer from './playlists'
+import playlistsReducer from './playlists'
 import likesReducer from "./likes";
+import queueReducer from "./queue";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
   comments: commentsReducer,
-  playlists: playlistReducer,
-  likes: likesReducer
+  playlists: playlistsReducer,
+  likes: likesReducer,
+  queue: queueReducer,
 });
 
 let enhancer;
