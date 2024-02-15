@@ -18,7 +18,7 @@ const AllLikesView = (song) => {
     if (!likes) return <div>Loading...</div>
 
     if (likes.length === 0) {
-        return <div>No Likes for this song yet!</div>
+        return <h2>No like for this song yet!</h2>
     }
 
     return (
