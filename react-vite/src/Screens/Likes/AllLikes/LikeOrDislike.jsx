@@ -23,7 +23,7 @@ const LikeOrDisLike = (song) => {
 
     return (
         <div>
-            <h2>Likes for the song</h2>
+            <h2>Likes for the song:</h2>
             <div className='likesContainer'>
                 {likes.map(like => (
                     <div key={like.id} className='likeBox'>
