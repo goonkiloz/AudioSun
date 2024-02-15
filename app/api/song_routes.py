@@ -125,7 +125,7 @@ def add_comments_for_song(song_id):
     """
     add a comment based on the song Id and user Id
     """
-    current_song = Song.query.get(song_id)
+
 
     form = NewCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -174,6 +174,7 @@ def add_like_for_song(song_id):
     db.session.commit()
     return new_like.to_dict()
 
+#to delete a like on a song
 @song_routes.route('/<int:song_id>/likes/<int:like_id>', methods=['DELETE'])
 @login_required
 def remove_like_for_song(like_id):
