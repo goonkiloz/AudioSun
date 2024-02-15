@@ -50,6 +50,6 @@ function DeleteSong({ songId }) {
             </button>
         </div>
     )
-};
+}
 
 export default memo(DeleteSong);
