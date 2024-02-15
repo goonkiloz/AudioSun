@@ -5,6 +5,7 @@ import { postSongThunk } from "../../../redux/songs";
 import "./NewSong.css";
 
 function NewSongForm() {
+    // const history = useHistory()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
@@ -15,30 +16,53 @@ function NewSongForm() {
     const [privacy, setPrivacy] = useState("");
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [song, setSong] = useState(null);
+    const [songLoading, setSongLoading] = useState(false);
 
     if (!user) return <Navigate to="/login" replace={true} />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
+        setValidationErrors('');
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("genre", genre);
+        formData.append("description", description);
+        formData.append("privacy", privacy);
+        formData.append("userId", user.id);
+        formData.append("file_path", filePath);
+        // "song_file": filePath,
+        // "title": title,
+        // "genre": genre,
+        // "description": description,
+        // "privacy": privacy,
+        // "userId": user.id
+        setSongLoading(true);
 
-        const newSong = {
-            title,
-            userId: user.id,
-            genre,
-            description,
-            filePath,
-            privacy,
-        };
+        // const newSong = {
+        //     title,
+        //     userId: user.id,
+        //     genre,
+        //     description,
+        //     filePath,
+        //     privacy,
+        // };
 
-        if (!validationErrors.length) {
-            const res = await dispatch(postSongThunk(newSong))
-            if (!res.ok) {
-                const errors = await res.json()
-                setValidationErrors(errors)
-            }
-        }
-        navigate(`/`)
+        console.log(formData);
+        await dispatch(postSongThunk(formData))
+            // if (!res.ok) {
+            //     const errors = await res.json()
+            //     console.log(errors);
+            //     setValidationErrors(errors)
+            // }
+            .catch(async (res) => {
+                const data = await res.json();
+                setValidationErrors(data)
+            })
+        // if (!validationErrors.length) {
+        // }
+        // navigate(`/songs`)
     };
 
     return (
@@ -47,7 +71,11 @@ function NewSongForm() {
                 <h1>Add a new song</h1>
             </div>
             <div>
-                <form onSubmit={handleSubmit} className="formContainer">
+                <form
+                    onSubmit={handleSubmit}
+                    className="formContainer"
+                // encType="multipart/form-data"
+                >
                     <label>Title
                         <input
                             type="text"
@@ -78,12 +106,11 @@ function NewSongForm() {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
-                    <label>File Path
+                    <label>Upload File (MP3)
                         <input
-                            type="text"
-                            placeholder="File Path"
-                            value={filePath}
-                            onChange={(e) => setFilePath(e.target.value)}
+                            type="file"
+                            // accept="mp3/*"
+                            onChange={(e) => setFilePath(e.target.files[0])}
                         />
                     </label>
                     {validationErrors.filePath && hasSubmitted &&
@@ -98,6 +125,7 @@ function NewSongForm() {
                     {validationErrors.privacy && hasSubmitted &&
                         <p className="error">{validationErrors.privacy}</p>}
                     <button>Submit</button>
+                    {(songLoading) && <p>Loading...</p>}
                 </form>
             </div>
         </div>
