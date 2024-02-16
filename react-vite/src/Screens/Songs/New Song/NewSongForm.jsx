@@ -52,12 +52,13 @@ function NewSongForm() {
         if (!validationErrors.length) {
             const res = await dispatch(postSongThunk(formData))
             if (!res.ok) {
+                setSongLoading(false);
                 const errors = await res.json()
-                console.log(errors);
                 setValidationErrors(errors)
+            } else {
+                navigate(`/songs`)
             }
         }
-        navigate(`/songs`)
     }
 
     return (
