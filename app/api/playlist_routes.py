@@ -27,6 +27,20 @@ def get_playlists_by_user():
     return {"playlists": [playlist.to_dict() for playlist in all_playlists_by_user]}
 
 
+# Get all songs in for a specific playlist
+@playlist_routes.route("/<int:playlist_id>/songs", methods=["GET"])
+def get_songs_from_playlist(playlist_id):
+    """
+    Query for all songs in a specific playlist
+    """
+    playlist = Playlist.query.get(playlist_id)
+
+    if not playlist:
+        return {"error": "Playlist not found"}, 404
+
+    songs_in_playlist = playlist.songs
+    return {"songs": [song.to_dict() for song in songs_in_playlist]}
+
 # Get all playlists by particular song
 @playlist_routes.route("/<int:song_id>", methods=["GET"])
 def get_playlists_by_song_id(song_id):
