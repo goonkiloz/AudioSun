@@ -61,7 +61,7 @@ function EditComment ({comment, songId}) {
                 <button className='confirm-submit-button'
                     type='button'
                     onClick={handleConfirmSubmit}
-                    // disabled={review.length < 10}
+                    disabled={comment.length < 10}
                 >
                     Yes
                 </button>
