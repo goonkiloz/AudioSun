@@ -16,19 +16,23 @@ function EditComment ({comment, songId}) {
     //console.log(spotId)
     const handleConfirmSubmit = async (e) => {
         e.preventDefault();
-        closeModal()
+
         const comment = {
             commentText: newComment
         }
 
-        if(!validationErrors.length) {
-            const res = await dispatch(editCommentThunk(comment, commentId, songId))
-            if(!res.ok) {
-                const errors = await res.json()
-                setValidationErrors(errors)
-            }
-        }
 
+        try {
+            const res = await dispatch(editCommentThunk(comment, commentId, songId));
+            if (res.status === 200) {
+                closeModal();
+            } else {
+                const errors = await res.json();
+                setValidationErrors(errors);
+            }
+        } catch (error) {
+            console.error("Error occurred while editing comment:", error);
+        }
     };
 
     const handleCancelSubmit = (e) => {
@@ -41,8 +45,8 @@ function EditComment ({comment, songId}) {
         <div className='edit-comment-container'>
             <h1 className='title'>Update Your Comment</h1>
 
-            {validationErrors.message && (
-                <p className=''>{validationErrors.message}</p>
+            {validationErrors && (
+                <p className=''>{validationErrors.comment_text}</p>
             )}
 
             <form className='comment-form' onSubmit={handleConfirmSubmit}>
@@ -57,7 +61,7 @@ function EditComment ({comment, songId}) {
                 <button className='confirm-submit-button'
                     type='button'
                     onClick={handleConfirmSubmit}
-                    // disabled={review.length < 10}
+                    disabled={comment.length < 10}
                 >
                     Yes
                 </button>
