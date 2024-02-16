@@ -3,23 +3,28 @@ import "./SongsView.css"
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useContext, useEffect } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
+import { getSingleUserThunk } from "../../../redux/users";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import EditSongModal from "../Edit Song/EditSongModal";
 import DeleteSongModal from "../DeleteSong/DeleteSongModal";
 
 const SingleSongComponent = (song) => {
+    const dispatch = useDispatch();
     const { currentSong, setCurrentSong } = useContext(PlayerContext);
-    console.log(currentSong, setCurrentSong, "?")
     song = song.song;
-    console.log(currentSong, "current")
+    console.log(song);
+    const user = useSelector(state => state.users.byId[song.user_id])
 
+    useEffect(() => {
+        dispatch(getSingleUserThunk(song.user_id));
+    }, [dispatch]);
 
     return (
         <div className="songContainer">
             <h2>Title: {song.title}</h2>
             <div>Description: {song.description}</div>
             <div>Genre: {song.genre}</div>
-            <div>Artist: {song.user_id}</div>
+            <div>Artist: {user.username}</div>
             {/* <CommentsView song={song} /> */}
             {/* <button
                 onClick={async () => {
