@@ -156,11 +156,12 @@ const songsReducer = (state = initialState, action) => {
                 newState.byId[song.id] = song;
             })
             return newState;
-        case PUT_SONG:
+        case PUT_SONG:{
             const index = newState.allSongs.findIndex(song => song.id === action.payload.id);
             newState.allSongs[index] = action.payload
             newState.byId[action.payload.id] = action.payload;
             return newState;
+        }
         case POST_SONG:
             newState.allSongs.push(action.payload)
             newState.byId[action.payload.id] = action.payload;
