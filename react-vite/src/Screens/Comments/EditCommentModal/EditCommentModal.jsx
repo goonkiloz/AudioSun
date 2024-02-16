@@ -22,17 +22,17 @@ function EditComment ({comment, songId}) {
         }
 
 
-        try {
-            const res = await dispatch(editCommentThunk(comment, commentId, songId));
-            if (res.status === 200) {
-                closeModal();
-            } else {
-                const errors = await res.json();
-                setValidationErrors(errors);
-            }
-        } catch (error) {
-            console.error("Error occurred while editing comment:", error);
+        const res = await dispatch(editCommentThunk(comment, commentId, songId));
+
+        console.log(res)
+
+        if (!res.id) {
+                setValidationErrors(res);
+        } else {
+                console.log(`is this called?`)
+                closeModal()
         }
+
     };
 
     const handleCancelSubmit = (e) => {
@@ -61,14 +61,13 @@ function EditComment ({comment, songId}) {
                 <button className='confirm-submit-button'
                     type='button'
                     onClick={handleConfirmSubmit}
-                    disabled={comment.length < 10}
+                    disabled={newComment.length < 10}
                 >
                     Yes
                 </button>
                 <button className='cancel-submit-button'
                     type='button'
                     onClick={handleCancelSubmit}
-                    // disabled={review.length < 10}
                 >
                     No
                 </button>
