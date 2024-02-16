@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, request, jsonify
 from flask_login import login_required, current_user
 from app.models import Song, db, Comment, Like
-from ..forms import NewSongForm, NewCommentForm
-from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename)
+from ..forms import NewSongForm, NewCommentForm, EditSongForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 song_routes = Blueprint('songs', __name__)
 
@@ -44,29 +44,24 @@ def new_song():
     if form.validate_on_submit():
         data = form.data
         song = data["file_path"]
-        print(song)
-        # song = {}
-        # song.file_path =
-        # song.title = data.title
-        # song.genre = data.genre
-        # song.description = data.description
-        # song.privacy = data.privacy
+        song.filename = get_unique_filename(song.filename)
+
+        upload = upload_file_to_s3(song)
+        print(upload)
+
+        if "url" not in upload:
+            return {"error": "The upload was unsuccessful"}
+
+        url = upload["url"]
+
         new_song = Song(
             title=data["title"],
             genre=data["genre"],
             description=data["description"],
-            file_path=get_unique_filename(data["file_path"]),
+            file_path=url,
             privacy=data["privacy"],
             user_id=current_user.id
         )
-        # upload = upload_file_to_s3(song)
-        # print(upload)
-
-        # if "url" not in upload:
-        #     return {"error": "The upload was unsuccessful"}
-
-        # url = upload["url"]
-        # new_song = Song(song= url)
 
         db.session.add(new_song)
         db.session.commit()
@@ -89,14 +84,13 @@ def update_song(id):
     if song.user_id != current_user.id:
         return {'error': "Not Authorized"}, 403
 
-    form = NewSongForm()
+    form = EditSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         song.title=data["title"]
         song.genre=data["genre"]
         song.description=data["description"]
-        song.file_path=data["file_path"]
         song.privacy=data["privacy"]
 
         db.session.commit()
@@ -111,6 +105,8 @@ def delete_song(id):
     Delete song if owned by current user
     """
     song = Song.query.get(id)
+    delete = remove_file_from_s3(song.file_path)
+    print(delete)
 
     #Check if song exists
     if not song:

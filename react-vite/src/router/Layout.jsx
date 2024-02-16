@@ -5,10 +5,12 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../Screens/Global/Navigation/Components"
 import Player from "../Screens/Player/Player";
+import PlayerProvider from "../context/PlayerContext";
 
 export default function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -16,10 +18,12 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <Navigation />
-        {isLoaded && <Outlet />}
-        <Modal />
-        <Player />
+        <PlayerProvider>
+          <Navigation />
+          {isLoaded && <Outlet />}
+          <Modal />
+          <Player />
+        </PlayerProvider>
       </ModalProvider>
     </>
   );
