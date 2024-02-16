@@ -51,7 +51,7 @@ const NewComment = (song) => {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     name='comment'
-                    placeholder='Leave your comment here...'
+                    placeholder='Write a comment'
                     rows='5'
                 >
                 </textarea>

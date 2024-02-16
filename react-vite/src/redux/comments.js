@@ -37,7 +37,7 @@ const removeComment = (commentId) => {
 export const getCommentsThunk = (songId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/songs/${songId}/comments`);
-    console.log(`res`, res);
+    // console.log(`res`, res);
     if (res.ok) {
       const data = await res.json();
       dispatch(loadComments(data.comments));

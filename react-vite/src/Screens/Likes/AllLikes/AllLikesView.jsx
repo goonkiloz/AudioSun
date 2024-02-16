@@ -9,7 +9,7 @@ const AllLikesView = (song) => {
 
     const currentSong = song.song
     const likes = useSelector(state => state.likes?.allLikes)
-    console.log(`likes`, likes)
+    // console.log(`likes`, likes)
 
     useEffect(() => {
         dispatch(getLikesThunk(currentSong.id))
@@ -25,7 +25,7 @@ const AllLikesView = (song) => {
         <div>
             {/* <h2>{likes.length} {likes.length === 1 ? 'like' : 'likes'} </h2> */}
             <div className='users-likes-container'>
-                <h2>Users who likes the song:</h2>
+                <h2>Users who like the song:</h2>
 
                 {likes.map(like => (
                     <div key={like.id} className='like-Box'>
