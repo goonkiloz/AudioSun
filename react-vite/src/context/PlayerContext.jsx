@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-export const PlayerContext = createContext();
+export const PlayerContext = createContext(null);
 export const usePlayer = () => useContext(PlayerContext);
 
 export default function PlayerProvider({ children }) {

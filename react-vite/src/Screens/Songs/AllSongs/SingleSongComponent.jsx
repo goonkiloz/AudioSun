@@ -6,11 +6,13 @@ import { PlayerContext } from "../../../context/PlayerContext";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import EditSongModal from "../Edit Song/EditSongModal";
 import DeleteSongModal from "../DeleteSong/DeleteSongModal";
-import { addQueueThunk } from "../../../redux/queue";
 
 const SingleSongComponent = (song) => {
     const { currentSong, setCurrentSong } = useContext(PlayerContext);
+    console.log(currentSong, setCurrentSong, "?")
     song = song.song;
+    console.log(currentSong, "current")
+
 
     return (
         <div className="songContainer">
@@ -23,7 +25,7 @@ const SingleSongComponent = (song) => {
                 onClick={async () => {
                     await dispatch(addQueueThunk(song))
                 }}>Play</button> */}
-            <button onClick={setCurrentSong(song)}>Play</button>
+            <button onClick={() => setCurrentSong(song)}>Play</button>
             <OpenModalButton
                 modalComponent={<EditSongModal song={song} />}
                 buttonText="Edit Song"
@@ -35,5 +37,6 @@ const SingleSongComponent = (song) => {
         </div>
     )
 }
+
 
 export default memo(SingleSongComponent);
