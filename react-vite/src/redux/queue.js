@@ -1,5 +1,5 @@
 
-
+const GET_QUEUE = "queue/get"
 const ADD_TO_QUEUE = "queue/add"
 
 const addQueue = (song) => {

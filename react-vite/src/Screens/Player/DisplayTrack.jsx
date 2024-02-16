@@ -1,7 +1,7 @@
 const DisplayTrack = ({ currentTrack }) => {
     return (
         <div>
-            <audio src={currentTrack} controls />
+            <audio src={currentTrack.file_path} controls />
         </div>
     )
 };
