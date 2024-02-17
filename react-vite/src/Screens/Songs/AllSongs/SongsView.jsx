@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import "./SongsView.css";
 import { NavLink } from "react-router-dom";
+import AddSong from "../../Playlist/AddSongModal";
+import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
+import { getCurrentUserPlaylistsThunk } from "../../../redux/playlists";
 
 const SongsView = () => {
     const dispatch = useDispatch();
@@ -10,6 +13,7 @@ const SongsView = () => {
 
     useEffect(() => {
         dispatch(getSongsThunk());
+        dispatch(getCurrentUserPlaylistsThunk())
     }, [dispatch]);
 
     if (!songs) return <h1>Loading...</h1>
@@ -23,6 +27,10 @@ const SongsView = () => {
                         <NavLink to={`/songs/${song.id}`}>
                             {song.title}
                         </NavLink>
+                        <OpenModalButton
+                            modalComponent={<AddSong songId={song.id}/>}
+                            buttonText={'Add to Playlist'}
+                        />
                     </div>
                 ))}
             </div>
@@ -30,4 +38,4 @@ const SongsView = () => {
     )
 };
 
-export default memo(SongsView);
+export default SongsView;

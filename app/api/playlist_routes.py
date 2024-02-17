@@ -51,13 +51,13 @@ def get_playlists_by_song_id(song_id):
     all_playlists_by_song_id = Playlist.query.filter(Playlist.songs.any(id=song_id)).all()
     return {"playlists": [playlist.to_dict() for playlist in all_playlists_by_song_id]}
 
-# @playlist_routes.route("/<int:playlist_id>", methods=["GET"])
-# def get_playlists_by_user(playlist_id):
-#     """
-#     Query for a playlist without login in
-#     """
-#     playlist = Playlist.query.get(playlist_id)
-#     return {"playlists": playlist.to_dict()}
+@playlist_routes.route("/<int:playlist_id>", methods=["GET"])
+def get_playlist(playlist_id):
+    """
+    Query for a playlist without login in
+    """
+    playlist = Playlist.query.get(playlist_id)
+    return {"playlists": playlist.to_dict()}
 
 @playlist_routes.route('/', methods=["POST"])
 @login_required

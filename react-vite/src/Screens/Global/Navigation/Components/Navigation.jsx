@@ -12,6 +12,10 @@ function Navigation() {
       <li>
         <ProfileButton />
       </li>
+
+      <li>
+        <NavLink to="/playlists">Playlists</NavLink>
+      </li>
     </ul>
   );
 }
