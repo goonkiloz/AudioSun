@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { postCommentThunk } from '../../../redux/comments';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // import { NavLink } from "react-router-dom";
 
 //should a SingleSongView Page, which pass on the songId
@@ -16,9 +16,6 @@ const NewComment = (song) => {
     const [validationErrors, setValidationErrors] = useState({});
     // const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    useEffect(() => {
-        setValidationErrors({});
-    }, [comment]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,24 +26,26 @@ const NewComment = (song) => {
             songId: currentSong.id
         }
 
-        if (!validationErrors.length) {
-            const res = await dispatch(postCommentThunk(newComment, songId))
-            console.log(`what is the res`, res)
-            console.log(`what is validation errors`, validationErrors)
+        const res = await dispatch(postCommentThunk(newComment, songId))
+
+        console.log(`what is the res`, res)
+
+        if (!res.id) {
+
+            setValidationErrors(res)
+            console.log(`validation Error`, validationErrors)
+        } else {
             setComment('')
-            if (!res.ok) {
-                const errors = await res.json()
-                console.log(`is this called for errors`, errors)
-                setValidationErrors(errors)
-                console.log(`validation Error`, validationErrors)
-            }
         }
 
     };
 
     return (
         <div>
-             <form className='comment-form' onSubmit={handleSubmit}>
+            {validationErrors && (
+                <p className=''>{validationErrors.comment_text}</p>
+            )}
+            <form className='comment-form' onSubmit={handleSubmit}>
                 <textarea className='post-comment-form-input'
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
@@ -55,9 +54,6 @@ const NewComment = (song) => {
                     rows='5'
                 >
                 </textarea>
-                {validationErrors && (
-                    <p>{validationErrors.comment_text}</p>
-                )}
                 <button className='postreview-submit-button'
                     type='button'
                     onClick={handleSubmit}
