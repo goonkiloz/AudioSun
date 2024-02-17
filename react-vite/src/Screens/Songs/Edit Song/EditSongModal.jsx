@@ -2,7 +2,7 @@ import { useState } from "react";
 // import { thunkLogin } from "../../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { putSongThunk } from "../../../redux/songs";
+import { getSongsThunk, putSongThunk } from "../../../redux/songs";
 // import "./LoginForm.css";
 
 function EditSongModal(song) {
@@ -39,6 +39,7 @@ function EditSongModal(song) {
                 setValidationErrors(errors)
                 console.log(validationErrors);
             } else {
+                await dispatch(getSongsThunk())
                 closeModal()
             }
         }
