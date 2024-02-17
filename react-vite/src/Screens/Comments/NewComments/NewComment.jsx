@@ -43,7 +43,7 @@ const NewComment = (song) => {
     return (
         <div>
             {validationErrors && (
-                <p className=''>{validationErrors.comment_text}</p>
+                <p className='comment form-error'>{validationErrors.comment_text}</p>
             )}
             <form className='comment-form' onSubmit={handleSubmit}>
                 <textarea className='post-comment-form-input'

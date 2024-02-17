@@ -46,7 +46,7 @@ function EditComment ({comment, songId}) {
             <h1 className='title'>Update Your Comment</h1>
 
             {validationErrors && (
-                <p className=''>{validationErrors.comment_text}</p>
+                <p className='comment form-error'>{validationErrors.comment_text}</p>
             )}
 
             <form className='comment-form' onSubmit={handleConfirmSubmit}>
