@@ -1,3 +1,3 @@
-import NewPlaylistForm from "./CreatePlaylistModal";
+import NewPlaylistForm from "./CreatePlaylistPage";
 
 export default NewPlaylistForm;

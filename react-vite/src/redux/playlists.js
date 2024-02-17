@@ -50,10 +50,10 @@ const postPlaylist = (playlist) => {
     }
 }
 
-const putPlaylist = (playlistId) => {
+const putPlaylist = (playlist) => {
     return {
         type: EDIT_PLAYLIST,
-        payload: playlistId
+        payload: playlist
     }
 }
 
@@ -163,12 +163,8 @@ export const putPlaylistThunk = (playlist, playlistId) => async (dispatch) => {
     try {
         const res = await fetch(`/api/playlists/${playlistId}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-                title: playlist.title,
-                description: playlist.description,
-                playlist_image: playlist.playlist_image
-            })
+            headers: {},
+            body: playlist
         })
 
         if(res.ok) {

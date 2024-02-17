@@ -35,7 +35,7 @@ function NewPlaylistForm() {
                 }
             })
         }
-        navigate(`/playlists`)
+        navigate(`/playlists/current`)
 
     }
 
