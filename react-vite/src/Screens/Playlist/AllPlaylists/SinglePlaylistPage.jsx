@@ -9,6 +9,7 @@ import RemoveSong from "../RemoveSongModal";
 const SinglePlaylistView = () => {
     const dispatch = useDispatch();
     const { playlistId } = useParams();
+    const currentUser = useSelector(state => state.session.user)
     const currentPlaylist = useSelector(state => state.playlists?.byId[playlistId])
     const currentPlaylistSongs = useSelector(state => state.playlists?.currentPlaylistSongs)
 
@@ -31,10 +32,12 @@ const SinglePlaylistView = () => {
                     <NavLink to ={`/songs/${song.id}`}>
                         {song.title}
                     </NavLink>
+                    {currentUser && (currentUser.id === currentPlaylist.user_id) && (
                     <OpenModalButton
                         modalComponent={<RemoveSong songId={song.id} playlistId={currentPlaylist?.id}/>}
                         buttonText={'Remove'}
                     />
+                    )}
                 </div>
             ))}
         </div>

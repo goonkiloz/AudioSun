@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
 import { memo, useEffect } from "react";
 import "./SongsView.css";
-import { NavLink } from "react-router-dom";
 import AddSong from "../../Playlist/AddSongModal";
 import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
 import { getCurrentUserPlaylistsThunk } from "../../../redux/playlists";

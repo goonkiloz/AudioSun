@@ -24,7 +24,7 @@ const CurrentUserPlaylistsPage = () => {
                 {currentUserPlaylists?.map((playlist) => {
                     return(
                         <div key={playlist.id}>
-                            <h3>{playlist.title}</h3>
+                            <NavLink to={`/playlists/${playlist.id}`}>{playlist.title}</NavLink>
                             <p>{playlist.description}</p>
                             <OpenModalButton
                             modalComponent={<EditPlaylist playlistId={playlist.id}/>}
