@@ -3,6 +3,7 @@ import { getSongsThunk } from "../../../redux/songs"
 import { memo, useEffect } from "react";
 import "./SongsView.css";
 import { NavLink } from "react-router-dom";
+import SingleSongComponent from "./SingleSongComponent";
 
 const SongsView = () => {
     const dispatch = useDispatch();
@@ -20,9 +21,7 @@ const SongsView = () => {
             <div className="songsContainer">
                 {songs.map((song) => (
                     <div key={song.id} className="songBox">
-                        <NavLink to={`/songs/${song.id}`}>
-                            {song.title}
-                        </NavLink>
+                        <SingleSongComponent song={song} />
                     </div>
                 ))}
             </div>

@@ -1,29 +1,31 @@
 import "./SongsView.css"
-// import CommentsView from "../../Comments/AllComments/CommentsView"
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useContext, useEffect } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
+import { NavLink } from "react-router-dom";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import EditSongModal from "../Edit Song/EditSongModal";
 import DeleteSongModal from "../DeleteSong/DeleteSongModal";
-import { addQueueThunk } from "../../../redux/queue";
 
 const SingleSongComponent = (song) => {
-    const { currentSong, setCurrentSong } = useContext(PlayerContext);
+    const dispatch = useDispatch();
+    const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
     song = song.song;
+    console.log(song);
 
     return (
         <div className="songContainer">
-            <h2>Title: {song.title}</h2>
+            <NavLink to={`/songs/${song.id}`}>
+                <h2>{song.title}</h2>
+            </NavLink>
             <div>Description: {song.description}</div>
             <div>Genre: {song.genre}</div>
-            <div>Artist: {song.user_id}</div>
-            {/* <CommentsView song={song} /> */}
-            {/* <button
-                onClick={async () => {
-                    await dispatch(addQueueThunk(song))
-                }}>Play</button> */}
-            <button onClick={setCurrentSong(song)}>Play</button>
+            <div>Artist: {song.artist.username}</div>
+            <button onClick={() => {
+                setIsPlaying(false);
+                setCurrentSong(song);
+                setIsPlaying(true);
+            }}>Play</button>
             <OpenModalButton
                 modalComponent={<EditSongModal song={song} />}
                 buttonText="Edit Song"
@@ -35,5 +37,6 @@ const SingleSongComponent = (song) => {
         </div>
     )
 }
+
 
 export default memo(SingleSongComponent);

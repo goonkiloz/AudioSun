@@ -1,12 +1,21 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 
 
 
 class EditSongForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    genre = StringField('Genre', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    title = StringField('Title', validators=[
+                            DataRequired(),
+                            Length(max=50, message="Title cannot be longer than 50 characters")
+                            ])
+    genre = StringField('Genre', validators=[
+                            DataRequired(),
+                            Length(max=50, message="Genre cannot be longer than 50 characters")
+                            ])
+    description = StringField('Description', validators=[
+                            DataRequired(),
+                            Length(max=255, message="Description cannot be longer than 255 characters")
+                            ])
     privacy = BooleanField('Private')
     submit = SubmitField('Edit Song')
