@@ -51,7 +51,7 @@ const CommentsView = (song) => {
 
                         )}
                     </div>
-            ))}
+                ))}
 
             </div>
 
