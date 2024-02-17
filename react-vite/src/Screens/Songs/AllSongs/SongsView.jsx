@@ -11,6 +11,7 @@ import SingleSongComponent from "./SingleSongComponent";
 const SongsView = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.songs.allSongs);
+    console.log(songs);
 
     useEffect(() => {
         dispatch(getSongsThunk());

@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { postSongThunk } from "../../../redux/songs";
+import { getCurrentUserSongsThunk, postSongThunk } from "../../../redux/songs";
 import "./NewSong.css";
 
 function NewSongForm() {
@@ -55,6 +55,7 @@ function NewSongForm() {
                 const errors = await res.json()
                 setValidationErrors(errors)
             } else {
+                await dispatch(getCurrentUserSongsThunk())
                 navigate(`/songs/current`)
             }
         }
