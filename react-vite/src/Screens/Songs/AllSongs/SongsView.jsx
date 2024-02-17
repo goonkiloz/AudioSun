@@ -25,12 +25,9 @@ const SongsView = () => {
             <div className="songsContainer">
                 {songs.map((song) => (
                     <div key={song.id} className="songBox">
-                        <NavLink to={`/songs/${song.id}`}>
-                            {song.title}
-                        </NavLink>
                         <SingleSongComponent song={song} />
                         <OpenModalButton
-                            modalComponent={<AddSong songId={song.id}/>}
+                            modalComponent={<AddSong songId={song.id} />}
                             buttonText={'Add to Playlist'}
                         />
 

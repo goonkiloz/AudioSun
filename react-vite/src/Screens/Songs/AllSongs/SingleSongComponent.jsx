@@ -9,6 +9,7 @@ import DeleteSongModal from "../DeleteSong/DeleteSongModal";
 
 const SingleSongComponent = (song) => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
     const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
     song = song.song;
     console.log(song);
@@ -26,14 +27,18 @@ const SingleSongComponent = (song) => {
                 setCurrentSong(song);
                 setIsPlaying(true);
             }}>Play</button>
-            <OpenModalButton
-                modalComponent={<EditSongModal song={song} />}
-                buttonText="Edit Song"
-            />
-            <OpenModalButton
-                modalComponent={<DeleteSongModal songId={song.id} />}
-                buttonText="Delete Song"
-            />
+            {user.id === song.user_id &&
+                <OpenModalButton
+                    modalComponent={<EditSongModal song={song} />}
+                    buttonText="Edit Song"
+                />
+            }
+            {user.id === song.user_id &&
+                <OpenModalButton
+                    modalComponent={<DeleteSongModal songId={song.id} />}
+                    buttonText="Delete Song"
+                />
+            }
         </div>
     )
 }
