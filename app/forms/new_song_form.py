@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length
-from app.api.aws_helpers import ALLOWED_EXTENSIONS
+from app.api.aws_helpers import ALLOWED_SONG_EXTENSIONS
 
 
 
@@ -23,5 +23,5 @@ class NewSongForm(FlaskForm):
                             ])
     file_path = FileField('File Path', validators=[
                             FileRequired(message="Please select a song to upload"),
-                            FileAllowed(list(ALLOWED_EXTENSIONS))])
+                            FileAllowed(list(ALLOWED_SONG_EXTENSIONS))])
     privacy = BooleanField('Private')

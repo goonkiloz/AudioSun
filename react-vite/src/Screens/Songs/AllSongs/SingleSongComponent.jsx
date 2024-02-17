@@ -27,13 +27,13 @@ const SingleSongComponent = (song) => {
                 setCurrentSong(song);
                 setIsPlaying(true);
             }}>Play</button>
-            {user.id === song.user_id &&
+            {user?.id === song.user_id &&
                 <OpenModalButton
                     modalComponent={<EditSongModal song={song} />}
                     buttonText="Edit Song"
                 />
             }
-            {user.id === song.user_id &&
+            {user?.id === song.user_id &&
                 <OpenModalButton
                     modalComponent={<DeleteSongModal songId={song.id} />}
                     buttonText="Delete Song"
