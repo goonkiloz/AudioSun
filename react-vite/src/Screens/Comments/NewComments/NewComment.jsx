@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { postCommentThunk } from '../../../redux/comments';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { NavLink } from "react-router-dom";
 
 //should a SingleSongView Page, which pass on the songId
@@ -16,6 +16,9 @@ const NewComment = (song) => {
     const [validationErrors, setValidationErrors] = useState({});
     // const [hasSubmitted, setHasSubmitted] = useState(false);
 
+    useEffect(() => {
+        setValidationErrors({});
+    }, [comment]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
