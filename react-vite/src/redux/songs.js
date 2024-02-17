@@ -109,6 +109,7 @@ export const postSongThunk = (song) => async (dispatch) => {
         if (res.ok) {
             const newSong = await res.json();
             dispatch(postSong(newSong));
+            dispatch(getCurrentUserSongsThunk());
             return res;
         }
         throw res

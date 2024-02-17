@@ -1,9 +1,22 @@
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 
-const DisplayTrack = ({ currentSong, audioRef }) => {
+const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef }) => {
+    let artist = {}
+    if (currentSong.currentSong !== '') {
+        artist = currentSong.currentSong.artist
+    }
+    const onLoadedMetadata = () => {
+        const seconds = audioRef.current.duration;
+        setDuration(seconds);
+        progressBarRef.current.max = seconds;
+    };
+
     return (
         <div>
-            <audio src={currentSong.file_path} ref={audioRef} />
+            <audio
+                src={currentSong.currentSong.file_path}
+                ref={audioRef}
+                onLoadedMetadata={onLoadedMetadata} />
             <div className="audio-info">
                 <div className="audio-image">
                     {/* CONDITIONALLY RENDER SONG IMAGE OR MUSIC NOTE */}
@@ -17,9 +30,10 @@ const DisplayTrack = ({ currentSong, audioRef }) => {
                     </div>
                     {/* )} */}
                 </div>
-                <div className="text">
-                    <p className="title">{currentSong.title}</p>
-                    <p>{currentSong.artist}</p>
+                <div className="song-info">
+                    <span className="title">{currentSong.currentSong.title}</span>
+                    -
+                    <span>by {artist?.username}</span>
                 </div>
             </div>
         </div>
