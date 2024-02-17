@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import AddSong from "../../Playlist/AddSongModal";
 import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
 import { getCurrentUserPlaylistsThunk } from "../../../redux/playlists";
+import SingleSongComponent from "./SingleSongComponent";
 
 const SongsView = () => {
     const dispatch = useDispatch();
@@ -27,10 +28,12 @@ const SongsView = () => {
                         <NavLink to={`/songs/${song.id}`}>
                             {song.title}
                         </NavLink>
+                        <SingleSongComponent song={song} />
                         <OpenModalButton
                             modalComponent={<AddSong songId={song.id}/>}
                             buttonText={'Add to Playlist'}
                         />
+                      
                     </div>
                 ))}
             </div>

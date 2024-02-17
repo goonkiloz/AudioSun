@@ -85,7 +85,7 @@ export const editCommentThunk =
         }),
       });
       if (res.ok) {
-        console.log(res);
+        // console.log(res);
         const data = await res.json();
         dispatch(editComment(data));
         dispatch(getCommentsThunk(songId));
@@ -93,7 +93,9 @@ export const editCommentThunk =
       }
       throw res;
     } catch (e) {
-      return e;
+      const data = await e.json()
+      console.log(data)
+      return data;
     }
   };
 //thunk action to delete comment to a song

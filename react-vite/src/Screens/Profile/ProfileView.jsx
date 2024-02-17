@@ -26,7 +26,7 @@ const ProfileView = () => {
         <div>
             <h1>Songs</h1>
             <div className="songsContainer">
-                {songs.map((song) => (
+                {songs?.map((song) => (
                     <div key={song.id} className="songBox">
                         <SingleSongComponent song={song} />
                     </div>

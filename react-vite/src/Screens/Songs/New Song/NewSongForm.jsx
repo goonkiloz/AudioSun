@@ -16,7 +16,6 @@ function NewSongForm() {
     const [privacy, setPrivacy] = useState("");
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [song, setSong] = useState(null);
     const [songLoading, setSongLoading] = useState(false);
 
     if (!user) return <Navigate to="/login" replace={true} />;
@@ -52,12 +51,13 @@ function NewSongForm() {
         if (!validationErrors.length) {
             const res = await dispatch(postSongThunk(formData))
             if (!res.ok) {
+                setSongLoading(false);
                 const errors = await res.json()
-                console.log(errors);
                 setValidationErrors(errors)
+            } else {
+                navigate(`/songs/current`)
             }
         }
-        navigate(`/songs`)
     }
 
     return (
@@ -92,8 +92,7 @@ function NewSongForm() {
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
                     <label>Description
-                        <input
-                            type="text"
+                        <textarea
                             placeholder="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
