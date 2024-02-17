@@ -40,13 +40,13 @@ class Song(db.Model):
     album = db.relationship('Album', back_populates='songs')
 
     #one song can have many likes
-    likes = db.relationship('Like', back_populates='song')
+    likes = db.relationship('Like', back_populates='song', cascade="all, delete")
 
     #many to many between songs and playlist goes here
     playlists = db.relationship('Playlist', secondary=playlist_songs, back_populates='songs')
 
     #one song can have many comments
-    comments = db.relationship('Comment', back_populates='song')
+    comments = db.relationship('Comment', back_populates='song', cascade="all, delete")
 
 
     def to_dict(self):
@@ -58,6 +58,7 @@ class Song(db.Model):
             'file_path': self.file_path,
             'privacy': self.privacy,
             'user_id': self.user_id,
+            'artist': self.user.to_dict(),
             'album_id': self.album_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

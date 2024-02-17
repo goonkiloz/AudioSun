@@ -6,6 +6,11 @@ import NewSongForm from '../Screens/Songs/New Song'
 import Layout from './Layout';
 import SingleSongPage from '../Screens/Songs/AllSongs/SingleSongPage';
 import ProfileView from '../Screens/Profile/ProfileView';
+import PlaylistsView from '../Screens/Playlist/AllPlaylists/PlaylistsView';
+import SinglePlaylistView from '../Screens/Playlist/AllPlaylists/SinglePlaylistPage';
+import NotFoundPage from '../Screens/NotFound/NotFoundPage';
+import NewPlaylistForm from '../Screens/Playlist/CreatePlaylist';
+import CurrentUserPlaylistsPage from '../Screens/Playlist/CurrentUserPlaylists';
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +47,26 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <ProfileView />
       },
+      {
+        path: "playlists",
+        element: <PlaylistsView />
+      },
+      {
+        path: "playlists/current",
+        element: <CurrentUserPlaylistsPage />
+      },
+      {
+        path: "playlists/:playlistId",
+        element: <SinglePlaylistView />
+      },
+      {
+        path: 'playlists/new',
+        element: <NewPlaylistForm />
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />
+      }
     ],
   },
 ]);

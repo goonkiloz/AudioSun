@@ -16,17 +16,21 @@ function EditComment ({comment, songId}) {
     //console.log(spotId)
     const handleConfirmSubmit = async (e) => {
         e.preventDefault();
-        closeModal()
+
         const comment = {
             commentText: newComment
         }
 
-        if(!validationErrors.length) {
-            const res = await dispatch(editCommentThunk(comment, commentId, songId))
-            if(!res.ok) {
-                const errors = await res.json()
-                setValidationErrors(errors)
-            }
+
+        const res = await dispatch(editCommentThunk(comment, commentId, songId));
+
+        console.log(res)
+
+        if (!res.id) {
+                setValidationErrors(res);
+        } else {
+                console.log(`is this called?`)
+                closeModal()
         }
 
     };
@@ -41,8 +45,8 @@ function EditComment ({comment, songId}) {
         <div className='edit-comment-container'>
             <h1 className='title'>Update Your Comment</h1>
 
-            {validationErrors.message && (
-                <p className=''>{validationErrors.message}</p>
+            {validationErrors && (
+                <p className=''>{validationErrors.comment_text}</p>
             )}
 
             <form className='comment-form' onSubmit={handleConfirmSubmit}>
@@ -57,14 +61,13 @@ function EditComment ({comment, songId}) {
                 <button className='confirm-submit-button'
                     type='button'
                     onClick={handleConfirmSubmit}
-                    // disabled={review.length < 10}
+                    disabled={newComment.length < 10}
                 >
                     Yes
                 </button>
                 <button className='cancel-submit-button'
                     type='button'
                     onClick={handleCancelSubmit}
-                    // disabled={review.length < 10}
                 >
                     No
                 </button>

@@ -2,14 +2,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
 import { memo, useEffect } from "react";
 import "./SongsView.css";
-import { NavLink } from "react-router-dom";
+import AddSong from "../../Playlist/AddSongModal";
+import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
+import { getCurrentUserPlaylistsThunk } from "../../../redux/playlists";
+import SingleSongComponent from "./SingleSongComponent";
 
 const SongsView = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.songs.allSongs);
+    console.log(songs);
 
     useEffect(() => {
         dispatch(getSongsThunk());
+        dispatch(getCurrentUserPlaylistsThunk())
     }, [dispatch]);
 
     if (!songs) return <h1>Loading...</h1>
@@ -20,9 +25,12 @@ const SongsView = () => {
             <div className="songsContainer">
                 {songs.map((song) => (
                     <div key={song.id} className="songBox">
-                        <NavLink to={`/songs/${song.id}`}>
-                            {song.title}
-                        </NavLink>
+                        <SingleSongComponent song={song} />
+                        <OpenModalButton
+                            modalComponent={<AddSong songId={song.id} />}
+                            buttonText={'Add to Playlist'}
+                        />
+
                     </div>
                 ))}
             </div>

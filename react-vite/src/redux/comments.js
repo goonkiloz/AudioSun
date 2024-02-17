@@ -15,7 +15,7 @@ const loadComments = (comments) => {
 const addComment = (comment) => {
   return {
     type: POST_COMMENT,
-    payload: comment ,
+    payload: comment,
   };
 };
 
@@ -37,7 +37,7 @@ const removeComment = (commentId) => {
 export const getCommentsThunk = (songId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/songs/${songId}/comments`);
-    console.log(`res`, res);
+    // console.log(`res`, res);
     if (res.ok) {
       const data = await res.json();
       dispatch(loadComments(data.comments));
@@ -68,33 +68,38 @@ export const postCommentThunk = (comment, songId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
+    console.log(`e`, e);
     return e;
   }
 };
 
 //thunk action to edit comment on a song
-export const editCommentThunk = (comment, commentId, songId) => async (dispatch) => {
-  try {
-    const res = await fetch(`/api/comments/${commentId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        comment_text: comment.commentText,
-      }),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(editComment(data));
-      dispatch(getCommentsThunk(songId));
+export const editCommentThunk =
+  (comment, commentId, songId) => async (dispatch) => {
+    try {
+      const res = await fetch(`/api/comments/${commentId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          comment_text: comment.commentText,
+        }),
+      });
+      if (res.ok) {
+        // console.log(res);
+        const data = await res.json();
+        dispatch(editComment(data));
+        dispatch(getCommentsThunk(songId));
+        return data;
+      }
+      throw res;
+    } catch (e) {
+      const data = await e.json()
+      console.log(data)
       return data;
     }
-    throw res;
-  } catch (e) {
-    return e;
-  }
-};
+  };
 //thunk action to delete comment to a song
-export const deleteCommentThunk = (commentId, songId) => async (dispatch) => {
+export const deleteCommentThunk = (commentId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/comments/${commentId}`, {
       method: "DELETE",
@@ -103,7 +108,7 @@ export const deleteCommentThunk = (commentId, songId) => async (dispatch) => {
       const data = await res.json();
       dispatch(removeComment(commentId));
       console.log("is load comments called?");
-      dispatch(getCommentsThunk(songId));
+      // dispatch(getCommentsThunk(songId));
       return data;
     }
     throw res;
@@ -131,16 +136,18 @@ const commentsReducer = (state = initialState, action) => {
       newState.byId[action.payload.id] = action.payload;
       return newState;
 
-    case EDIT_COMMENT:{
-      const index = newState.allComments.findIndex(comment => comment.id === action.payload.id);
-      newState.allComments[index] = action.payload
+    case EDIT_COMMENT: {
+      const index = newState.allComments.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      newState.allComments[index] = action.payload;
       newState.byId[action.payload.id] = action.payload;
       return newState;
     }
 
     case REMOVE_COMMENT:
       newState.allComments = newState.allComments.filter(
-        (comment) => comment.id !== action.payload.commentId
+        (comment) => comment.id !== action.payload
       );
       delete newState.byId[action.payload];
       return newState;
