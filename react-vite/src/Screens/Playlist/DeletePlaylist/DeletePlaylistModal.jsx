@@ -12,7 +12,7 @@ function DeletePlaylist({ playlistId }) {
         e.preventDefault();
 
         return dispatch(removePlaylistThunk(playlistId))
-            .then(dispatch(getCurrentUserPlaylistsThunk()))
+            .then(async () => await dispatch(getCurrentUserPlaylistsThunk()))
             .then(closeModal)
             .catch(async (res) => {
                 if (res) {
