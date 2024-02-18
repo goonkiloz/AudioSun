@@ -18,24 +18,28 @@ function NewPlaylistForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setValidationErrors("")
         setHasSubmitted(true);
-        setValidationErrors('');
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description)
         formData.append("playlist_image", playlistImage)
         formData.append('userId', user.id)
 
-        if (!validationErrors.length) {
-            await dispatch(postPlaylistThunk(formData))
-            .catch( async (res) => {
-                if(res.ok) {
-                    const errors = await res.json()
-                    setValidationErrors(errors)
-                }
-            })
+        if(!validationErrors.length) {
+            const res = await dispatch(postPlaylistThunk(formData))
+            if (!res.ok){
+                console.log(res)
+                const errors = await res.json()
+                console.log(errors)
+                setValidationErrors(errors)
+            } else {
+                navigate(`/playlists/current`)
+            }
         }
-        navigate(`/playlists/current`)
+
+
+
 
     }
 
@@ -69,15 +73,15 @@ function NewPlaylistForm() {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
-                    <label> Upload Image(jpg)
+                    <label> Upload Image(url)
                         <input
                             type="text"
                             value={playlistImage}
                             onChange={(e) => setPlaylistImage(e.target.value)}
                         />
                         </label>
-                        {validationErrors.playlistImage && hasSubmitted &&
-                        <p className="error">{validationErrors.playlistImage}</p>}
+                        {validationErrors.playlist_image && hasSubmitted &&
+                        <p className="error">{validationErrors.playlist_image}</p>}
 
                     <button>Submit</button>
                 </form>

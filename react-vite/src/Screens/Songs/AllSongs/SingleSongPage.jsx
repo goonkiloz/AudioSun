@@ -25,7 +25,7 @@ const SingleSongPage = () => {
             <LikeOrRemoveLike song={currentSong} />
             <div>Description: {currentSong.description}</div>
             <div>Genre: {currentSong.genre}</div>
-            <div>Artist: {currentSong.user_id}</div>
+            <div>Artist: {currentSong.artist.username}</div>
             <CommentsView song={currentSong} />
 
             <AllLikesView song={currentSong} />

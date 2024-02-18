@@ -9,11 +9,12 @@ function NewSongForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
+    const [isButtonDisabled, setButtonDisabled] = useState(false);
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [description, setDescription] = useState("");
     const [filePath, setFilePath] = useState("");
-    const [privacy, setPrivacy] = useState("");
+    const [privacy, setPrivacy] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [songLoading, setSongLoading] = useState(false);
@@ -22,6 +23,7 @@ function NewSongForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setButtonDisabled(true)
         setHasSubmitted(true);
         setValidationErrors('');
         const formData = new FormData();
@@ -48,15 +50,26 @@ function NewSongForm() {
         //     privacy,
         // };
 
-        if (!validationErrors.length) {
+    //     await dispatch(postSongThunk(formData))
+    //     .catch(async (res) => {
+    //         setSongLoading(false);
+    //         const errors = await res.json()
+    //         setValidationErrors(errors)
+    //     })
+    //     .then((data) => {
+    //         navigate(`/songs/${data.id}`)
+    //     })
+
+        if(!validationErrors.length) {
             const res = await dispatch(postSongThunk(formData))
-            if (!res.ok) {
-                setSongLoading(false);
-                const errors = await res.json()
+            console.log(res)
+            if (!res.res.ok){
+                const errors = await res.res.json()
+                // console.log(errors)
                 setValidationErrors(errors)
+                setButtonDisabled(false)
             } else {
-                await dispatch(getCurrentUserSongsThunk())
-                navigate(`/songs/current`)
+                navigate(`/songs/${res.newSong.id}`)
             }
         }
     }
@@ -119,7 +132,9 @@ function NewSongForm() {
                     </label>
                     {validationErrors.privacy && hasSubmitted &&
                         <p className="error">{validationErrors.privacy}</p>}
-                    <button>Submit</button>
+                    <button
+                        disabled={isButtonDisabled}
+                    >Submit</button>
                     {(songLoading) && <p>Loading...</p>}
                 </form>
             </div>

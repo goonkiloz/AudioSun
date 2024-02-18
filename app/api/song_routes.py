@@ -47,6 +47,7 @@ def new_song():
         song.filename = get_unique_filename(song.filename)
 
         upload = upload_file_to_s3(song)
+        print(song)
         print(upload)
 
         if "url" not in upload:
