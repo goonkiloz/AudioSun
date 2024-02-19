@@ -1,11 +1,10 @@
 import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCurrentUserSongsThunk, postSongThunk } from "../../../redux/songs";
+import { postSongThunk } from "../../../redux/songs";
 import "./NewSong.css";
 
 function NewSongForm() {
-    // const history = useHistory()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
@@ -33,44 +32,18 @@ function NewSongForm() {
         formData.append("privacy", privacy);
         formData.append("userId", user.id);
         formData.append("file_path", filePath);
-        // "song_file": filePath,
-        // "title": title,
-        // "genre": genre,
-        // "description": description,
-        // "privacy": privacy,
-        // "userId": user.id
         setSongLoading(true);
 
-        // const newSong = {
-        //     title,
-        //     userId: user.id,
-        //     genre,
-        //     description,
-        //     filePath,
-        //     privacy,
-        // };
+        const res = await dispatch(postSongThunk(formData));
+        console.log(res);
 
-    //     await dispatch(postSongThunk(formData))
-    //     .catch(async (res) => {
-    //         setSongLoading(false);
-    //         const errors = await res.json()
-    //         setValidationErrors(errors)
-    //     })
-    //     .then((data) => {
-    //         navigate(`/songs/${data.id}`)
-    //     })
-
-        if(!validationErrors.length) {
-            const res = await dispatch(postSongThunk(formData))
-            console.log(res)
-            if (!res.res.ok){
-                const errors = await res.res.json()
-                // console.log(errors)
-                setValidationErrors(errors)
-                setButtonDisabled(false)
-            } else {
-                navigate(`/songs/${res.newSong.id}`)
-            }
+        if (!res.id) {
+            setValidationErrors(res);
+            setSongLoading(false);
+            setButtonDisabled(false)
+        } else {
+            console.log("??? run ???");
+            navigate(`/songs/${res.id}`)
         }
     }
 
@@ -103,8 +76,8 @@ function NewSongForm() {
                             onChange={(e) => setGenre(e.target.value)}
                         />
                     </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
+                    {validationErrors.genre && hasSubmitted &&
+                        <p className="error">{validationErrors.genre}</p>}
                     <label>Description
                         <textarea
                             placeholder="Description"
@@ -121,15 +94,15 @@ function NewSongForm() {
                             onChange={(e) => setFilePath(e.target.files[0])}
                         />
                     </label>
-                    {validationErrors.filePath && hasSubmitted &&
-                        <p className="error">{validationErrors.filePath}</p>}
-                    <label>Privacy
+                    {validationErrors.file_path && hasSubmitted &&
+                        <p className="error">{validationErrors.file_path}</p>}
+                    {/* <label>Privacy
                         <input
                             type="checkbox"
                             value={privacy}
                             onChange={(e) => setPrivacy(e.target.value)}
                         />
-                    </label>
+                    </label> */}
                     {validationErrors.privacy && hasSubmitted &&
                         <p className="error">{validationErrors.privacy}</p>}
                     <button
