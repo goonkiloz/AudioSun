@@ -1,6 +1,6 @@
 function NotFoundPage() {
     return (
-        <p>Are you Lost?</p>
+        <div>ARE YOU LOST?</div>
     )
 }
 

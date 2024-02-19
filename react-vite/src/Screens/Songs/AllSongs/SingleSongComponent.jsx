@@ -1,6 +1,6 @@
 import "./SongsView.css"
-import { useDispatch, useSelector } from "react-redux";
-import { memo, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { memo, useContext} from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import { NavLink } from "react-router-dom";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
@@ -8,7 +8,7 @@ import EditSongModal from "../Edit Song/EditSongModal";
 import DeleteSongModal from "../DeleteSong/DeleteSongModal";
 
 const SingleSongComponent = (song) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
     song = song.song;
