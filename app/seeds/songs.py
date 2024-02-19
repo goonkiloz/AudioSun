@@ -26,6 +26,8 @@ genres = [
     "Techno"
 ]
 
+img = 'https://audiosunsongs.s3.amazonaws.com/2dd5bea3b6f949c6b9dfb4c8912723f1.jpg'
+
 songs = [
     "https://audiosunsongs.s3.amazonaws.com/0567664f9a0642ff987da246077cc6b9.mp3",
     "https://audiosunsongs.s3.amazonaws.com/8ec282c1aad54eb3a2283650509022e9.mp3",
@@ -39,180 +41,180 @@ songs = [
     dict(
         title="song 1",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=1,
         album_id=None
     ),
     dict(
         title="song 2",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=5,
         album_id=None
     ),
     dict(
         title="song 3",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=7,
         album_id=None
     ),
     dict(
         title="song 4",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=13,
         album_id=None
     ),
     dict(
         title="song 5",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=14,
         album_id=None
     ),
     dict(
         title="song 6",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=15,
         album_id=None
     ),
     dict(
         title="song 7",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=20,
         album_id=None
     ),
     dict(
         title="song 8",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=23,
         album_id=None
     ),
     dict(
         title="song 9",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=25,
         album_id=None
     ),
     dict(
         title="song 10",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=29,
         album_id=None
     ),
     dict(
         title="song 11",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=33,
         album_id=None
     ),
     dict(
         title="song 12",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=34,
         album_id=None
     ),
     dict(
         title="song 13",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=37,
         album_id=None
     ),
     dict(
         title="song 14",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=39,
         album_id=None
     ),
     dict(
         title="song 15",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=42,
         album_id=None
     ),
     dict(
         title="song 16",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=44,
         album_id=None
     ),
     dict(
         title="song 17",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=45,
         album_id=None
     ),
     dict(
         title="song 18",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=46,
         album_id=None
     ),
     dict(
         title="song 19",
         genre=random.choice(genres),
+        song_image=img,
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=47,
         album_id=None
     ),
     dict(
         title="song 20",
+        song_image=img,
         genre=random.choice(genres),
         description="This song is good",
         file_path=random.choice(songs),
-        privacy=False,
         user_id=50,
         album_id=None
     ),
@@ -223,9 +225,9 @@ def seed_songs():
         new_song = Song(
             title=song["title"],
             genre=song["genre"],
+            song_image=song['song_image'],
             description=song["description"],
             file_path=song["file_path"],
-            privacy=song["privacy"],
             user_id=song["user_id"],
             album_id=song["album_id"]
         )

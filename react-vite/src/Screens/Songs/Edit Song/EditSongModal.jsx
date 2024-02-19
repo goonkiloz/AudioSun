@@ -12,7 +12,6 @@ function EditSongModal(song) {
     const [title, setTitle] = useState(song.title);
     const [genre, setGenre] = useState(song.genre);
     const [description, setDescription] = useState(song.description);
-    const [privacy, setPrivacy] = useState(song.privacy);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
@@ -28,8 +27,7 @@ function EditSongModal(song) {
             userId,
             genre,
             description,
-            filePath,
-            privacy,
+            filePath
         };
 
         if (!validationErrors.length) {
@@ -82,15 +80,6 @@ function EditSongModal(song) {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
-                    <label>Privacy
-                        <input
-                            type="checkbox"
-                            value={privacy}
-                            onChange={(e) => setPrivacy(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.privacy && hasSubmitted &&
-                        <p className="error">{validationErrors.privacy}</p>}
                     <button>Submit</button>
                 </form>
             </div>

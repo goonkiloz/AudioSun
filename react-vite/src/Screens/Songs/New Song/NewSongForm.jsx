@@ -14,7 +14,7 @@ function NewSongForm() {
     const [genre, setGenre] = useState("");
     const [description, setDescription] = useState("");
     const [filePath, setFilePath] = useState("");
-    const [privacy, setPrivacy] = useState(false);
+    const [songImg, setSongImg] = useState("")
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [songLoading, setSongLoading] = useState(false);
@@ -29,15 +29,14 @@ function NewSongForm() {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("genre", genre);
+        formData.append('song_image', songImg)
         formData.append("description", description);
-        formData.append("privacy", privacy);
         formData.append("userId", user.id);
         formData.append("file_path", filePath);
         // "song_file": filePath,
         // "title": title,
         // "genre": genre,
         // "description": description,
-        // "privacy": privacy,
         // "userId": user.id
         setSongLoading(true);
 
@@ -47,7 +46,6 @@ function NewSongForm() {
         //     genre,
         //     description,
         //     filePath,
-        //     privacy,
         // };
 
     //     await dispatch(postSongThunk(formData))
@@ -114,6 +112,15 @@ function NewSongForm() {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
+                    <label>Upload File (jpg)
+                        <input
+                            type="file"
+                            // accept="mp3/*"
+                            onChange={(e) => setSongImg(e.target.files[0])}
+                        />
+                    </label>
+                    {validationErrors.song_image && hasSubmitted &&
+                        <p className="error">{validationErrors.song_image}</p>}
                     <label>Upload File (MP3)
                         <input
                             type="file"
@@ -123,15 +130,6 @@ function NewSongForm() {
                     </label>
                     {validationErrors.filePath && hasSubmitted &&
                         <p className="error">{validationErrors.filePath}</p>}
-                    <label>Privacy
-                        <input
-                            type="checkbox"
-                            value={privacy}
-                            onChange={(e) => setPrivacy(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.privacy && hasSubmitted &&
-                        <p className="error">{validationErrors.privacy}</p>}
                     <button
                         disabled={isButtonDisabled}
                     >Submit</button>

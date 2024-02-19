@@ -17,6 +17,7 @@ function NewPlaylistForm() {
     if (!user) return <Navigate to="/login" replace={true} />
 
     const handleSubmit = async (e) => {
+        console.log(playlistImage)
         e.preventDefault()
         setValidationErrors("")
         setHasSubmitted(true);
@@ -74,10 +75,10 @@ function NewPlaylistForm() {
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
                     <label> Upload Image(url)
-                        <input
-                            type="text"
-                            value={playlistImage}
-                            onChange={(e) => setPlaylistImage(e.target.value)}
+                    <input
+                            type="file"
+                            // accept="mp3/*"
+                            onChange={(e) => setPlaylistImage(e.target.files[0])}
                         />
                         </label>
                         {validationErrors.playlist_image && hasSubmitted &&

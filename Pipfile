@@ -30,6 +30,7 @@ faker = "*"
 boto3 = "*"
 email-validator = "*"
 wtforms = {extras = ["email"], version = "*"}
+flask-uploads = "*"
 
 [dev-packages]
 

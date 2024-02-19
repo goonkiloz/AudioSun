@@ -76,9 +76,7 @@ export const putSongThunk = (song, songId) => async (dispatch) => {
                 title: song.title,
                 genre: song.genre,
                 description: song.description,
-                file_path: song.filePath,
-                privacy: song.privacy,
-                // user_id: song.userId
+                file_path: song.filePath
             })
         });
 

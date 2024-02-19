@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired, Length
 
 
@@ -17,5 +18,4 @@ class EditSongForm(FlaskForm):
                             DataRequired(),
                             Length(max=255, message="Description cannot be longer than 255 characters")
                             ])
-    privacy = BooleanField('Private')
     submit = SubmitField('Edit Song')
