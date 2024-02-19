@@ -83,17 +83,15 @@ export const putSongThunk = (song, songId) => async (dispatch) => {
         });
 
         if (res.ok) {
-            console.log(res);
-            const updatedSong = await res.json();
-            dispatch(putSong(updatedSong));
+            const data = await res.json();
+            dispatch(putSong(data));
             dispatch(getCurrentUserSongsThunk());
-            return res;
+            return data;
         }
-        throw res
+        throw res;
     } catch (e) {
-        // const errors = await e.json();
-
-        return e
+        const data = await e.json()
+        return data;
     }
 };
 
@@ -108,17 +106,15 @@ export const postSongThunk = (song) => async (dispatch) => {
 
         if (res.ok) {
             // console.log(res)
-            const newSong = await res.json();
-            dispatch(postSong(newSong));
+            const data = await res.json();
+            dispatch(postSong(data));
             dispatch(getCurrentUserSongsThunk());
-            return {res, newSong}
-        } else {
-            return {res}
+            return data;
         }
+        throw res;
     } catch (e) {
-        // const errors = await e.json();
-
-        return e
+        const data = await e.json()
+        return data;
     }
 };
 

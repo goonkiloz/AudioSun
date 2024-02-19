@@ -12,7 +12,6 @@ const SingleSongComponent = (song) => {
     const user = useSelector(state => state.session.user)
     const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
     song = song.song;
-    console.log(song);
 
     return (
         <div className="songContainer">

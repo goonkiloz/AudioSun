@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import './EditCommentModal.css'
 import { editCommentThunk } from '../../../redux/comments';
 
-function EditComment ({comment, songId}) {
+function EditComment({ comment, songId }) {
     //console.log(spotId)
     const dispatch = useDispatch();
     const commentText = comment.comment_text
-    const commentId= comment.id
+    const commentId = comment.id
     //const sessionUser = useSelector((state) => state.session.user);
     const [validationErrors, setValidationErrors] = useState({});
     const [newComment, setNewComment] = useState(commentText);
