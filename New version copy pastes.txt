@@ -20,3 +20,9 @@ after op.create
         op.execute(f"ALTER TABLE playlist_songs SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 #COPY/PASTE
+
+#remove seed data from postgres
+DROP SCHEMA audio_sun CASCADE;
+CREATE SCHEMA audio_sun;
+GRANT ALL ON SCHEMA audio_sun TO postgres;
+GRANT ALL ON SCHEMA audio_sun TO public;

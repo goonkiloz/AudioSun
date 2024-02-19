@@ -24,6 +24,7 @@ const SingleSongComponent = (song) => {
             <div>Artist: {song.artist.username}</div>
             <button onClick={() => {
                 setIsPlaying(false);
+                setCurrentSong()
                 setCurrentSong(song);
                 setIsPlaying(true);
             }}>Play</button>

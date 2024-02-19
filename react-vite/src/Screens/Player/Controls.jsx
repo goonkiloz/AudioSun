@@ -32,6 +32,10 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
     }
 
     useEffect(() => {
+        console.log(currentSong)
+    }, [currentSong])
+
+    useEffect(() => {
         if (isPlaying) {
             audioRef.current.play();
         } else {

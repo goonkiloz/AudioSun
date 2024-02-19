@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom"
 
 const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS"
 const GET_ALL_PLAYLISTS_CURRENT_USER = "playlists/GET_ALL_PLAYLISTS_CURRENT_USER"
@@ -128,11 +129,14 @@ export const getPlaylistThunk = (playlistId) => async (dispatch) => {
     try {
         const res = await fetch(`/api/playlists/${playlistId}`)
 
-        if(res.ok) {
+
+        if(!res.ok) {
             const data = await res.json()
-            dispatch(getPlaylist(data))
-            return data
+            return res
         }
+        const data = await res.json()
+        dispatch(getPlaylist(data))
+        return res
     } catch (e) {
         return e;
     }
@@ -148,9 +152,13 @@ export const postPlaylistThunk = (playlist) => async (dispatch) => {
         })
 
         if(res.ok) {
+            // console.log(res)
             const data = await res.json()
             dispatch(postPlaylist(data))
-            return data
+            return res
+        } else {
+            // console.log(res)
+            return res
         }
 
     } catch (e) {
@@ -168,9 +176,13 @@ export const putPlaylistThunk = (playlist, playlistId) => async (dispatch) => {
         })
 
         if(res.ok) {
+            // console.log(res)
             const data = await res.json()
             dispatch(putPlaylist(data))
-            return data
+            return res
+        } else {
+            // console.log(res)
+            return res
         }
 
     } catch (e) {
@@ -207,12 +219,16 @@ const playlistsReducer = (state = initialState, action) => {
             action.payload.forEach(playlist => {
                 newState.byId[playlist.id] = playlist;
             });
+            newState.currentPlaylist = {};
+            newState.currentPlaylistSongs = [];
             return newState
         case GET_ALL_PLAYLISTS_CURRENT_USER:
             newState.currentUserPlaylists = action.payload
             action.payload.forEach(playlist => {
                 newState.byId[playlist.id] = playlist;
             });
+            newState.currentPlaylist = {};
+            newState.currentPlaylistSongs = [];
             return newState;
         case GET_PLAYLIST_SONGS:
             newState.currentPlaylistSongs = action.payload
@@ -224,7 +240,7 @@ const playlistsReducer = (state = initialState, action) => {
             });
             return newState;
         case GET_PLAYLIST:
-            newState.currentPlaylist = action.playlist;
+            newState.currentPlaylist = action.payload.playlist;
             return newState;
         case CREATE_PLAYLIST:
             newState.allPlaylists.push(action.payload)
