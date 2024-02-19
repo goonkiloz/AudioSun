@@ -45,18 +45,6 @@ const SingleSongPage = () => {
                 setCurrentSong(song);
                 setIsPlaying(true);
             }}>Play</button>
-            {user?.id === song.user_id &&
-                <OpenModalButton
-                    modalComponent={<EditSongModal song={song} />}
-                    buttonText="Edit Song"
-                />
-            }
-            {user?.id === song.user_id &&
-                <OpenModalButton
-                    modalComponent={<DeleteSongModal songId={song.id} />}
-                    buttonText="Delete Song"
-                />
-            }
             <CommentsView song={song} />
 
             <AllLikesView song={song} />
