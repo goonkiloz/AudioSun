@@ -51,6 +51,7 @@ export const getSongsThunk = () => async (dispatch) => {
   const res = await fetch("/api/songs");
   const data = await res.json();
   dispatch(getSongs(data.songs));
+  return data;
 };
 
 export const getSingleSongThunk = (songId) => async (dispatch) => {
@@ -81,7 +82,6 @@ export const getCurrentUserSongsThunk = () => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-
     const data = await e.json();
     return data;
   }
@@ -106,6 +106,7 @@ export const putSongThunk = (song, songId) => async (dispatch) => {
       const data = await res.json();
       dispatch(putSong(data));
       dispatch(getCurrentUserSongsThunk());
+      dispatch(getSongsThunk());
       return data;
     }
     throw res;
@@ -127,7 +128,7 @@ export const postSongThunk = (song) => async (dispatch) => {
       // console.log(res)
       const data = await res.json();
       dispatch(postSong(data));
-      dispatch(getCurrentUserSongsThunk());
+      // dispatch(getCurrentUserSongsThunk());
       return data;
     }
     throw res;
@@ -145,7 +146,8 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(deleteSong(songId));
-      dispatch(getCurrentUserSongsThunk());
+      dispatch(getCurrentUserSongsThunk())
+      dispatch(getSongsThunk());
       return data;
     }
     throw res;

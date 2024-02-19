@@ -13,7 +13,7 @@ const SongsView = () => {
 
     useEffect(() => {
         dispatch(getSongsThunk());
-        dispatch(getCurrentUserPlaylistsThunk())
+        // dispatch(getCurrentUserPlaylistsThunk())
     }, [dispatch]);
 
     if (!songs) return <h1>Loading...</h1>
