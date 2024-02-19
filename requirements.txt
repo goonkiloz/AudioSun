@@ -26,3 +26,4 @@ zipp==3.17.0; python_version >= '3.8'
 faker
 boto3
 email_validator
+
