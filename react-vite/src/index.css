@@ -1,4 +1,86 @@
 /* TODO: Add sitewide styles */
 body {
     margin-bottom: 100px;
+    font-family: 'Roboto'
 }
+
+
+.modalContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalContainer label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.modalContainer button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px
+}
+
+
+.modalContainer .error {
+    color: red;
+    margin-top: 5px;
+  }
+
+
+
+.formContainer {
+    max-width: 800px;
+}
+
+.formContainer label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.formContainer input[type="text"],
+.formContainer input[type="file"],
+.formContainer textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.formContainer textarea {
+    height: 100px;
+    width: 800px;
+}
+
+.formContainer .error {
+    color: red;
+    margin-top: 5px;
+}
+
+.formContainer button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Need to set the button to disable in the jsx
+.formContainer button:disabled {
+    background-color: #8c8c8c;
+    cursor: not-allowed;
+} */

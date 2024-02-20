@@ -1,0 +1,12 @@
+.song-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.single-song-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+    margin: 0 auto;
+}

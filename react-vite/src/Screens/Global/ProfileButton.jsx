@@ -6,6 +6,7 @@ import OpenModalMenuItem from "./OpenModalButton/OpenModalMenuItem";
 import LoginFormModal from "../Login/LoginFormModal"
 import SignupFormModal from "../Signup/SignupFormModal";
 import { useContext } from "react";
+import './ProfileButton.css';
 import { PlayerContext } from "../../context/PlayerContext";
 
 function ProfileButton() {

@@ -18,7 +18,8 @@ function NewSongForm() {
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [songLoading, setSongLoading] = useState(false);
 
-    if (!user) return <Navigate to="/login" replace={true} />;
+
+    if (!user) return <h2>You need to sign in to add a new song</h2>;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
