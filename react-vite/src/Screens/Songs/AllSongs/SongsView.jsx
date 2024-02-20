@@ -10,6 +10,7 @@ import SingleSongComponent from "./SingleSongComponent";
 const SongsView = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.songs.allSongs);
+    const currentUser = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getSongsThunk());
@@ -18,23 +19,37 @@ const SongsView = () => {
 
     if (!songs) return <h1>Loading...</h1>
 
-    return (
-        <div>
-            <h1>Songs</h1>
-            <div className="songsContainer">
-                {songs.map((song) => (
-                    <div key={song.id} className="songBox">
-                        <SingleSongComponent song={song} />
-                        <OpenModalButton
-                            modalComponent={<AddSong songId={song.id} />}
-                            buttonText={'Add to Playlist'}
-                        />
-
-                    </div>
-                ))}
+    if(!currentUser) {
+        return (
+            <div>
+                <h1>Songs</h1>
+                <div className="songsContainer">
+                    {songs.map((song) => (
+                        <div key={song.id} className="songBox">
+                            <SingleSongComponent song={song} />
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div>
+                <h1>Songs</h1>
+                <div className="songsContainer">
+                    {songs.map((song) => (
+                        <div key={song.id} className="songBox">
+                            <SingleSongComponent song={song} />
+                            <OpenModalButton
+                                modalComponent={<AddSong songId={song.id} />}
+                                buttonText={'Add to Playlist'}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
 };
 
 export default memo(SongsView);
