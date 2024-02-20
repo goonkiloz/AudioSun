@@ -29,7 +29,9 @@ const SinglePlaylistView = () => {
 
     if(!playlist) return <h1>Loading ...</h1>
 
-    if(currentPlaylistSongs.length === 0) {
+    if(!currentPlaylistSongs) return <p></p>
+
+    if(currentPlaylistSongs?.length === 0 && currentPlaylist?.user_id === currentUser?.id) {
         return (
             <div className="playlistContainer">
                 <h2>Title: {currentPlaylist?.title}</h2>
