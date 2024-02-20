@@ -9,28 +9,46 @@ import LikeOrRemoveLike from "../../Likes/AllLikes/LikeOrRemoveLike";
 
 const SingleSongPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const { songId } = useParams();
-    const currentSong = useSelector(state => state.songs.byId[songId])
-    // console.log(currentSong)
+    const song = useSelector(state => state.songs.byId[songId])
+    const user = useSelector(state => state.session.user)
+    const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
 
     useEffect(() => {
-        dispatch(getSingleSongThunk(songId));
-    }, [dispatch, songId]);
+        const fetchData = async () => {
+
+            const res = await dispatch(getSingleSongThunk(songId))
+            if (res.error) {
+                //console.error("Error fetching song:", res)
+                navigate('/*')
+            }
+        };
+
+        fetchData();
+
+    }, [dispatch, songId, navigate]);
 
     if (!currentSong) return <h2>Loading...</h2>
 
     return (
         <div className="songContainer">
-            <img src={currentSong.song_image}/>
-            <h2>Title: {currentSong.title}</h2>
-            <LikeOrRemoveLike song={currentSong} />
-            <div>Description: {currentSong.description}</div>
-            <div>Genre: {currentSong.genre}</div>
-            <div>Artist: {currentSong.artist.username}</div>
-            <CommentsView song={currentSong} />
+        <img src={song.song_image}/>
+        <h2>Title: {song.title}</h2>
+        <LikeOrRemoveLike song={song} />
+        <div>Description: {song.description}</div>
+        <div>Genre: {song.genre}</div>
+        <div>Artist: {song.artist.username}</div>
+        <button onClick={() => {
+            setIsPlaying(false);
+            setCurrentSong()
+            setCurrentSong(song);
+            setIsPlaying(true);
+        }}>Play</button>
+        <CommentsView song={song} />
 
-            <AllLikesView song={currentSong} />
-        </div>
+        <AllLikesView song={song} />
+    </div>
     )
 }
 

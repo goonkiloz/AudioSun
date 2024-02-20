@@ -12,6 +12,7 @@ function EditSongModal(song) {
     const [title, setTitle] = useState(song.title);
     const [genre, setGenre] = useState(song.genre);
     const [description, setDescription] = useState(song.description);
+    const [privacy, setPrivacy] = useState(song.privacy);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
@@ -27,20 +28,25 @@ function EditSongModal(song) {
             userId,
             genre,
             description,
-            filePath
+            filePath,
+            privacy,
         };
 
-        if (!validationErrors.length) {
-            const res = await dispatch(putSongThunk(updatedSong, songId))
-            if (!res.ok) {
-                const errors = await res.json()
-                setValidationErrors(errors)
-                console.log(validationErrors);
-            } else {
-                await dispatch(getSongsThunk())
-                closeModal()
-            }
+        const res = await dispatch(putSongThunk(updatedSong, songId))
+        console.log("RES?????", res);
+
+        if (!res.id) {
+            console.log("res not ok???");
+            setValidationErrors(res);
+            console.log("errors?", validationErrors);
+        } else {
+            closeModal()
         }
+    };
+
+    const handleCancelSubmit = (e) => {
+        e.preventDefault();
+        closeModal()
     };
 
     return (
@@ -68,8 +74,8 @@ function EditSongModal(song) {
                             onChange={(e) => setGenre(e.target.value)}
                         />
                     </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
+                    {validationErrors.genre && hasSubmitted &&
+                        <p className="error">{validationErrors.genre}</p>}
                     <label>Description
                         <input
                             type="text"
@@ -80,7 +86,21 @@ function EditSongModal(song) {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
+                    {/* <label>Privacy
+                        <input
+                            type="checkbox"
+                            value={privacy}
+                            onChange={(e) => setPrivacy(e.target.value)}
+                        />
+                    </label> */}
+                    {/* {validationErrors.privacy && hasSubmitted &&
+                        <p className="error">{validationErrors.privacy}</p>} */}
                     <button>Submit</button>
+                    <button className='cancel-submit-button'
+                        onClick={handleCancelSubmit}
+                    >
+                        Cancel
+                    </button>
                 </form>
             </div>
         </div>

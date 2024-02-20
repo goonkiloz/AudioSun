@@ -21,7 +21,7 @@ const SinglePlaylistView = () => {
         dispatch(getPlaylistThunk(playlistId))
         .then((res) => {
             if(!res.ok){
-                navigate('*')
+                navigate('/*')
             }
         })
 
