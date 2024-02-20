@@ -49,7 +49,7 @@ const LikeOrRemoveLike = (song) => {
 
     return (
         <div>
-            <div className='likes-container'>
+            <div className='likesContainer'>
                 <div className={like ? `filled` : `empty`}
                     onClick={handleLike}
                 >
