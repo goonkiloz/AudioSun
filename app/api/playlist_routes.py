@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Playlist, Like
-from ..forms import NewPlaylistForm
+from ..forms import NewPlaylistForm, EditPlaylistForm
 from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 playlist_routes = Blueprint("playlists", __name__)
@@ -110,13 +110,12 @@ def edit_playlist(playlist_id):
     if current_user.id != current_playlist.user_id:
         return {"error": "Not Authorized"}, 403
 
-    form = NewPlaylistForm()
+    form = EditPlaylistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
         current_playlist.title=data["title"]
         current_playlist.description=data["description"]
-        current_playlist.playlist_image=data["playlist_image"]
 
         db.session.commit()
         return current_playlist.to_dict()

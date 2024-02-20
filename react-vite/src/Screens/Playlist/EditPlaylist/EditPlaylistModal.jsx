@@ -11,7 +11,6 @@ function EditPlaylist({playlistId}){
 
     const [ title, setTitle ] = useState(playlist?.title);
     const [ description, setDescription ] = useState(playlist?.description);
-    const [ playlistImage, setPlaylistImage ] = useState(playlist?.playlist_image);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
@@ -23,7 +22,6 @@ function EditPlaylist({playlistId}){
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description)
-        formData.append("playlist_image", playlistImage)
         formData.append('userId', user.id)
 
         if(!validationErrors.length) {
