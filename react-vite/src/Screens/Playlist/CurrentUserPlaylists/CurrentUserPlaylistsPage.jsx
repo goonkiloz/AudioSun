@@ -25,6 +25,7 @@ const CurrentUserPlaylistsPage = () => {
                     return(
                         <div key={playlist.id}>
                             <NavLink to={`/playlists/${playlist.id}`}>{playlist.title}</NavLink>
+                            <img src={playlist?.playlist_image}/>
                             <p>{playlist.description}</p>
                             <OpenModalButton
                             modalComponent={<EditPlaylist playlistId={playlist.id}/>}

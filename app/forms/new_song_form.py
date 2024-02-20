@@ -6,14 +6,15 @@ from app.api.aws_helpers import ALLOWED_SONG_EXTENSIONS
 
 extension_joined = ", ".join(ALLOWED_SONG_EXTENSIONS)
 
-
-
 class NewSongForm(FlaskForm):
     title = StringField('Title',
                         validators=[
                             DataRequired(),
                             Length(max=50, message="Title cannot be longer than 50 characters")
                             ])
+    song_image = FileField('Song Image', validators=[
+                            FileRequired(message="Please select a image to upload"),
+                            FileAllowed(["jpg", 'png'])])
     genre = StringField('Genre',
                         validators=[
                             DataRequired(),

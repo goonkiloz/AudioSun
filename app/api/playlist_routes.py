@@ -1,7 +1,8 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Playlist, Like
-from ..forms import NewSongForm, NewCommentForm, NewPlaylistForm
+from ..forms import NewPlaylistForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 playlist_routes = Blueprint("playlists", __name__)
 
@@ -74,10 +75,20 @@ def new_playlist():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+        img = data["playlist_image"]
+        img.filename = get_unique_filename(img.filename)
+
+        upload = upload_file_to_s3(img)
+
+        if "url" not in upload:
+            return {"error": 'The upload was unsuccessful'}
+
+        url = upload['url']
+
         new_playlist = Playlist(
             title=data["title"],
             description=data['description'],
-            playlist_image=data["playlist_image"],
+            playlist_image=url,
             user_id=current_user.id
         )
         db.session.add(new_playlist)
@@ -169,6 +180,7 @@ def remove_playlist(playlist_id):
     """
 
     current_playlist = Playlist.query.get(playlist_id)
+    delete = remove_file_from_s3(current_playlist.playlist_image)
 
     if not current_playlist:
         return {"error": "No playlist is found"}, 404

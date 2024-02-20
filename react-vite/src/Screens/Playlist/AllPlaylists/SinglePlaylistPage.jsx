@@ -1,5 +1,5 @@
 import { getPlaylistSongsThunk, getPlaylistThunk, getPlaylistsThunk } from "../../../redux/playlists";
-import { NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
@@ -10,9 +10,9 @@ const SinglePlaylistView = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const { playlistId } = useParams();
-    const currentUser = useSelector(state => state.session.user)
-    const playlist = useSelector((state) => state.playlists.currentPlaylist)
-    // const currentPlaylist = useSelector(state => state.playlists?.byId[playlistId])
+    const currentUser = useSelector(state => state.session?.user)
+    const playlist = useSelector((state) => state.playlists?.currentPlaylist)
+    const currentPlaylist = useSelector(state => state.playlists?.byId[playlistId])
     const currentPlaylistSongs = useSelector(state => state.playlists?.currentPlaylistSongs)
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const SinglePlaylistView = () => {
         dispatch(getPlaylistThunk(playlistId))
         .then((res) => {
             if(!res.ok){
-                navigate('*')
+                navigate('/*')
             }
         })
 
@@ -32,13 +32,13 @@ const SinglePlaylistView = () => {
 
     return (
         <div className="playlistContainer">
-            <h2>Title: {playlist?.title}</h2>
+            <h2>Title: {currentPlaylist?.title}</h2>
             {currentPlaylistSongs?.map((song) => (
                 <div key={song?.id} className="playlistSongBox">
                     <NavLink to ={`/songs/${song?.id}`}>
                         {song?.title}
                     </NavLink>
-                    {currentUser && (currentUser?.id === playlist?.user_id) && (
+                    {currentUser && (currentUser?.id === currentPlaylist?.user_id) && (
                     <OpenModalButton
                         modalComponent={<RemoveSong songId={song?.id} playlistId={playlist?.id}/>}
                         buttonText={'Remove'}

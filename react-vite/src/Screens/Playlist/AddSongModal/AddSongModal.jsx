@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import { useNavigate } from "react-router-dom";
+import { getCurrentUserPlaylistsThunk } from '../../../redux/playlists';
 
 
 
 
 function AddSong({songId}) {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [ errors, setErrors ] = useState({})
     const [ playlists, setPlaylists ] = useState([])
     const { closeModal } = useModal()
     const currentUserPlaylists = useSelector((state) => state.playlists?.currentUserPlaylists)
+
+    useEffect(() => {
+        dispatch(getCurrentUserPlaylistsThunk())
+    }, [dispatch])
 
     const handleConfirmSubmit = async (e) => {
         e.preventDefault();

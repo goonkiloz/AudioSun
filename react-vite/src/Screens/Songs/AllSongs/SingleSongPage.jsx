@@ -34,22 +34,23 @@ const SingleSongPage = () => {
 
     return (
         <div className="songContainer">
-            <h2>Title: {song.title}</h2>
-            <LikeOrRemoveLike song={song} />
-            <div>Description: {song.description}</div>
-            <div>Genre: {song.genre}</div>
-            <div>Artist: {song.artist.username}</div>
-            <button onClick={() => {
-                setIsPlaying(false);
-                setCurrentSong()
-                setCurrentSong(song);
-                setIsPlaying(true);
-            }}>Play</button>
-            <CommentsView song={song} />
+        <img src={song.song_image}/>
+        <h2>Title: {song.title}</h2>
+        <LikeOrRemoveLike song={song} />
+        <div>Description: {song.description}</div>
+        <div>Genre: {song.genre}</div>
+        <div>Artist: {song.artist.username}</div>
+        <button onClick={() => {
+            setIsPlaying(false);
+            setCurrentSong()
+            setCurrentSong(song);
+            setIsPlaying(true);
+        }}>Play</button>
+        <CommentsView song={song} />
 
-            <AllLikesView song={song} />
-        </div>
+        <AllLikesView song={song} />
+    </div>
     )
 }
 
-export default memo(SingleSongPage);
+export default SingleSongPage;
