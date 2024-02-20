@@ -22,3 +22,8 @@
     background-color:#ff5500;
     color:white
 }
+
+.comment-form button:disabled {
+    background-color: #8c8c8c;
+    color: white
+}
