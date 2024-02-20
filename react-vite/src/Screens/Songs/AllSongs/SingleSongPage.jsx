@@ -33,7 +33,7 @@ const SingleSongPage = () => {
     if (!song) return <h2>Loading...</h2>
 
     return (
-        <div className="songContainer">
+        <div className="single-song-page songContainer">
             <div>
                 <img className='song-img' src={song.song_image}/>
             </div>

@@ -3,7 +3,7 @@
     height: 300px;
 }
 
-.songContainer {
+.single-song-page {
     display: grid;
     grid-template-columns: 1fr 1fr;
     max-width: 800px;
