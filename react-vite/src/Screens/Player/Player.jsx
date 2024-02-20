@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlayerContext } from "../../context/PlayerContext";
 import Controls from "./Controls";
@@ -7,11 +7,18 @@ import ProgressBar from "./ProgressBar";
 import "./Player.css"
 
 const Player = () => {
-    const { currentSong, setCurrentSong } = useContext(PlayerContext);
-    const [timeProgress, setTimeProgress] = useState(0);
+    const { currentSong, setCurrentSong, timeProgress, setTimeProgress, setIsPlaying } = useContext(PlayerContext);
+    // const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef();
     const progressBarRef = useRef();
+
+    useEffect(() => {
+        setTimeProgress(0);
+        setDuration(0);
+        setIsPlaying(true);
+    }, [currentSong]);
+
     return (
         <span className="player-box">
             <h2>Player</h2>

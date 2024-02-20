@@ -20,16 +20,10 @@ function AddSong({songId}) {
 
     const handleConfirmSubmit = async (e) => {
         e.preventDefault();
-        setErrors({});
 
         playlists?.forEach(async (playlistId) => {
             await fetch(`/api/playlists/${playlistId}/songs/${songId}`, {
                 method: "POST"
-            })
-            .catch((res) =>{
-                if (res && res.message) {
-                    setErrors(res);
-                }
             })
         })
 
@@ -43,7 +37,24 @@ function AddSong({songId}) {
         closeModal()
     };
 
-    if(currentUserPlaylists.length === 0){
+    let playlistCheck = []
+
+
+    currentUserPlaylists?.map((playlist) => {
+        let songIds = []
+
+        playlist?.songs?.map(song => {
+            songIds?.push(song.id)
+        })
+
+        if (!songIds?.includes(songId)) {
+            playlistCheck?.push(playlist)
+        }
+
+    })
+
+    console.log(playlistCheck)
+    if(currentUserPlaylists?.length === 0){
         return (
             <div className='add-song modalContainer'>
                 <h1>Add Song</h1>
@@ -64,48 +75,62 @@ function AddSong({songId}) {
                 >Cancel</button>
             </div>
         )
-    }
-
-    return (
-        <div className='add-song modalContainer'>
-            <h1>Add Song</h1>
-            <p>Which Playlist would you like to add this to?</p>
-            <div>
-                {currentUserPlaylists?.map((playlist)=> {
-                   return(
-                        <label key={playlist.id}>{playlist.title}
-                            <input
-                                type="checkbox"
-                                value={playlist.id}
-                                onChange={(e) => {
-                                    if(!playlists.includes(e.target.value)){
-                                        setPlaylists((playlists) => [e.target.value, ...playlists])
-                                    } else {
-                                        let newPlaylists = playlists.filter((playlistId) => playlistId !== e.target.value)
-                                        console.log(newPlaylists)
-                                        setPlaylists(newPlaylists)
-                                    }
-                                }}
-                            />
-                        </label>
-                    )
-                })}
-            </div>
-
-            <button
-                className='add-song confirm-button'
-                type='button'
-                onClick={handleConfirmSubmit}
-            >Add</button>
-            <button
+    } else if(playlistCheck?.length === 0) {
+        return (
+            <div className='add-song modalContainer'>
+                <h1>Add Song</h1>
+                <p>Song is added to all playlists</p>
+                <button
                 className='add-song cancel-button'
                 type='button'
                 label='Cancel'
                 onClick={handleCancelSubmit}
-            >Cancel</button>
+                >Cancel</button>
+            </div>
+        )
+    } else {
+        return (
+            <div className='add-song modalContainer'>
+                <h1>Add Song</h1>
+                <p>Which Playlist would you like to add this to?</p>
+                <div>
+                    {playlistCheck?.map((playlist)=> {
+                            return(
+                                 <label key={playlist.id}>{playlist.title}
+                                     <input
+                                         type="checkbox"
+                                         value={playlist.id}
+                                         onChange={(e) => {
+                                             if(!playlists.includes(e.target.value)){
+                                                 setPlaylists((playlists) => [e.target.value, ...playlists])
+                                             } else {
+                                                 let newPlaylists = playlists.filter((playlistId) => playlistId !== e.target.value)
+                                                 console.log(newPlaylists)
+                                                 setPlaylists(newPlaylists)
+                                             }
+                                         }}
+                                     />
+                                 </label>
+                             )
+                    })}
+                </div>
 
-        </div>
-    )
+                <button
+                    className='add-song confirm-button'
+                    type='button'
+                    onClick={handleConfirmSubmit}
+                >Add</button>
+                <button
+                    className='add-song cancel-button'
+                    type='button'
+                    label='Cancel'
+                    onClick={handleCancelSubmit}
+                >Cancel</button>
+
+            </div>
+        )
+    }
+
 }
 
 export default AddSong;

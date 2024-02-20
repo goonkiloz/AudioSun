@@ -14,7 +14,7 @@ const SingleSongPage = () => {
     const { songId } = useParams();
     const song = useSelector(state => state.songs.byId[songId])
     const user = useSelector(state => state.session.user)
-    const { setCurrentSong, setIsPlaying } = useContext(PlayerContext);
+    const { setCurrentSong, setIsPlaying, currentSong } = useContext(PlayerContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +35,7 @@ const SingleSongPage = () => {
     return (
         <div className="single-song-page songContainer">
             <div>
-                <img className='song-img' src={song.song_image}/>
+                <img className='song-img' src={song.song_image} />
             </div>
 
             <div>
@@ -45,10 +45,11 @@ const SingleSongPage = () => {
                 <div>Genre: {song.genre}</div>
                 <div>Artist: {song.artist.username}</div>
                 <button onClick={() => {
-                setIsPlaying(false);
-                setCurrentSong()
-                setCurrentSong(song);
-                setIsPlaying(true);
+                    // setIsPlaying(false);
+                    // setCurrentSong(null)
+                    setCurrentSong(song);
+                    // setTimeProgress(0);
+                    // setIsPlaying(true);
                 }}>Play</button>
             </div>
 
