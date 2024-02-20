@@ -12,6 +12,7 @@ export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentSong, setCurrentSong] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [timeProgress, setTimeProgress] = useState(0);
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -19,7 +20,11 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <PlayerContext.Provider value={{ currentSong, setCurrentSong, isPlaying, setIsPlaying }}>
+        <PlayerContext.Provider value={{
+          currentSong, setCurrentSong,
+          isPlaying, setIsPlaying,
+          timeProgress, setTimeProgress
+        }}>
           <Navigation />
           {isLoaded && <Outlet />}
           <Modal />
