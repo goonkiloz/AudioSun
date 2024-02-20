@@ -40,7 +40,7 @@ const SinglePlaylistView = () => {
                     </NavLink>
                     {currentUser && (currentUser?.id === currentPlaylist?.user_id) && (
                     <OpenModalButton
-                        modalComponent={<RemoveSong songId={song?.id} playlistId={playlist?.id}/>}
+                        modalComponent={<RemoveSong songId={song?.id}/>}
                         buttonText={'Remove'}
                     />
                     )}
