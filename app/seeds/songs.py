@@ -41,7 +41,7 @@ songs = [
     dict(
         title="song 1",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/11066983/pexels-photo-11066983.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="1song.mp3",
         privacy=False,
@@ -51,7 +51,7 @@ songs = [
     dict(
         title="song 2",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5868293/pexels-photo-5868293.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="2song.mp3",
         privacy=False,
@@ -61,7 +61,7 @@ songs = [
     dict(
         title="song 3",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/11066983/pexels-photo-11066983.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="3song.mp3",
         privacy=False,
@@ -71,7 +71,7 @@ songs = [
     dict(
         title="song 4",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="4song.mp3",
         privacy=False,
@@ -81,7 +81,7 @@ songs = [
     dict(
         title="song 5",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="5song.mp3",
         privacy=False,
@@ -91,7 +91,7 @@ songs = [
     dict(
         title="song 6",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="6song.mp3",
         privacy=False,
@@ -101,7 +101,7 @@ songs = [
     dict(
         title="song 7",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="7song.mp3",
         privacy=False,
@@ -111,7 +111,7 @@ songs = [
     dict(
         title="song 8",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="8song.mp3",
         privacy=False,
@@ -121,7 +121,7 @@ songs = [
     dict(
         title="song 9",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="9song.mp3",
         privacy=False,
@@ -131,7 +131,7 @@ songs = [
     dict(
         title="song 10",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="a1song.mp3",
         privacy=False,
@@ -141,7 +141,7 @@ songs = [
     dict(
         title="song 11",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="b1song.mp3",
         privacy=False,
@@ -151,7 +151,7 @@ songs = [
     dict(
         title="song 12",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="c1song.mp3",
         privacy=False,
@@ -161,7 +161,7 @@ songs = [
     dict(
         title="song 13",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="d1song.mp3",
         privacy=False,
@@ -171,7 +171,7 @@ songs = [
     dict(
         title="song 14",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="e1song.mp3",
         privacy=False,
@@ -181,7 +181,7 @@ songs = [
     dict(
         title="song 15",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="f1song.mp3",
         privacy=False,
@@ -191,7 +191,7 @@ songs = [
     dict(
         title="song 16",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="g1song.mp3",
         privacy=False,
@@ -201,7 +201,7 @@ songs = [
     dict(
         title="song 17",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="h1song.mp3",
         privacy=False,
@@ -211,7 +211,7 @@ songs = [
     dict(
         title="song 18",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="i1song.mp3",
         privacy=False,
@@ -221,7 +221,7 @@ songs = [
     dict(
         title="song 19",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="j1song.mp3",
         privacy=False,
@@ -231,7 +231,7 @@ songs = [
     dict(
         title="song 20",
         genre=random.choice(genres),
-        song_image=img,
+        song_image="https://images.pexels.com/photos/5713184/pexels-photo-5713184.jpeg?auto=compress&cs=tinysrgb&w=800",
         description="This song is good",
         file_path="k1song.mp3",
         privacy=False,
