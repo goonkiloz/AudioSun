@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useModal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { getPlaylistSongsThunk } from "../../../redux/playlists";
+import { useParams } from "react-router-dom";
 
-function RemoveSong({songId, playlistId}){
+function RemoveSong({songId}){
     const dispatch = useDispatch()
+    const { playlistId } = useParams()
 
     const [ errors, setErrors ] = useState({})
     const { closeModal } = useModal();
