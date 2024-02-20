@@ -5,9 +5,13 @@
 }
 
 .comment-form textarea {
-    width: 295px;
+    width: 280px;
     margin-top: 10px;
     margin-bottom: 0px;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+
 }
 
 .comment-form > .error{
