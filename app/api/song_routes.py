@@ -32,7 +32,7 @@ def get_song(id):
 
     if not song:
         return {'error': 'Song not found'}, 404
-    
+
     return song.to_dict()
 
 @song_routes.route('/', methods=["POST"])
@@ -135,7 +135,7 @@ def get_comments_for_song(song_id):
     all_comments = Comment.query.filter(Comment.song_id == song_id).order_by(Comment.updated_at).all()
 
     if not all_comments:
-        return {'error': 'no comment is found'}, 404
+        return {'comments': []}
 
     return {'comments': [comment.to_dict() for comment in all_comments]}
 
@@ -172,7 +172,8 @@ def get_likes_for_song(song_id):
     current_song_likes = Like.query.filter(Like.song_id == song_id).all()
 
     if not current_song_likes:
-        return {'error': 'no like was found'}, 404
+        return {'likes': []}
+
     return {'likes': [like.to_dict() for like in current_song_likes]}
 
 

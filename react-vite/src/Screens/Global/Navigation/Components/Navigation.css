@@ -20,3 +20,12 @@
   margin-right: 10px;
   height: 40px
 }
+
+.navbar-profile-container {
+
+  display: flex;
+}
+
+.navbar-profile-container > .username {
+  margin-right: 5px;
+}
