@@ -6,7 +6,7 @@ playlists = [
         title="playlist 1",
         description="a pretty good playlist",
         playlist_image="https://images.pexels.com/photos/6839415/pexels-photo-6839415.jpeg?auto=compress&cs=tinysrgb&w=600",
-        user_id=1
+        user_id=3
     ),
     dict(
         title="playlist 2",

@@ -14,7 +14,7 @@ class NewSongForm(FlaskForm):
                             ])
     song_image = FileField('Song Image', validators=[
                             FileRequired(message="Please select a image to upload"),
-                            FileAllowed(["jpg", 'png'])])
+                            FileAllowed(["jpg", 'png', 'jpeg'])])
     genre = StringField('Genre',
                         validators=[
                             DataRequired(),
