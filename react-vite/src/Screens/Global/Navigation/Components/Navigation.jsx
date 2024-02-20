@@ -4,19 +4,19 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+    <div className="navbar-container">
 
-      <li>
-        <ProfileButton />
-      </li>
+        <NavLink to="/">
+          <img className='navbar-logo' src="/logo.png" alt="Home" />
+        </NavLink>
 
-      <li>
-        <NavLink to="/playlists">Playlists</NavLink>
-      </li>
-    </ul>
+        <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
+
+        <NavLink className='navbar-new-song' to='/songs/new'>Upload song</NavLink>
+
+        <ProfileButton className='navbar-profile'/>
+
+    </div>
   );
 }
 

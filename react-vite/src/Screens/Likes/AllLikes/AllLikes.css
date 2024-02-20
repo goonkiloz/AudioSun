@@ -1,16 +1,40 @@
-.likes-container {
+.likesContainer {
     display: flex;
+    margin: 2px 0;
+    align-items: center;
 }
 
-.likes-container .filled {
-    color: #ff865a;
+.likesContainer i{
+    cursor: pointer
+}
+
+.likesContainer .filled {
+    color:#ff5500;
     font-size: 20px;
 }
-.likes-container .empty {
-    color: #7b889e ;
+.likesContainer .empty {
+    color: #8c8c8c;
     font-size: 20px;
 }
 
 .like-count {
     margin-left: 10px;
+}
+
+.user-id-map {
+    display: flex;
+    flex-direction: row
+}
+
+.user-id-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color:#ff5500; /* You can change this color */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
 }

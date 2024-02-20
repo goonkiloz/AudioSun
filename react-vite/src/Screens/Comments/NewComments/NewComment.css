@@ -1,0 +1,33 @@
+.comment-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.comment-form textarea {
+    width: 280px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.comment-form > .error{
+    margin: 5px 0;
+    color: red;
+}
+
+.comment-form button {
+    width: 300px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    background-color:#ff5500;
+    color:white
+}
+
+.comment-form button:disabled {
+    background-color: #8c8c8c;
+    color: white
+}

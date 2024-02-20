@@ -1,3 +1,22 @@
-.profile-dropdown {
-  position: absolute;
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  margin: 10px 0;
+  border-bottom: 2px solid #CCCCCC;
+}
+
+.navbar-logo {
+  width: 160px;
+  height: 40px;
+}
+
+.navBar-create-new-song {
+  margin-right: 10px;
+  height: 40px
 }
