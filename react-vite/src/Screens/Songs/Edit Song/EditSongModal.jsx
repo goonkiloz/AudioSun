@@ -50,7 +50,7 @@ function EditSongModal(song) {
     };
 
     return (
-        <div className='edit-song modelContainer'>
+        <div className='edit-song modalContainer'>
             <div className="header">
                 <h1>Edit {song.title}</h1>
             </div>
