@@ -31,6 +31,7 @@ body {
     margin-top: 5px
 }
 
+
 .modalContainer .error {
     color: red;
     margin-top: 5px;
@@ -78,7 +79,8 @@ body {
     cursor: pointer;
 }
 
+/* Need to set the button to disable in the jsx
 .formContainer button:disabled {
     background-color: #8c8c8c;
     cursor: not-allowed;
-}
+} */
