@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { postCommentThunk } from '../../../redux/comments';
 import { useState, useEffect } from "react";
 // import { NavLink } from "react-router-dom";
+import './NewComment.css';
 
 //should a SingleSongView Page, which pass on the songId
 const NewComment = (song) => {
@@ -45,9 +46,7 @@ const NewComment = (song) => {
 
     return (
         <div>
-            {validationErrors && (
-                <p className='comment form-error'>{validationErrors.comment_text}</p>
-            )}
+
             <form className='comment-form' onSubmit={handleSubmit}>
                 <textarea className='post-comment-form-input'
                     value={comment}
@@ -57,13 +56,19 @@ const NewComment = (song) => {
                     rows='5'
                 >
                 </textarea>
+                {validationErrors && (
+                <p className='error'>{validationErrors.comment_text}</p>
+                )}
+
                 <button className='postreview-submit-button'
-                    type='button'
-                    onClick={handleSubmit}
-                    disabled={comment.length < 10}
-                >
-                    Submit Your comment
+                        type='button'
+                        onClick={handleSubmit}
+                        disabled={comment.length < 10}
+                    >
+                        Submit your comment
                 </button>
+
+
             </form>
         </div>
     )

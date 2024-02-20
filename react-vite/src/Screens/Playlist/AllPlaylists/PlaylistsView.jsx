@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { getPlaylistSongsThunk, getPlaylistsThunk } from "../../../redux/playlists"
+import { getPlaylistsThunk } from "../../../redux/playlists"
 import { useEffect } from "react";
 // import "./PlaylistView.css";
 import { NavLink } from "react-router-dom";
@@ -18,9 +18,9 @@ const PlaylistsView = () => {
         <div>
             <h1>Playlists</h1>
             <div className="playlistContaniner">
-                {playlists.map((playlist) =>(
+                {playlists?.map((playlist) =>(
                     <div key={playlist.id} className="playlistBox">
-                        <NavLink to={`/playlists/${playlist.id}`} onClick={async () => await dispatch(getPlaylistSongsThunk(playlist.id))}>
+                        <NavLink to={`/playlists/${playlist.id}`}>
                             {playlist.title}
                         </NavLink>
                     </div>

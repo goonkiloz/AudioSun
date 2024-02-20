@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import { useNavigate } from "react-router-dom";
 import { getCurrentUserPlaylistsThunk } from '../../../redux/playlists';
-
-
+import '../../../index.css'
 
 
 function AddSong({songId}) {
@@ -46,7 +45,7 @@ function AddSong({songId}) {
 
     if(currentUserPlaylists.length === 0){
         return (
-            <div className='add-song modal-container'>
+            <div className='add-song modalContainer'>
                 <h1>Add Song</h1>
                 <p>Would you like to create a playlist?</p>
                 <button
@@ -68,7 +67,7 @@ function AddSong({songId}) {
     }
 
     return (
-        <div className='add-song modal-container'>
+        <div className='add-song modalContainer'>
             <h1>Add Song</h1>
             <p>Which Playlist would you like to add this to?</p>
             <div>
