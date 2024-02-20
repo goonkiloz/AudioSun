@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9360df7957bf
+Revision ID: 2e1dfbe33849
 Revises:
-Create Date: 2024-02-14 17:24:43.108644
+Create Date: 2024-02-19 19:22:11.893551
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '9360df7957bf'
+revision = '2e1dfbe33849'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -59,9 +59,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('genre', sa.String(length=100), nullable=False),
+    sa.Column('song_image', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('file_path', sa.String(length=255), nullable=False),
-    sa.Column('privacy', sa.Boolean(create_constraint=255), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('album_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
@@ -98,7 +98,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
     sa.PrimaryKeyConstraint('playlist_id', 'song_id')
     )
-
+    
     if environment == "production":
         op.execute(f"ALTER TABLE albums SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
@@ -107,7 +107,6 @@ def upgrade():
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE playlist_songs SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###
     # ### end Alembic commands ###
 
 

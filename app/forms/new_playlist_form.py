@@ -15,5 +15,5 @@ class NewPlaylistForm(FlaskForm):
     description = StringField('Description', validators=[DataRequired()])
     playlist_image = FileField('Playlist Image', validators=[
             FileRequired(message='Please select a image to upload'),
-            FileAllowed(["jpg", 'png'])]
+            FileAllowed(["jpg", 'png', 'jpeg'])]
         )
