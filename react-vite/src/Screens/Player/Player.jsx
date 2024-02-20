@@ -14,9 +14,10 @@ const Player = () => {
     const progressBarRef = useRef();
 
     useEffect(() => {
+        setIsPlaying(false)
         setTimeProgress(0);
         setDuration(0);
-        setIsPlaying(true);
+        if(currentSong !== '') setIsPlaying(true);
     }, [currentSong]);
 
     return (
