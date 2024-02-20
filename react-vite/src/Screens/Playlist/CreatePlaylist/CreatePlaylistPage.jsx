@@ -10,6 +10,7 @@ function NewPlaylistForm() {
     const [ title, setTitle ] = useState(" ");
     const [ description, setDescription ] = useState(" ");
     const [ playlistImage, setPlaylistImage ] = useState("");
+    const [isButtonDisabled, setButtonDisabled] = useState(false);
 
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
@@ -19,6 +20,7 @@ function NewPlaylistForm() {
     const handleSubmit = async (e) => {
         console.log(playlistImage)
         e.preventDefault()
+        setButtonDisabled(true)
         setValidationErrors("")
         setHasSubmitted(true);
         const formData = new FormData();
@@ -34,6 +36,7 @@ function NewPlaylistForm() {
                 const errors = await res.json()
                 console.log(errors)
                 setValidationErrors(errors)
+                setButtonDisabled(false)
             } else {
                 navigate(`/playlists/current`)
             }
@@ -80,11 +83,13 @@ function NewPlaylistForm() {
                             // accept="mp3/*"
                             onChange={(e) => setPlaylistImage(e.target.files[0])}
                         />
-                        </label>
-                        {validationErrors.playlist_image && hasSubmitted &&
-                        <p className="error">{validationErrors.playlist_image}</p>}
+                    </label>
+                    {validationErrors.playlist_image && hasSubmitted &&
+                    <p className="error">{validationErrors.playlist_image}</p>}
 
-                    <button>Submit</button>
+                    <button
+                        disabled={isButtonDisabled}
+                    >Submit</button>
                 </form>
             </div>
         </div>
