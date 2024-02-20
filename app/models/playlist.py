@@ -36,6 +36,7 @@ class Playlist(db.Model):
             'description': self.description,
             'playlist_image': self.playlist_image,
             'user_id': self.user_id,
+            'songs' : list(songs.to_dict() for songs in self.songs),
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

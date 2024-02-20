@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useModal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
-import { getPlaylistSongsThunk } from "../../../redux/playlists";
+import { getPlaylistThunk } from "../../../redux/playlists";
 import { useParams } from "react-router-dom";
 
 function RemoveSong({songId}){
@@ -23,9 +23,9 @@ function RemoveSong({songId}){
                 setErrors(res)
             }
         })
+        dispatch(getPlaylistThunk(playlistId))
+        return closeModal()
 
-        closeModal()
-        return dispatch(getPlaylistSongsThunk(playlistId))
 
 
     }
