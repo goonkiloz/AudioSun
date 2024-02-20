@@ -1,0 +1,11 @@
+.song-img {
+    width: 300px;
+    height: 300px;
+}
+
+.songContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+    margin: 0 auto;
+}

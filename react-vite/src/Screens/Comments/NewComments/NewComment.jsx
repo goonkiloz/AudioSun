@@ -45,9 +45,7 @@ const NewComment = (song) => {
 
     return (
         <div>
-            {validationErrors && (
-                <p className='comment form-error'>{validationErrors.comment_text}</p>
-            )}
+
             <form className='comment-form' onSubmit={handleSubmit}>
                 <textarea className='post-comment-form-input'
                     value={comment}
@@ -57,13 +55,19 @@ const NewComment = (song) => {
                     rows='5'
                 >
                 </textarea>
-                <button className='postreview-submit-button'
-                    type='button'
-                    onClick={handleSubmit}
-                    disabled={comment.length < 10}
-                >
-                    Submit Your comment
-                </button>
+                {validationErrors && (
+                <p className='comment form-error'>{validationErrors.comment_text}</p>
+                )}
+                <div>
+                    <button className='postreview-submit-button'
+                        type='button'
+                        onClick={handleSubmit}
+                        disabled={comment.length < 10}
+                    >
+                        Submit Your comment
+                    </button>
+                </div>
+
             </form>
         </div>
     )

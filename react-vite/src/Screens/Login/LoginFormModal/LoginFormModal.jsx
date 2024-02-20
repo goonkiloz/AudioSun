@@ -29,7 +29,7 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="log-in modalContainer">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -60,7 +60,7 @@ function LoginFormModal() {
             Demo User
           </button>
       </form>
-    </>
+    </div>
   );
 }
 

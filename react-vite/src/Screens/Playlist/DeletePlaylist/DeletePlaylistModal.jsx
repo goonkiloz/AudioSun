@@ -27,7 +27,7 @@ function DeletePlaylist({ playlistId }) {
     };
 
     return (
-        <div className='modal-container'>
+        <div className='delete-playlist modalContainer'>
             <h1>Confirm Delete Playlist</h1>
             {errors.message && (
                 <p className=''>{errors.message}</p>

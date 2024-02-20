@@ -34,7 +34,7 @@ function RemoveComment ({commentId}) {
 
 
     return (
-        <div className='delete-comment modal-container'>
+        <div className='delete-comment modalContainer'>
             <h1>Confirm Delete</h1>
 
             {errors.message && (

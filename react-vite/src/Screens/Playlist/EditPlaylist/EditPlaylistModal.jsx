@@ -43,7 +43,7 @@ function EditPlaylist({playlistId}){
         closeModal()
     };
     return (
-        <div className='edit-playlist modal-container'>
+        <div className='edit-playlist modalContainer'>
             <h1>Edit Playlist</h1>
             <form
                     onSubmit={handleSubmit}

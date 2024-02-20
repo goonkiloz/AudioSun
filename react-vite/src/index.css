@@ -2,3 +2,42 @@
 body {
     margin-bottom: 100px;
 }
+
+
+.modalContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalContainer label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.modalContainer button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px
+}
+
+/* this will need to be implemented with creation of error class
+.modalContainer .error {
+    color: red;
+    margin-top: 5px;
+  } */
+
+/* this will need to be implemented with button disable in jsx
+.modalContainer button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  } */

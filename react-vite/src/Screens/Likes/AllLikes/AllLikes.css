@@ -3,11 +3,11 @@
 }
 
 .likes-container .filled {
-    color: #ff865a;
+    color:#ff5500;
     font-size: 20px;
 }
 .likes-container .empty {
-    color: #7b889e ;
+    color: #8c8c8c;
     font-size: 20px;
 }
 

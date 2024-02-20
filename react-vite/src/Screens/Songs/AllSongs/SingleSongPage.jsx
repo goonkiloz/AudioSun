@@ -7,7 +7,7 @@ import { memo, useEffect, useContext } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import AllLikesView from "../../Likes/AllLikes/AllLikesView";
 import LikeOrRemoveLike from "../../Likes/AllLikes/LikeOrRemoveLike";
-
+import './SongsView.css'
 const SingleSongPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -34,22 +34,28 @@ const SingleSongPage = () => {
 
     return (
         <div className="songContainer">
-        <img src={song.song_image}/>
-        <h2>Title: {song.title}</h2>
-        <LikeOrRemoveLike song={song} />
-        <div>Description: {song.description}</div>
-        <div>Genre: {song.genre}</div>
-        <div>Artist: {song.artist.username}</div>
-        <button onClick={() => {
-            setIsPlaying(false);
-            setCurrentSong()
-            setCurrentSong(song);
-            setIsPlaying(true);
-        }}>Play</button>
-        <CommentsView song={song} />
+            <div>
+                <img className='song-img' src={song.song_image}/>
+            </div>
 
-        <AllLikesView song={song} />
-    </div>
+            <div>
+                <h2>Title: {song.title}</h2>
+                <LikeOrRemoveLike song={song} />
+                <div>Description: {song.description}</div>
+                <div>Genre: {song.genre}</div>
+                <div>Artist: {song.artist.username}</div>
+                <button onClick={() => {
+                setIsPlaying(false);
+                setCurrentSong()
+                setCurrentSong(song);
+                setIsPlaying(true);
+                }}>Play</button>
+            </div>
+
+            <CommentsView song={song} />
+
+            <AllLikesView song={song} />
+        </div>
     )
 }
 
