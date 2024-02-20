@@ -1,6 +1,6 @@
 import "./SongsView.css"
 import { useSelector } from "react-redux";
-import { memo, useContext} from "react";
+import { memo, useContext } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import { NavLink } from "react-router-dom";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
@@ -22,10 +22,10 @@ const SingleSongComponent = (song) => {
             <div>Genre: {song.genre}</div>
             <div>Artist: {song.artist.username}</div>
             <button onClick={() => {
-                setIsPlaying(false);
-                setCurrentSong()
+                // setIsPlaying(false);
+                // setCurrentSong(null);
                 setCurrentSong(song);
-                setIsPlaying(true);
+                // setIsPlaying(true);
             }}>Play</button>
             {user?.id === song.user_id &&
                 <OpenModalButton
