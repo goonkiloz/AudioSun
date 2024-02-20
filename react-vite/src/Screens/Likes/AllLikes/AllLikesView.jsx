@@ -26,13 +26,14 @@ const AllLikesView = (song) => {
             {/* <h2>{likes.length} {likes.length === 1 ? 'like' : 'likes'} </h2> */}
             <div className='users-likes-container'>
                 <h2>Users who like the song:</h2>
+                <div className='user-id-map'>
+                    {likes.map(like => (
+                        <div key={like.id}>
+                            <span className='user-id-circle'>{like.user_id}</span>
+                        </div>
+                    ))}
+                </div>
 
-                {likes.map(like => (
-                    <div key={like.id} className='like-Box'>
-
-                        <div>UserID: {like.user_id}</div>
-                    </div>
-            ))}
             </div>
         </div>
     )
