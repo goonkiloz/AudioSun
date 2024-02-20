@@ -30,7 +30,9 @@ def get_song(id):
     """
     song = Song.query.get(id)
 
-    print(song)
+    if not song:
+        return {'error': 'Song not found'}, 404
+    
     return song.to_dict()
 
 @song_routes.route('/', methods=["POST"])
@@ -44,22 +46,28 @@ def new_song():
     if form.validate_on_submit():
         data = form.data
         song = data["file_path"]
+        img = data['song_image']
         song.filename = get_unique_filename(song.filename)
+        img.filename = get_unique_filename(img.filename)
 
-        upload = upload_file_to_s3(song)
-        print(upload)
+        uploadSong = upload_file_to_s3(song)
+        uploadImg = upload_file_to_s3(img)
 
-        if "url" not in upload:
+        if "url" not in uploadSong:
             return {"error": "The upload was unsuccessful"}
 
-        url = upload["url"]
+        if "url" not in uploadImg:
+            return {"error": "The upload was unsuccessful"}
+
+        songUrl = uploadSong["url"]
+        imgUrl = uploadImg['url']
 
         new_song = Song(
             title=data["title"],
             genre=data["genre"],
+            song_image=imgUrl,
             description=data["description"],
-            file_path=url,
-            privacy=data["privacy"],
+            file_path=songUrl,
             user_id=current_user.id
         )
 
@@ -91,7 +99,6 @@ def update_song(id):
         song.title=data["title"]
         song.genre=data["genre"]
         song.description=data["description"]
-        song.privacy=data["privacy"]
 
         db.session.commit()
         return song.to_dict()

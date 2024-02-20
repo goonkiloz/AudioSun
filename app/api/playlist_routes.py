@@ -1,7 +1,8 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Playlist, Like
-from ..forms import NewSongForm, NewCommentForm, NewPlaylistForm
+from ..forms import NewPlaylistForm
+from app.api.aws_helpers import (upload_file_to_s3, get_unique_filename, remove_file_from_s3)
 
 playlist_routes = Blueprint("playlists", __name__)
 
@@ -42,14 +43,15 @@ def get_songs_from_playlist(playlist_id):
     return {"songs": [song.to_dict() for song in songs_in_playlist]}
 
 # Get all playlists by particular song
-@playlist_routes.route("/<int:song_id>", methods=["GET"])
+@playlist_routes.route("/songs/<int:song_id>", methods=["GET"])
 def get_playlists_by_song_id(song_id):
     """
     Query for all playlists by song ID
     """
 
+
     all_playlists_by_song_id = Playlist.query.filter(Playlist.songs.any(id=song_id)).all()
-    return {"playlists": [playlist.to_dict() for playlist in all_playlists_by_song_id]}
+    return {"playlist": [playlist.to_dict() for playlist in all_playlists_by_song_id]}
 
 @playlist_routes.route("/<int:playlist_id>", methods=["GET"])
 def get_playlist(playlist_id):
@@ -57,7 +59,11 @@ def get_playlist(playlist_id):
     Query for a playlist without login in
     """
     playlist = Playlist.query.get(playlist_id)
-    return {"playlists": playlist.to_dict()}
+
+    if playlist == None:
+        return {"error": "Playlist not found"}, 404
+
+    return {"playlist": playlist.to_dict()}
 
 @playlist_routes.route('/', methods=["POST"])
 @login_required
@@ -69,10 +75,20 @@ def new_playlist():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+        img = data["playlist_image"]
+        img.filename = get_unique_filename(img.filename)
+
+        upload = upload_file_to_s3(img)
+
+        if "url" not in upload:
+            return {"error": 'The upload was unsuccessful'}
+
+        url = upload['url']
+
         new_playlist = Playlist(
             title=data["title"],
             description=data['description'],
-            playlist_image=data["playlist_image"],
+            playlist_image=url,
             user_id=current_user.id
         )
         db.session.add(new_playlist)
@@ -164,6 +180,7 @@ def remove_playlist(playlist_id):
     """
 
     current_playlist = Playlist.query.get(playlist_id)
+    delete = remove_file_from_s3(current_playlist.playlist_image)
 
     if not current_playlist:
         return {"error": "No playlist is found"}, 404

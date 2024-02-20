@@ -1,15 +1,23 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../context/Modal';
+import { useNavigate } from "react-router-dom";
+import { getCurrentUserPlaylistsThunk } from '../../../redux/playlists';
+
 
 
 
 function AddSong({songId}) {
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
     const [ errors, setErrors ] = useState({})
     const [ playlists, setPlaylists ] = useState([])
     const { closeModal } = useModal()
     const currentUserPlaylists = useSelector((state) => state.playlists?.currentUserPlaylists)
+
+    useEffect(() => {
+        dispatch(getCurrentUserPlaylistsThunk())
+    }, [dispatch])
 
     const handleConfirmSubmit = async (e) => {
         e.preventDefault();
@@ -36,7 +44,28 @@ function AddSong({songId}) {
         closeModal()
     };
 
-    if(!currentUserPlaylists) return <h1>loading...</h1>
+    if(currentUserPlaylists.length === 0){
+        return (
+            <div className='add-song modal-container'>
+                <h1>Add Song</h1>
+                <p>Would you like to create a playlist?</p>
+                <button
+                className='add-song confirm-button'
+                type='button'
+                onClick={() => {
+                    navigate('/playlists/new')
+                    closeModal()
+                }}
+                >Yes</button>
+                <button
+                className='add-song cancel-button'
+                type='button'
+                label='Cancel'
+                onClick={handleCancelSubmit}
+                >Cancel</button>
+            </div>
+        )
+    }
 
     return (
         <div className='add-song modal-container'>

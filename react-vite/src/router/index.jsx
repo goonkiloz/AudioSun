@@ -4,6 +4,7 @@ import SignupFormPage from '../Screens/Signup/SignupFormPage';
 import SongsView from '../Screens/Songs/AllSongs/SongsView';
 import NewSongForm from '../Screens/Songs/New Song'
 import Layout from './Layout';
+import SplashPage from '../Screens/SplashPage';
 import SingleSongPage from '../Screens/Songs/AllSongs/SingleSongPage';
 import ProfileView from '../Screens/Profile/ProfileView';
 import PlaylistsView from '../Screens/Playlist/AllPlaylists/PlaylistsView';
@@ -18,10 +19,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <>
-          <h1>Welcome!</h1>
-          <a href="/songs">View All Songs</a>
-        </>
+        element: <SplashPage />
       },
       {
         path: "login",

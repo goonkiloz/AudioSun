@@ -24,7 +24,15 @@ const CommentsView = (song) => {
     if (!comments) return <div>Loading...</div>
 
     if (comments.length === 0) {
-        return <div>Be the first to post a comment!</div>
+        return(
+            <div>
+                {(currentUser) && <NewComment song={song} />}
+                <div>Be the first to post a comment!</div>
+            </div>
+
+
+        )
+
     }
 
     return (

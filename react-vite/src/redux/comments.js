@@ -45,7 +45,9 @@ export const getCommentsThunk = (songId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-    return e;
+    const data = await e.json()
+    console.log(data)
+    return data;
   }
 };
 //thunk action to add comment to a song
@@ -68,11 +70,11 @@ export const postCommentThunk = (comment, songId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-    console.log(`e`, e);
-    return e;
+    const data = await e.json()
+    console.log(data)
+    return data;
   }
 };
-
 //thunk action to edit comment on a song
 export const editCommentThunk =
   (comment, commentId, songId) => async (dispatch) => {
@@ -113,10 +115,11 @@ export const deleteCommentThunk = (commentId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-    return e;
+    const data = await e.json()
+    console.log(data)
+    return data;
   }
 };
-
 //declare a normalized default state
 const initialState = { allComments: [], byId: {} };
 

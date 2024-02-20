@@ -1,13 +1,13 @@
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { getCurrentUserSongsThunk } from "../../redux/songs"
 import "./ProfileView.css";
 // import { NavLink } from "react-router-dom";
 import SingleSongComponent from "../Songs/AllSongs/SingleSongComponent";
 
 const ProfileView = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     const songs = useSelector(state => state.songs.currentUserSongs)
@@ -21,6 +21,24 @@ const ProfileView = () => {
     if (!user) return <Navigate to="/login" replace={true} />;
     // if (!currentSongs) currentSongs = songs.filter(song => song.userId === user.id)
     if (!songs) return <h1>Loading...</h1>
+
+    if(songs.length === 0) {
+        return (
+            <div>
+                <h1>Songs</h1>
+                <div className="songsContainer">
+                <p>Upload a song!</p>
+                <button
+                className='add-song confirm-button'
+                type='button'
+                onClick={() => {
+                    navigate('/songs/new')
+                }}
+                >Yes</button>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div>

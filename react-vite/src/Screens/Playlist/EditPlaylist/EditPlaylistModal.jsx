@@ -26,18 +26,19 @@ function EditPlaylist({playlistId}){
         formData.append("playlist_image", playlistImage)
         formData.append('userId', user.id)
 
-        if (!validationErrors.length) {
-            await dispatch(putPlaylistThunk(formData, playlistId))
-            .catch( async (res) => {
-                if(res.ok) {
-                    const errors = await res.json()
-                    setValidationErrors(errors)
-                }
-            })
+        if(!validationErrors.length) {
+            const res = await dispatch(putPlaylistThunk(formData, playlistId))
+            if (!res.ok){
+                console.log(res)
+                const errors = await res.json()
+                console.log(errors)
+                setValidationErrors(errors)
+            }else {
+                dispatch(getCurrentUserPlaylistsThunk())
+                return closeModal()
+            }
         }
 
-        dispatch(getCurrentUserPlaylistsThunk())
-        return closeModal()
     }
     const handleCancelSubmit = (e) => {
         e.preventDefault();
@@ -70,16 +71,6 @@ function EditPlaylist({playlistId}){
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
-                    <label> Upload Image(jpg)
-                        <input
-                            type="text"
-                            value={playlistImage}
-                            onChange={(e) => setPlaylistImage(e.target.value)}
-                        />
-                        </label>
-                        {validationErrors.playlistImage && hasSubmitted &&
-                        <p className="error">{validationErrors.playlistImage}</p>}
-
                     <button>Submit</button>
                 </form>
 

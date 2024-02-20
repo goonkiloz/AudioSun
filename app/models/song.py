@@ -26,9 +26,9 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(100), nullable=False)
+    song_image = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     file_path = db.Column(db.String(255), nullable=False)
-    privacy = db.Column(db.Boolean(255), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -54,9 +54,9 @@ class Song(db.Model):
             'id': self.id,
             'title': self.title,
             'genre': self.genre,
+            'song_image': self.song_image,
             'description': self.description,
             'file_path': self.file_path,
-            'privacy': self.privacy,
             'user_id': self.user_id,
             'artist': self.user.to_dict(),
             'album_id': self.album_id,

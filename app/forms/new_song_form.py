@@ -4,7 +4,7 @@ from wtforms import StringField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length
 from app.api.aws_helpers import ALLOWED_SONG_EXTENSIONS
 
-
+extension_joined = ", ".join(ALLOWED_SONG_EXTENSIONS)
 
 class NewSongForm(FlaskForm):
     title = StringField('Title',
@@ -12,6 +12,9 @@ class NewSongForm(FlaskForm):
                             DataRequired(),
                             Length(max=50, message="Title cannot be longer than 50 characters")
                             ])
+    song_image = FileField('Song Image', validators=[
+                            FileRequired(message="Please select a image to upload"),
+                            FileAllowed(["jpg", 'png', 'jpeg'])])
     genre = StringField('Genre',
                         validators=[
                             DataRequired(),
@@ -23,5 +26,5 @@ class NewSongForm(FlaskForm):
                             ])
     file_path = FileField('File Path', validators=[
                             FileRequired(message="Please select a song to upload"),
-                            FileAllowed(list(ALLOWED_SONG_EXTENSIONS))])
+                            FileAllowed(list(ALLOWED_SONG_EXTENSIONS), message=f"Please choose a valid file extension. ({extension_joined})")])
     privacy = BooleanField('Private')

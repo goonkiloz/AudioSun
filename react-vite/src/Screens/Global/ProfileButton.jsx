@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "./OpenModalButton/OpenModalMenuItem";
 import LoginFormModal from "../Login/LoginFormModal"
 import SignupFormModal from "../Signup/SignupFormModal";
+import { useContext } from "react";
+import { PlayerContext } from "../../context/PlayerContext";
 
 function ProfileButton() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const { setIsPlaying, setCurrentSong } = useContext(PlayerContext);
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -38,6 +41,9 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    setIsPlaying(false)
+    setCurrentSong("")
+    navigate(`/`)
   };
 
   return (

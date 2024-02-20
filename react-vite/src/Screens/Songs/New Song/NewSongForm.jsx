@@ -1,19 +1,19 @@
 import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCurrentUserSongsThunk, postSongThunk } from "../../../redux/songs";
+import { postSongThunk } from "../../../redux/songs";
 import "./NewSong.css";
 
 function NewSongForm() {
-    // const history = useHistory()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
+    const [isButtonDisabled, setButtonDisabled] = useState(false);
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [description, setDescription] = useState("");
     const [filePath, setFilePath] = useState("");
-    const [privacy, setPrivacy] = useState("");
+    const [songImg, setSongImg] = useState("")
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [songLoading, setSongLoading] = useState(false);
@@ -22,42 +22,28 @@ function NewSongForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setButtonDisabled(true)
         setHasSubmitted(true);
         setValidationErrors('');
         const formData = new FormData();
         formData.append("title", title);
         formData.append("genre", genre);
+        formData.append('song_image', songImg)
         formData.append("description", description);
-        formData.append("privacy", privacy);
         formData.append("userId", user.id);
         formData.append("file_path", filePath);
-        // "song_file": filePath,
-        // "title": title,
-        // "genre": genre,
-        // "description": description,
-        // "privacy": privacy,
-        // "userId": user.id
         setSongLoading(true);
 
-        // const newSong = {
-        //     title,
-        //     userId: user.id,
-        //     genre,
-        //     description,
-        //     filePath,
-        //     privacy,
-        // };
+        const res = await dispatch(postSongThunk(formData));
+        console.log(res);
 
-        if (!validationErrors.length) {
-            const res = await dispatch(postSongThunk(formData))
-            if (!res.ok) {
-                setSongLoading(false);
-                const errors = await res.json()
-                setValidationErrors(errors)
-            } else {
-                await dispatch(getCurrentUserSongsThunk())
-                navigate(`/songs/current`)
-            }
+        if (!res.id) {
+            setValidationErrors(res);
+            setSongLoading(false);
+            setButtonDisabled(false)
+        } else {
+            console.log("??? run ???");
+            navigate(`/songs/${res.id}`)
         }
     }
 
@@ -90,8 +76,8 @@ function NewSongForm() {
                             onChange={(e) => setGenre(e.target.value)}
                         />
                     </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
+                    {validationErrors.genre && hasSubmitted &&
+                        <p className="error">{validationErrors.genre}</p>}
                     <label>Description
                         <textarea
                             placeholder="Description"
@@ -101,6 +87,15 @@ function NewSongForm() {
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
+                    <label>Upload File (jpg)
+                        <input
+                            type="file"
+                            // accept="mp3/*"
+                            onChange={(e) => setSongImg(e.target.files[0])}
+                        />
+                    </label>
+                    {validationErrors.song_image && hasSubmitted &&
+                        <p className="error">{validationErrors.song_image}</p>}
                     <label>Upload File (MP3)
                         <input
                             type="file"
@@ -108,18 +103,20 @@ function NewSongForm() {
                             onChange={(e) => setFilePath(e.target.files[0])}
                         />
                     </label>
-                    {validationErrors.filePath && hasSubmitted &&
-                        <p className="error">{validationErrors.filePath}</p>}
-                    <label>Privacy
+                    {validationErrors.file_path && hasSubmitted &&
+                        <p className="error">{validationErrors.file_path}</p>}
+                    {/* <label>Privacy
                         <input
                             type="checkbox"
                             value={privacy}
                             onChange={(e) => setPrivacy(e.target.value)}
                         />
-                    </label>
+                    </label> */}
                     {validationErrors.privacy && hasSubmitted &&
                         <p className="error">{validationErrors.privacy}</p>}
-                    <button>Submit</button>
+                    <button
+                        disabled={isButtonDisabled}
+                    >Submit</button>
                     {(songLoading) && <p>Loading...</p>}
                 </form>
             </div>
