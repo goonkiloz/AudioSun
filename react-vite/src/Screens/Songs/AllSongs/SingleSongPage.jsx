@@ -1,9 +1,10 @@
 import "./SongsView.css"
 import CommentsView from "../../Comments/AllComments/CommentsView"
 import { getSingleSongThunk } from "../../../redux/songs";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { memo, useEffect, useContext } from "react";
+import { PlayerContext } from "../../../context/PlayerContext";
 import AllLikesView from "../../Likes/AllLikes/AllLikesView";
 import LikeOrRemoveLike from "../../Likes/AllLikes/LikeOrRemoveLike";
 
@@ -29,7 +30,7 @@ const SingleSongPage = () => {
 
     }, [dispatch, songId, navigate]);
 
-    if (!currentSong) return <h2>Loading...</h2>
+    if (!song) return <h2>Loading...</h2>
 
     return (
         <div className="songContainer">

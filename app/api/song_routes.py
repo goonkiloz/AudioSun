@@ -30,7 +30,9 @@ def get_song(id):
     """
     song = Song.query.get(id)
 
-    print(song)
+    if not song:
+        return {'error': 'Song not found'}, 404
+    
     return song.to_dict()
 
 @song_routes.route('/', methods=["POST"])

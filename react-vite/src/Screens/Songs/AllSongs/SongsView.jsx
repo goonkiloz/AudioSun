@@ -10,11 +10,10 @@ import SingleSongComponent from "./SingleSongComponent";
 const SongsView = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.songs.allSongs);
-    console.log(songs);
 
     useEffect(() => {
         dispatch(getSongsThunk());
-        dispatch(getCurrentUserPlaylistsThunk())
+        // dispatch(getCurrentUserPlaylistsThunk())
     }, [dispatch]);
 
     if (!songs) return <h1>Loading...</h1>
