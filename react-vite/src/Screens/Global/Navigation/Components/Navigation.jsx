@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "../../ProfileButton"
 import "./Navigation.css";
+import { useSelector } from "react-redux";
 
 function Navigation() {
+
+  const currentUser = useSelector(state => state.session.user)
+
   return (
     <div className="navbar-container">
 
@@ -14,7 +18,11 @@ function Navigation() {
 
         <NavLink className='navbar-new-song' to='/songs/new'>Upload song</NavLink>
 
-        <ProfileButton className='navbar-profile'/>
+        <div className="navbar-profile-container">
+          {currentUser && <div className="username">{currentUser.username}</div>}
+          <ProfileButton className='navbar-profile'/>
+        </div>
+
 
     </div>
   );
