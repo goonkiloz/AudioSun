@@ -71,16 +71,6 @@ function EditPlaylist({playlistId}){
                     </label>
                     {validationErrors.description && hasSubmitted &&
                         <p className="error">{validationErrors.description}</p>}
-                    <label> Upload Image(jpg)
-                        <input
-                            type="text"
-                            value={playlistImage}
-                            onChange={(e) => setPlaylistImage(e.target.value)}
-                        />
-                        </label>
-                        {validationErrors.playlist_image && hasSubmitted &&
-                        <p className="error">{validationErrors.playlist_image}</p>}
-
                     <button>Submit</button>
                 </form>
 

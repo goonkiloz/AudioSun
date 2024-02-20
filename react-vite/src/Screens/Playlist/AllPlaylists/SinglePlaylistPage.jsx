@@ -29,6 +29,21 @@ const SinglePlaylistView = () => {
 
     if(!playlist) return <h1>Loading ...</h1>
 
+    if(currentPlaylistSongs.length === 0) {
+        return (
+            <div className="playlistContainer">
+                <h2>Title: {currentPlaylist?.title}</h2>
+                <p>No songs currently in playlist, add songs to see them here!</p>
+                <button
+                className='playlist-view songs-button'
+                type='button'
+                onClick={() => {
+                    navigate('/songs/')
+                }}
+                >Add a song</button>
+            </div>
+        )
+    }
 
     return (
         <div className="playlistContainer">
