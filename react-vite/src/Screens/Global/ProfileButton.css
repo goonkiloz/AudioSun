@@ -2,24 +2,28 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    top: 50px;
-    right: 20px;
-
-    border: 1px solid  #CCCCCC;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    top: 35px;
+    right: 9px;
+    border: 1px solid  #8c8c8c;
     padding: 5px;
     list-style-type: none;
-    background-color: white;
+    background-color: 	#ffffff;
     cursor: pointer;
+    z-index: 999;
 }
 .profile-dropdown li {
-    margin: 5px;
-    transition: background-color 0.5s;
-    cursor: pointer;
+    margin: 3px;
+    text-align: center;
 }
 
-.profile-dropdown li:hover {
-    background-color: #767676;
+.profile-dropdown button {
+    width: 100px;
+    height: 25px;
+    border: 1px solid  #8c8c8c;
+    border-radius: 3px;
+}
+.profile-dropdown button:hover {
+    background-color: #c6c6c6;
+    cursor: pointer;
   }
-

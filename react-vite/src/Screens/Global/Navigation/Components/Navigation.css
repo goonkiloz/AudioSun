@@ -1,24 +1,28 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+}
+
 .navbar-container {
   display: flex;
   flex-direction: row;
   position: relative;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  margin: 10px 0;
-  border-bottom: 2px solid #CCCCCC;
+  background-color: black;
+  width: 1000px;
 }
 
 .navbar-logo {
   width: 160px;
-  height: 40px;
+  height: 50px;
 }
 
 .navBar-create-new-song {
   margin-right: 10px;
-  height: 40px
+  height: 50px;
 }
 
 .navbar-profile-container {
@@ -26,6 +30,60 @@
   display: flex;
 }
 
-.navbar-profile-container > .username {
-  margin-right: 5px;
+.navbar-home {
+  width: 50px;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-playlists {
+  width: 60px;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-new-song {
+  width: 50px;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+.navbar-songs {
+  width: 50px;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+.navbar-profile-container {
+  width: 80px;
+  padding: 15px;
+}
+
+.navbar-search {
+  width: 330px;
+  padding: 15px;
+  color: white;
+}
+
+.navbar-search input{
+  width: 250px;
+}
+
+.navbar-search button{
+  cursor: pointer;
+}
+
+.username {
+  color: white;
+  margin-top: 1px;
+  margin-right: 10px;
+}
+
+.navbar-home:hover,
+.navbar-playlists:hover,
+.navbar-songs:hover,
+.navbar-new-song:hover {
+    background-color:#333333
 }

@@ -15,7 +15,7 @@ function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-  const { setIsPlaying, setCurrentSong, setTimeProgress } = useContext(PlayerContext);
+  const { setCurrentSong } = useContext(PlayerContext);
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -63,7 +63,7 @@ function ProfileButton() {
                 <button onClick={() => {
                   closeMenu();
                   navigate("/profile")
-                }}>View Profile</button>
+                }}>My Songs</button>
               </li>
               <li>
                 <button onClick={() => {
