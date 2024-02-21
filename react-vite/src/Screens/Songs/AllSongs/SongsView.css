@@ -10,3 +10,8 @@
     max-width: 800px;
     margin: 0 auto;
 }
+
+.songsContainer {
+    display: flex;
+    align-items: center;
+}
