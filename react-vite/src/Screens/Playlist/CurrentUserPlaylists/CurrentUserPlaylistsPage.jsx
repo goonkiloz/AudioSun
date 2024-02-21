@@ -29,11 +29,11 @@ const CurrentUserPlaylistsPage = () => {
                         <div className="current-user-playlist" key={playlist.id}>
                             <div>
                                 <NavLink className="current-user-playlist-nav" to={`/playlists/${playlist.id}`}>
-                                    <h2>{playlist.title}</h2>
+
                                     <img src={playlist?.playlist_image}/>
                                 </NavLink>
                             </div>
-
+                            <div>{playlist.title}</div>
                             <div className="current-user-playlist-description">Description: {playlist.description}</div>
                             <OpenModalButton
                             modalComponent={<EditPlaylist playlistId={playlist.id}/>}
