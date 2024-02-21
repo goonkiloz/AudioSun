@@ -1,0 +1,72 @@
+.current-playlist-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: 	#ffffff
+}
+
+
+.current-user-playlist-map{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+.current-user-playlist {
+    text-align: center;
+    margin: 5px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.current-user-playlist-nav,
+.current-user-playlist-description{
+    text-decoration: none;
+    color: #353535
+}
+
+.current-user-playlist-description {
+    max-width: 250px;
+    overflow-wrap: break-word;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.current-user-playlist img{
+    width: 280px
+}
+
+
+.current-user-playlist button {
+    display: in-line;
+    width: 46%;
+    padding: 10px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px
+}
+
+.new-playlist-button {
+    display: in-line;
+    width: 200px;
+    padding: 10px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.new-playlist-button:hover,
+.current-user-playlist button:hover {
+    background-color: #ff3300;
+}

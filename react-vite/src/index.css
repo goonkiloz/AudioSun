@@ -1,4 +1,5 @@
 /* TODO: Add sitewide styles */
+
 body {
     margin-bottom: 100px;
     font-family: 'Roboto';
@@ -34,6 +35,10 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 5px
+}
+
+.modalContainer button:hover {
+    background-color: #ff3300;
 }
 
 
@@ -98,4 +103,8 @@ body {
 .formContainer button:disabled {
     background-color: #8c8c8c;
     cursor: not-allowed;
+}
+
+.formContainer button:hover {
+    background-color: #ff3300;
 }

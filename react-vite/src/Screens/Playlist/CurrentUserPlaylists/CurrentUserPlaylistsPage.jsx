@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylistModal";
 import DeletePlaylist from "../DeletePlaylist/DeletePlaylistModal";
+import './CurrentUserPlaylistsPage.css'
 
 const CurrentUserPlaylistsPage = () => {
     const dispatch = useDispatch();
@@ -17,28 +18,41 @@ const CurrentUserPlaylistsPage = () => {
     if(!currentUserPlaylists) return <h1>Loading...</h1>
 
     return (
-        <div>
-            <h1>My Playlists</h1>
-                <NavLink to={'/playlists/new'}>Create a new Playlist</NavLink>
-            <div>
-                {currentUserPlaylists?.map((playlist) => {
-                    return(
-                        <div key={playlist.id}>
-                            <NavLink to={`/playlists/${playlist.id}`}>{playlist.title}</NavLink>
-                            <img src={playlist?.playlist_image}/>
-                            <p>{playlist.description}</p>
-                            <OpenModalButton
-                            modalComponent={<EditPlaylist playlistId={playlist.id}/>}
-                            buttonText={'Edit'}
-                            />
-                            <OpenModalButton
-                            modalComponent={<DeletePlaylist playlistId={playlist.id}/>}
-                            buttonText={'Delete'}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
+        <div className="current-playlist-Container">
+                <div>
+                    <h1>My Playlists</h1>
+                </div>
+                <div>
+                    <NavLink to={'/playlists/new'}>
+                        <button className="new-playlist-button">Create a new Playlist</button>
+                    </NavLink>
+                </div>
+
+                <div className="current-user-playlist-map">
+                    {currentUserPlaylists?.map((playlist) => {
+                        return(
+                            <div className="current-user-playlist" key={playlist.id}>
+                                <div>
+                                    <NavLink className="current-user-playlist-nav" to={`/playlists/${playlist.id}`}>
+                                        <h2>{playlist.title}</h2>
+                                        <img src={playlist?.playlist_image}/>
+                                    </NavLink>
+                                </div>
+
+                                <div className="current-user-playlist-description">Description: {playlist.description}</div>
+                                <OpenModalButton
+                                modalComponent={<EditPlaylist playlistId={playlist.id}/>}
+                                buttonText={'Edit'}
+                                />
+                                <OpenModalButton
+                                modalComponent={<DeletePlaylist playlistId={playlist.id}/>}
+                                buttonText={'Delete'}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+
         </div>
     )
 }

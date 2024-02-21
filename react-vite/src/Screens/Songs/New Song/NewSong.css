@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: 	#ffffff
+    background-color: 	#ffffff;
+    margin-top: 10px;
 }
 
 .formContainer input,
