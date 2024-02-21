@@ -6,13 +6,15 @@
     top: 50px;
     right: 20px;
 
-    border: 1px solid  #CCCCCC;
+    border: 1px solid #CCCCCC;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     padding: 5px;
     list-style-type: none;
     background-color: white;
     cursor: pointer;
+    z-index: 99;
 }
+
 .profile-dropdown li {
     margin: 5px;
     transition: background-color 0.5s;
@@ -21,5 +23,4 @@
 
 .profile-dropdown li:hover {
     background-color: #767676;
-  }
-
+}

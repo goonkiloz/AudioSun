@@ -36,12 +36,12 @@ const SongsView = () => {
                 {mostRecentSongs?.map((song) => (
                     <div key={song?.id} className="songBox">
                         <SingleSongComponent song={song} />
-                        {currentUser !== null &&
+                        {/* {currentUser !== null &&
                             <OpenModalButton
                                 modalComponent={<AddSong songId={song?.id} />}
                                 buttonText={'Add to Playlist'}
                             />
-                        }
+                        } */}
                     </div>
                 ))}
             </div>
@@ -50,12 +50,12 @@ const SongsView = () => {
                 {rockSongs?.map((song) => (
                     <div key={song?.id} className="songBox">
                         <SingleSongComponent song={song} />
-                        {currentUser !== null &&
+                        {/* {currentUser !== null &&
                             <OpenModalButton
                                 modalComponent={<AddSong songId={song?.id} />}
                                 buttonText={'Add to Playlist'}
                             />
-                        }
+                        } */}
                     </div>
                 ))}
             </div>
