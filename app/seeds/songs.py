@@ -31,7 +31,7 @@ img = 'https://audiosunsongs.s3.amazonaws.com/seedsongs/f7a4e9373c654472b4997f96
 songs = [
     dict(
         title="song 1",
-        genre=random.choice(genres),
+        genre="Rock",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/0330c1627a2c4bb394b2a064776a18c3.mp3",
@@ -41,7 +41,7 @@ songs = [
     ),
     dict(
         title="song 2",
-        genre=random.choice(genres),
+        genre="Rock",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/33b02905f26c4682bbf35112e0b2b1df.mp3",
@@ -51,7 +51,7 @@ songs = [
     ),
     dict(
         title="song 3",
-        genre=random.choice(genres),
+        genre="Hip Hop",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/62beb6dc6a104bfc879a3f2e18e97704.mp3",
@@ -61,7 +61,7 @@ songs = [
     ),
     dict(
         title="song 4",
-        genre=random.choice(genres),
+        genre="Hip Hop",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/6683c7ebb0454266baaf3ebc7b208416.mp3",
@@ -71,7 +71,7 @@ songs = [
     ),
     dict(
         title="song 5",
-        genre=random.choice(genres),
+        genre="Country",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/69e443c2879c458580469d3d89275249.mp3",
@@ -81,7 +81,7 @@ songs = [
     ),
     dict(
         title="song 6",
-        genre=random.choice(genres),
+        genre="Country",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/75ade037f4a044a7b8be976f54663940.mp3",
@@ -91,7 +91,7 @@ songs = [
     ),
     dict(
         title="song 7",
-        genre=random.choice(genres),
+        genre="Pop",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/77d781edb3c741a8878ab33d22121b9e.mp3",
@@ -101,7 +101,7 @@ songs = [
     ),
     dict(
         title="song 8",
-        genre=random.choice(genres),
+        genre="Pop",
         song_image=img,
         description="This song is good",
         file_path="https://audiosunsongs.s3.amazonaws.com/seedsongs/88678d2b08f4460696bd37b83f3fe0a7.mp3",
