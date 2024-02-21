@@ -22,11 +22,6 @@ const CurrentUserPlaylistsPage = () => {
             <div>
                 <h1>My Playlists</h1>
             </div>
-            <div>
-                <NavLink to={'/playlists/new'}>
-                    <button className="new-playlist-button">Create a new Playlist</button>
-                </NavLink>
-            </div>
 
             <div className="current-user-playlist-map">
                 {currentUserPlaylists?.map((playlist) => {
@@ -51,6 +46,15 @@ const CurrentUserPlaylistsPage = () => {
                         </div>
                     )
                 })}
+                <div>
+
+                <div className="new-play-list-button-container">
+                    <NavLink to={'/playlists/new'}>
+                        <button className="new-playlist-button">Create a new Playlist</button>
+                    </NavLink>
+                </div>
+
+            </div>
             </div>
 
         </div>
