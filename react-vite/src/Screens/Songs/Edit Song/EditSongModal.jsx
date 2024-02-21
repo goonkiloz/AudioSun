@@ -51,58 +51,54 @@ function EditSongModal(song) {
 
     return (
         <div className='edit-song modalContainer'>
-            <div className="header">
-                <h1>Edit {song.title}</h1>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit} className="formContainer">
-                    <label>Title
-                        <input
-                            type="text"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.title && hasSubmitted &&
-                        <p className="error">{validationErrors.title}</p>}
-                    <label>Genre
-                        <input
-                            type="text"
-                            placeholder="Genre"
-                            value={genre}
-                            onChange={(e) => setGenre(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.genre && hasSubmitted &&
-                        <p className="error">{validationErrors.genre}</p>}
-                    <label>Description
-                        <input
-                            type="text"
-                            placeholder="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
-                    {/* <label>Privacy
-                        <input
-                            type="checkbox"
-                            value={privacy}
-                            onChange={(e) => setPrivacy(e.target.value)}
-                        />
-                    </label> */}
-                    {/* {validationErrors.privacy && hasSubmitted &&
-                        <p className="error">{validationErrors.privacy}</p>} */}
-                    <button>Submit</button>
-                    <button className='cancel-submit-button'
-                        onClick={handleCancelSubmit}
-                    >
-                        Cancel
-                    </button>
-                </form>
-            </div>
+            <h1>Edit {song.title}</h1>
+            <form onSubmit={handleSubmit}>
+                <label>Title
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </label>
+                {validationErrors.title && hasSubmitted &&
+                    <p className="error">{validationErrors.title}</p>}
+                <label>Genre
+                    <input
+                        type="text"
+                        placeholder="Genre"
+                        value={genre}
+                        onChange={(e) => setGenre(e.target.value)}
+                    />
+                </label>
+                {validationErrors.genre && hasSubmitted &&
+                    <p className="error">{validationErrors.genre}</p>}
+                <label>Description
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </label>
+                {validationErrors.description && hasSubmitted &&
+                    <p className="error">{validationErrors.description}</p>}
+                {/* <label>Privacy
+                    <input
+                        type="checkbox"
+                        value={privacy}
+                        onChange={(e) => setPrivacy(e.target.value)}
+                    />
+                </label> */}
+                {/* {validationErrors.privacy && hasSubmitted &&
+                    <p className="error">{validationErrors.privacy}</p>} */}
+                <button>Submit</button>
+                <button className='cancel-submit-button'
+                    onClick={handleCancelSubmit}
+                >
+                    Cancel
+                </button>
+            </form>
         </div>
     );
 }

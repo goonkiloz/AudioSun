@@ -48,50 +48,53 @@ function NewPlaylistForm() {
     }
 
     return (
-        <div className="playlistPageContainer">
-            <div className="header">
-                <h1>Add a new playlist</h1>
-            </div>
+        <div className="pageContainer">
             <div>
-                <form
-                    onSubmit={handleSubmit}
-                    className="playlistFormContainer"
-                >
-                    <label>Title
+                <div className="header">
+                    <h1>Add a new playlist</h1>
+                </div>
+                <div>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="formContainer"
+                    >
+                        <label>Title
+                            <input
+                                type="text"
+                                placeholder="Title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </label>
+                        {validationErrors.title && hasSubmitted &&
+                            <p className="error">{validationErrors.title}</p>}
+                        <label>Description
+                            <input
+                                type="text"
+                                placeholder="Description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </label>
+                        {validationErrors.description && hasSubmitted &&
+                            <p className="error">{validationErrors.description}</p>}
+                        <label> Upload Image(url)
                         <input
-                            type="text"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.title && hasSubmitted &&
-                        <p className="error">{validationErrors.title}</p>}
-                    <label>Description
-                        <input
-                            type="text"
-                            placeholder="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
-                    <label> Upload Image(url)
-                    <input
-                            type="file"
-                            // accept="mp3/*"
-                            onChange={(e) => setPlaylistImage(e.target.files[0])}
-                        />
-                    </label>
-                    {validationErrors.playlist_image && hasSubmitted &&
-                    <p className="error">{validationErrors.playlist_image}</p>}
+                                type="file"
+                                // accept="mp3/*"
+                                onChange={(e) => setPlaylistImage(e.target.files[0])}
+                            />
+                        </label>
+                        {validationErrors.playlist_image && hasSubmitted &&
+                        <p className="error">{validationErrors.playlist_image}</p>}
 
-                    <button
-                        disabled={isButtonDisabled}
-                    >Submit</button>
-                </form>
+                        <button
+                            disabled={isButtonDisabled}
+                        >Submit</button>
+                    </form>
+                </div>
             </div>
+
         </div>
     )
 }
