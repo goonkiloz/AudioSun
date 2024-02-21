@@ -51,12 +51,12 @@ function NewSongForm() {
     return (
         <div className="pageContainer">
             <div>
-                <h1>Add a new song</h1>
                 <form
                     onSubmit={handleSubmit}
                     className="formContainer"
                 // encType="multipart/form-data"
                 >
+                    <h1>Add a new song</h1>
                     <label>Title
                         <input
                             type="text"
