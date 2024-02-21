@@ -15,7 +15,7 @@
     display: grid;
 }
 
-.play-button {
+.play-pause-image {
     position: absolute;
     opacity: .75;
     left: 0;
@@ -26,10 +26,29 @@
     z-index: 1;
 }
 
+.no-bg-button {
+    all: unset;
+    cursor: pointer;
+}
+
 .options-menu {
     position: absolute;
     right: 5px;
     bottom: -5px;
+}
+
+.options-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 90%;
+    right: 0;
+    list-style-type: none;
+}
+
+.options-dropdown button {
+    width: 150px;
 }
 
 .img-buttons-container:before {
@@ -38,7 +57,7 @@
     position: absolute;
     height: 0%;
     width: 100%;
-    bottom: 0;
+    bottom: 5px;
     background: linear-gradient(to bottom, transparent 40%, black 180%);
 }
 
