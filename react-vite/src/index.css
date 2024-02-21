@@ -1,22 +1,27 @@
 /* TODO: Add sitewide styles */
 body {
     margin-bottom: 100px;
-    font-family: 'Roboto'
+    font-family: 'Roboto';
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
-
 .modalContainer {
-    max-width: 400px;
-    margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .modalContainer label {
     display: block;
+    height: 30px;
     margin-bottom: 10px;
 }
+
+.modalContainer input {
+    margin-left: 5px;
+}
+
 
 
 .modalContainer button {
@@ -40,7 +45,11 @@ body {
 
 
 .formContainer {
+    width: 100%;
     max-width: 800px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .formContainer label {
@@ -48,14 +57,21 @@ body {
     margin-bottom: 10px;
 }
 
-.formContainer input[type="text"],
-.formContainer input[type="file"],
 .formContainer textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+.formContainer input {
+    height: 30px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
 }
 
 .formContainer textarea {
@@ -65,7 +81,7 @@ body {
 
 .formContainer .error {
     color: red;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .formContainer button {
@@ -79,8 +95,7 @@ body {
     cursor: pointer;
 }
 
-/* Need to set the button to disable in the jsx
 .formContainer button:disabled {
     background-color: #8c8c8c;
     cursor: not-allowed;
-} */
+}

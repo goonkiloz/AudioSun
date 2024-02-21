@@ -39,14 +39,14 @@ function DeleteSong({ songId }) {
                 // type='button'
                 onClick={handleSubmit}
             >
-                Yes (Delete Song)
+                Yes
             </button>
             <button
                 className='delete-song cancel-button'
                 // type='button'
                 onClick={handleCancel}
             >
-                No (Keep Song)
+                No
             </button>
         </div>
     )

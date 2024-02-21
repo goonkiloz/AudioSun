@@ -1,0 +1,16 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: 	#ffffff
+}
+
+.formContainer input,
+.formContainer textarea {
+    width: 100%;
+}
+
+
+.formContainer input[type="file"]:hover {
+    cursor: pointer;
+}
