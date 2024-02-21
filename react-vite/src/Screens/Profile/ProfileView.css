@@ -34,3 +34,7 @@
     cursor: pointer;
     margin: 5px
 }
+
+.current-user-song-buttons button:hover {
+    background-color: #ff3300;
+}
