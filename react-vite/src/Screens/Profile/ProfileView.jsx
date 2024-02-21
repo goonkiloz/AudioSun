@@ -51,14 +51,18 @@ const ProfileView = () => {
                     <div key={song.id} className="current-user-song">
                         <SingleSongComponent song={song} />
 
-                        <OpenModalButton
-                            modalComponent={<DeleteSong songId={song.id}/>}
-                            buttonText={'Edit'}
-                        />
-                        <OpenModalButton
+                        <div className="current-user-song-buttons">
+                            <OpenModalButton
+                                modalComponent={<DeleteSong songId={song.id}/>}
+                                buttonText={'Edit'}
+                            />
+                            <OpenModalButton
                             modalComponent={<EditSong song={song}/>}
                             buttonText={'Delete'}
-                        />
+                            />
+                        </div>
+
+
                     </div>
                 ))}
             </div>

@@ -22,8 +22,8 @@
 
 }
 
-/* .current-user-song-delete-button,
-.current-user-song-delete-button {
+
+.current-user-song-buttons button{
     display: in-line;
     width: 44%;
     padding: 10px;
@@ -33,4 +33,4 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 5px
-} */
+}
