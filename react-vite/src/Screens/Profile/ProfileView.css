@@ -22,6 +22,9 @@
 
 }
 
+.current-user-song-buttons {
+    margin-top: 10px;
+}
 
 .current-user-song-buttons button{
     display: in-line;
