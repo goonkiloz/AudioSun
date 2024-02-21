@@ -1,9 +1,8 @@
 import { getPlaylistThunk } from "../../../redux/playlists";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
-import RemoveSong from "../RemoveSongModal";
+import './PlaylistsView.css'
 
 
 const SinglePlaylistView = () => {
@@ -30,7 +29,7 @@ const SinglePlaylistView = () => {
         if(playlist?.songs?.length === 0) {
             return (
                 <div className="playlistContainer">
-                    <h2>Title: {playlist?.title}</h2>
+                    <h2>{playlist?.title}</h2>
                     <p>No songs currently in playlist, add songs to see them here!</p>
                     <button
                     className='playlist-view songs-button'
@@ -44,12 +43,10 @@ const SinglePlaylistView = () => {
         }else {
             return (
                 <div className="playlistContainer">
-                    <h2>Title: {playlist?.title}</h2>
-                    {playlist?.songs?.map((song) => (
+                    <h2>{playlist?.title}</h2>
+                    {/* {playlist?.songs?.map((song) => (
                         <div key={song?.id} className="playlistSongBox">
-                            <NavLink to ={`/songs/${song?.id}`}>
-                                {song?.title}
-                            </NavLink>
+                            <SingleSongComponent song={song}/>
                             {currentUser && (currentUser?.id === playlist?.user_id) && (
                             <OpenModalButton
                                 modalComponent={<RemoveSong songId={song?.id}/>}
@@ -57,7 +54,7 @@ const SinglePlaylistView = () => {
                             />
                             )}
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             )
         }
@@ -71,21 +68,32 @@ const SinglePlaylistView = () => {
             )
         }else {
             return (
-                <div className="playlistContainer">
-                    <h2>Title: {playlist?.title}</h2>
-                    {playlist?.songs?.map((song) => (
-                        <div key={song?.id} className="playlistSongBox">
-                            <NavLink to ={`/songs/${song?.id}`}>
-                                {song?.title}
-                            </NavLink>
-                        </div>
-                    ))}
+                <div className="SinglePlaylistDiv">
+                    <div className="SinglePlaylistInfo">
+                        <img
+                            src={playlist.playlist_image}
+                            className="SinglePlaylistImg"
+                        />
+                        <h3 className="SinglePlaylistTitle">{playlist?.title}</h3>
+                        <p className="SinglePlaylistArtist">{playlist?.owner?.username}</p>
+                    </div>
+                    <div className="songDiv">
+                        {playlist?.songs?.map((song) => {
+                            return(
+                                <div className="playlistSongContainer" key={song?.id} onClick={() => navigate(`/songs/${song?.id}`)}>
+                                    <img src={song?.song_image} className="songImg"/>
+                                    <div className="songInfo">
+                                        <h3 className="songTitle">{song?.title}</h3>
+                                        <p className="songArtist">Artist: {song?.artist?.username}</p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             )
         }
     }
-
-
 }
 
 export default SinglePlaylistView

@@ -1,0 +1,138 @@
+.playlistPage {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+.playlistViewsDiv {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    width: 1000px;
+}
+
+.playlist-header {
+    align-self: flex-start;
+}
+
+.playlistContainerDiv {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.singlePlaylistDiv {
+    display: flex;
+    margin-bottom: 100px;
+    flex-direction: row;
+}
+
+.playlistInfo {
+    margin-bottom: 10px;
+}
+
+.playlist-img-buttons-container {
+    position: relative;
+    display: grid;
+}
+
+.playlist-img-buttons-container:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0%;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 40%, black 180%);
+}
+
+.playlist-img-buttons-container:hover:before {
+    height: 30%;
+}
+
+.playlistComponentImg {
+    width: 180px;
+    z-index: auto;
+}
+
+.playlistDivTitle {
+    margin: 0;
+}
+
+.playlistDivOwner {
+    margin: 0;
+}
+
+.playlist-play-button {
+    position: absolute;
+    opacity: .75;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+.playlist-options-menu {
+    position: absolute;
+    right: 5px;
+    bottom: -5px;
+}
+
+.SinglePlaylistDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.SinglePlaylistImg {
+    width: 250px;
+    height: 250px;
+}
+
+.SinglePlaylistTitle {
+    margin: 0;
+}
+
+.SinglePlaylistArtist {
+    margin: 0;
+}
+
+.songDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #000000;
+    row-gap: 5px;
+    border-radius: 15px;
+}
+
+.playlistSongContainer{
+    background-color: white;
+    border-radius: 15px;
+    width: 800px;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 55px 650px 100px ;
+    grid-template-areas:
+        "img info .";
+}
+
+.songImg{
+    grid-area: img;
+    margin-right:  5px;
+    width: 50px;
+}
+
+.songInfo {
+    grid-area: info;
+}
+
+.songTitle {
+    margin: 0;
+}
+
+.songArtist {
+    margin: 0;
+}

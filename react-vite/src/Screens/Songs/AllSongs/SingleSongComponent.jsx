@@ -18,7 +18,7 @@ const SingleSongComponent = (song) => {
 
     return (
         <div className="songContainer">
-            <div className="img-buttons-container">
+            <div className="playlist-img-buttons-container">
                 <img src={song?.song_image} className="song-image" />
                 <IconContext.Provider value={{
                     color: "red",
@@ -37,7 +37,7 @@ const SingleSongComponent = (song) => {
                     color: "white",
                     size: "22px"
                 }}>
-                    <div className="options-menu">
+                    <div className="playlist-options-menu">
                         <HiOutlineDotsHorizontal />
                     </div>
                 </IconContext.Provider>
