@@ -9,9 +9,9 @@ import { PlayerContext } from "../../../context/PlayerContext";
 import { useContext } from "react";
 
 
-const SinglePlaylistComponent = ({playlist}) => {
+const SinglePlaylistComponent = ({ playlist }) => {
     const { setCurrentSong } = useContext(PlayerContext);
-    const [ isHovering, setIsHovering ] = useState(false)
+    const [isHovering, setIsHovering] = useState(false)
     const navigate = useNavigate()
 
     const handleMouseOver = () => {
@@ -22,13 +22,13 @@ const SinglePlaylistComponent = ({playlist}) => {
         setIsHovering(false)
     }
 
-    const SongComponent = ({playlist}) => {
+    const SongComponent = ({ playlist }) => {
         return (
             <div>
                 <IconContext.Provider value={{
                     color: "red",
                     size: "35px"
-                    }}
+                }}
                 >
                     <FaPlay
                         className="playlist-play-button"
@@ -41,11 +41,11 @@ const SinglePlaylistComponent = ({playlist}) => {
                     />
                 </IconContext.Provider>
                 <IconContext.Provider value={{
-                        color: "white",
-                        size: "22px"
-                    }}>
+                    color: "white",
+                    size: "22px"
+                }}>
                     <div className="playlist-options-menu">
-                    <HiOutlineDotsHorizontal />
+                        <HiOutlineDotsHorizontal />
                     </div>
                 </IconContext.Provider>
             </div>
@@ -73,40 +73,40 @@ const SinglePlaylistComponent = ({playlist}) => {
 
 
     return (
-            <div
-                className="singlePlaylistDiv"
-                // onMouseOver={handleMouseOver}
-                // onMouseOut={handleMouseOut}
-            >
-                <div className="playlistDiv">
-                    <div className="playlistInfo">
-                        <div
-                            className="playlist-img-buttons-container"
-                            onMouseOver={handleMouseOver}
-                            onMouseOut={handleMouseOut}
-                        >
+        <div
+            className="singlePlaylistDiv"
+        // onMouseOver={handleMouseOver}
+        // onMouseOut={handleMouseOut}
+        >
+            <div className="playlistDiv">
+                <div className="playlistInfo">
+                    <div
+                        className="playlist-img-buttons-container"
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+                    >
                         <img
                             src={playlist?.playlist_image}
                             className="playlistComponentImg"
-                            />
-                            {
-                                isHovering
-                                &&
-                                <SongComponent playlist={playlist}/>
-                            }
-                        </div>
-                        <div onClick={() => navigate(`/playlists/${playlist.id}`)}>
-                            <h3 className="playlistDivTitle" >{playlist?.title}</h3>
-                            <p className="playlistDivOwner">{playlist?.owner?.username}</p>
-                        </div>
+                        />
+                        {
+                            isHovering
+                            &&
+                            <SongComponent playlist={playlist} />
+                        }
+                    </div>
+                    <div onClick={() => navigate(`/playlists/${playlist.id}`)}>
+                        <h3 className="playlistDivTitle" >{playlist?.title}</h3>
+                        <p className="playlistDivOwner">{playlist?.owner?.username}</p>
                     </div>
                 </div>
-                {/* {
+            </div>
+            {/* {
                 isHovering
                 &&
                 <SongComponent playlist={playlist}/>
                 } */}
-            </div>
+        </div>
 
     )
 }
