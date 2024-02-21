@@ -1,6 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../Screens/Login/LoginFormPage';
-import SignupFormPage from '../Screens/Signup/SignupFormPage';
 import SongsView from '../Screens/Songs/AllSongs/SongsView';
 import NewSongForm from '../Screens/Songs/New Song'
 import Layout from './Layout';

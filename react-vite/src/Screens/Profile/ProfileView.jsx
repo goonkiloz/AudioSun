@@ -41,11 +41,11 @@ const ProfileView = () => {
     }
 
     return (
-        <div>
+        <div className='current-user-songs-container'>
             <h1>Songs</h1>
-            <div className="songsContainer">
+            <div className="current-user-songs-map">
                 {songs?.map((song) => (
-                    <div key={song.id} className="songBox">
+                    <div key={song.id} className="current-user-song">
                         <SingleSongComponent song={song} />
                     </div>
                 ))}
