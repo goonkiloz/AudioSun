@@ -76,7 +76,7 @@ function NewPlaylistForm() {
                         </label>
                         {validationErrors.description && hasSubmitted &&
                             <p className="error">{validationErrors.description}</p>}
-                        <label> Upload Image ( jpg, jpeg, png )
+                        <label> Upload Playlist Cover ( jpg, jpeg, png )
                         <input
                                 type="file"
                                 // accept="mp3/*"
