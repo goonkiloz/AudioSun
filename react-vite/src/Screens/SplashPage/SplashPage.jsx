@@ -32,11 +32,11 @@ const SplashPage = () => {
                 ))}
             </div>
             <footer className="splash-page-footer">
-                <p>©2024 Developed by Brendan, Eddie and Joel for educational purpose.</p>
+                <p>©2024 Developed by Brendan, Eddie and Joel for educational purpose</p>
                 <div>
-                    <a href="https://github.com/goonkiloz">Brendan&apos;s Github | </a>
-                    <a href="https://github.com/edison914">Eddie&apos;s Github | </a>
-                    <a href="https://github.com/urfavoritejoel">Joel&apos;s Github</a>
+                    <a href="https://github.com/goonkiloz" target="_blank" rel="noreferrer">Brendan&apos;s Github | </a>
+                    <a href="https://github.com/edison914" target="_blank" rel="noreferrer">Eddie&apos;s Github | </a>
+                    <a href="https://github.com/urfavoritejoel" target="_blank" rel="noreferrer"> Joel&apos;s Github</a>
                 </div>
 
             </footer>
