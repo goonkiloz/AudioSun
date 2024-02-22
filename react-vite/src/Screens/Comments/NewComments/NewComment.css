@@ -1,30 +1,33 @@
 .comment-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
 }
 
 .comment-form textarea {
-    width: 280px;
-    margin-top: 10px;
-    margin-bottom: 0px;
+    width: 450px;
+    height: 50px;
+    margin: 10px 0;
     resize: none;
     border-radius: 5px;
     padding: 10px;
 
 }
 
-.comment-form > .error{
+.comment-form textarea:focus {
+    outline: none;
+}
+.review-form-error{
     margin: 5px 0;
     color: red;
 }
 
 .comment-form button {
-    width: 300px;
-    margin-top: 5px;
-    margin-bottom: 0px;
+    width: 100px;
+    margin: 10px 0 10px 10px;
     background-color:#ff5500;
-    color:white
+    color:white;
+    border-radius: 5px;
 }
 
 .comment-form button:disabled {

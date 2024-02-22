@@ -1,0 +1,43 @@
+.current-user-songs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff
+}
+
+.current-user-songs-map {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+.current-user-song {
+    text-align: center;
+    margin: 5px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.current-user-song-buttons {
+    margin-top: 10px;
+}
+
+.current-user-song-buttons button {
+    display: in-line;
+    width: 44%;
+    padding: 10px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px
+}
+
+.current-user-song-buttons button:hover {
+    background-color: #ff3300;
+}

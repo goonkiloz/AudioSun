@@ -1,0 +1,31 @@
+.commentBox {
+    margin: 10px 0;
+    padding-bottom: 5px;
+}
+
+.comment-button-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-delete-button,
+.comment-edit-button {
+    margin: 10px 10px 0 0;
+
+}
+
+.comment-delete-button button,
+.comment-edit-button button{
+    display: block;
+    width: 60px;
+    background-color: #8c8c8c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-delete-button button:hover,
+.comment-edit-button button:hover {
+    background-color: #ff5500;
+}

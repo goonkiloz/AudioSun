@@ -7,24 +7,51 @@ function Navigation() {
 
   const currentUser = useSelector(state => state.session.user)
 
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    alert(`Feature to come later!`)
+  }
+
   return (
-    <div className="navbar-container">
+    <div className="page-container">
+        <div className="navbar-container">
 
-        <NavLink to="/">
-          <img className='navbar-logo' src="/logo.png" alt="Home" />
-        </NavLink>
+          <NavLink className='navbar-logo container' to="/">
+            <img className='navbar-logo' src="/logo.png" alt="Home" />
+          </NavLink>
 
-        <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
+          <NavLink className='navbar-home' to="/">
+            Home
+          </NavLink>
 
-        <NavLink className='navbar-new-song' to='/songs/new'>Upload song</NavLink>
+          <form className="navbar-search">
+            <input
+            type="text"
+            placeholder="Search..."
+            value='Feature coming soon'
+            />
+            <button
+              type="submit"
+              onClick={handleOnClick}
 
-        <div className="navbar-profile-container">
-          {currentUser && <div className="username">{currentUser.username}</div>}
-          <ProfileButton className='navbar-profile'/>
+            >
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+
+          <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
+          <NavLink className='navbar-songs' to="/songs">Songs</NavLink>
+          <NavLink className='navbar-new-song' to='/songs/new'>Upload</NavLink>
+
+          <div className="navbar-profile-container">
+            {currentUser && <div className="username">{currentUser.username}</div>}
+            <ProfileButton className='navbar-profile'/>
+          </div>
+
+
         </div>
-
-
     </div>
+
   );
 }
 

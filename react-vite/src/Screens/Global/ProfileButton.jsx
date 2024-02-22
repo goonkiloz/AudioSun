@@ -15,7 +15,7 @@ function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-  const { setIsPlaying, setCurrentSong, setTimeProgress } = useContext(PlayerContext);
+  const { setCurrentSong } = useContext(PlayerContext);
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -55,7 +55,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.email}</li>
+              <li className="profile-dropdown-user-email">{user.email}</li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
@@ -63,7 +63,7 @@ function ProfileButton() {
                 <button onClick={() => {
                   closeMenu();
                   navigate("/profile")
-                }}>View Profile</button>
+                }}>My Songs</button>
               </li>
               <li>
                 <button onClick={() => {
@@ -82,16 +82,21 @@ function ProfileButton() {
             </>
           ) : (
             <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
+              <button>
+                <OpenModalMenuItem
+                  itemText="Log In"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+              </button>
+              <button>
+                <OpenModalMenuItem
+                  itemText="Sign Up"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+              </button>
+
             </>
           )}
         </ul>

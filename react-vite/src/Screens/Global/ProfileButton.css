@@ -6,20 +6,36 @@
     top: 50px;
     right: 20px;
 
-    border: 1px solid  #CCCCCC;
+    border: 1px solid #CCCCCC;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    top: 35px;
+    right: 9px;
+    border: 1px solid  #8c8c8c;
     padding: 5px;
     list-style-type: none;
-    background-color: white;
+    background-color: 	#ffffff;
     cursor: pointer;
-}
-.profile-dropdown li {
-    margin: 5px;
-    transition: background-color 0.5s;
-    cursor: pointer;
+    z-index: 999;
 }
 
-.profile-dropdown li:hover {
-    background-color: #767676;
+.profile-dropdown li {
+    text-align: center;
+}
+
+.profile-dropdown button {
+    width: 100px;
+    height: 30px;
+    border: 1px solid  #8c8c8c;
+    border-radius: 3px;
+    margin: 5px
+}
+.profile-dropdown button:hover {
+    background-color: 	#ff5500;
+    cursor: pointer;
   }
 
+
+.profile-dropdown-user-email {
+    cursor: auto
+}
