@@ -38,8 +38,9 @@
 }
 
 .current-user-playlist img{
-    width: 186px;
-    max-height: 186px;
+    min-width: 185px;
+    max-width: 185px;
+    height: 185px;
 }
 
 
@@ -55,10 +56,6 @@
     margin: 5px
 }
 
-.new-play-list-button-container {
-    margin-top: 30px;
-    margin-left: 5px;;
-}
 
 .new-playlist-button {
     display: in-line;
@@ -69,7 +66,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .new-playlist-button:hover,

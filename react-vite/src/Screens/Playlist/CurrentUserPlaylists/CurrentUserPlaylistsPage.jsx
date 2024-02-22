@@ -21,6 +21,12 @@ const CurrentUserPlaylistsPage = () => {
         <div className="current-user-playlist-container">
             <div>
                 <h1>My Playlists</h1>
+
+            </div>
+            <div className="new-play-list-button-container">
+                    <NavLink to={'/playlists/new'}>
+                        <button className="new-playlist-button">Create a new Playlist</button>
+                    </NavLink>
             </div>
 
             <div className="current-user-playlist-map">
@@ -48,14 +54,10 @@ const CurrentUserPlaylistsPage = () => {
                 })}
                 <div>
 
-                <div className="new-play-list-button-container">
-                    <NavLink to={'/playlists/new'}>
-                        <button className="new-playlist-button">Create a new Playlist</button>
-                    </NavLink>
-                </div>
 
             </div>
             </div>
+
 
         </div>
     )

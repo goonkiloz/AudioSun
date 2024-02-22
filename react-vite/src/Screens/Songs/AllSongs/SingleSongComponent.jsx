@@ -68,7 +68,7 @@ const SingleSongComponent = (song) => {
                 {isHovering &&
                     <>
                         <IconContext.Provider value={{
-                            color: "red",
+                            color: "#ff5500",
                             size: "70px"
                         }}>
                             <button
