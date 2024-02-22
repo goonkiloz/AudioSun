@@ -32,12 +32,10 @@ const NewComment = (song) => {
 
         const res = await dispatch(postCommentThunk(newComment, songId))
 
-        console.log(`what is the res`, res)
 
         if (!res.id) {
 
             setValidationErrors(res)
-            console.log(`validation Error`, validationErrors)
         } else {
             setComment('')
         }

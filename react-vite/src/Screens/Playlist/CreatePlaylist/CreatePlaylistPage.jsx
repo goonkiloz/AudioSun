@@ -22,7 +22,6 @@ function NewPlaylistForm() {
     }
 
     const handleSubmit = async (e) => {
-        console.log(playlistImage)
         e.preventDefault()
         setButtonDisabled(true)
         setValidationErrors("")
@@ -36,9 +35,7 @@ function NewPlaylistForm() {
         if(!validationErrors.length) {
             const res = await dispatch(postPlaylistThunk(formData))
             if (!res.ok){
-                console.log(res)
                 const errors = await res.json()
-                console.log(errors)
                 setValidationErrors(errors)
                 setButtonDisabled(false)
             } else {

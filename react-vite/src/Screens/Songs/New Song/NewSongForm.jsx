@@ -35,14 +35,12 @@ function NewSongForm() {
         setSongLoading(true);
 
         const res = await dispatch(postSongThunk(formData));
-        console.log(res);
 
         if (!res.id) {
             setValidationErrors(res);
             setSongLoading(false);
             setButtonDisabled(false)
         } else {
-            console.log("??? run ???");
             navigate(`/songs/${res.id}`)
         }
     }

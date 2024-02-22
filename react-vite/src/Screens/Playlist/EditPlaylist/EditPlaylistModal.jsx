@@ -14,7 +14,6 @@ function EditPlaylist({playlistId}){
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
-    //console.log(spotId)
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true);
@@ -27,9 +26,7 @@ function EditPlaylist({playlistId}){
         if(!validationErrors.length) {
             const res = await dispatch(putPlaylistThunk(formData, playlistId))
             if (!res.ok){
-                console.log(res)
                 const errors = await res.json()
-                console.log(errors)
                 setValidationErrors(errors)
             }else {
                 dispatch(getCurrentUserPlaylistsThunk())

@@ -53,7 +53,6 @@ function AddSong({songId}) {
 
     })
 
-    console.log(playlistCheck)
     if(currentUserPlaylists?.length === 0){
         return (
             <div className='add-song modalContainer'>
@@ -105,7 +104,6 @@ function AddSong({songId}) {
                                                  setPlaylists((playlists) => [e.target.value, ...playlists])
                                              } else {
                                                  let newPlaylists = playlists.filter((playlistId) => playlistId !== e.target.value)
-                                                 console.log(newPlaylists)
                                                  setPlaylists(newPlaylists)
                                              }
                                          }}

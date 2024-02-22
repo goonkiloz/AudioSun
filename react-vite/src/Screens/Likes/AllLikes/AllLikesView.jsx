@@ -9,7 +9,6 @@ const AllLikesView = (song) => {
 
     const currentSong = song.song
     const likes = useSelector(state => state.likes?.allLikes)
-    // console.log(`likes`, likes)
 
     useEffect(() => {
         dispatch(getLikesThunk(currentSong.id))
