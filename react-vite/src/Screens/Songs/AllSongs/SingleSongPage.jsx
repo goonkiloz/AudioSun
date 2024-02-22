@@ -13,8 +13,7 @@ const SingleSongPage = () => {
     const navigate = useNavigate()
     const { songId } = useParams();
     const song = useSelector(state => state.songs.byId[songId])
-    const user = useSelector(state => state.session.user)
-    const { setCurrentSong, setIsPlaying, currentSong } = useContext(PlayerContext);
+    const { setCurrentSong } = useContext(PlayerContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,4 +59,4 @@ const SingleSongPage = () => {
     )
 }
 
-export default SingleSongPage;
+export default memo(SingleSongPage);

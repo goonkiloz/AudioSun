@@ -6,7 +6,7 @@ import { PlayerContext } from "../../../context/PlayerContext";
 
 function DeleteSong({ songId }) {
     const dispatch = useDispatch();
-    const { currentSong, setCurrentSong, setIsPlaying, isPlaying, setTimeProgress } = useContext(PlayerContext);
+    const { currentSong, setCurrentSong, setIsPlaying, setTimeProgress } = useContext(PlayerContext);
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 

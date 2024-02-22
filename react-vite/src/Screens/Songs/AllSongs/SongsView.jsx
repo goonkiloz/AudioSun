@@ -2,15 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../../redux/songs"
 import { memo, useEffect } from "react";
 import "./SongsView.css";
-import AddSong from "../../Playlist/AddSongModal";
-import OpenModalButton from "../../Global/OpenModalButton/OpenModalButton";
-import { getCurrentUserPlaylistsThunk } from "../../../redux/playlists";
 import SingleSongComponent from "./SingleSongComponent";
 
 const SongsView = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.songs.allSongs);
-    const currentUser = useSelector(state => state.session.user);
+    // const currentUser = useSelector(state => state.session.user);
     const mostRecentSongs = [songs[songs.length - 1], songs[songs.length - 2], songs[songs.length - 3], songs[songs.length - 4]];
     const rockFilter = songs.filter(song => song.genre.toLowerCase() === "rock");
     const hipHopFilter = songs.filter(song => song.genre.toLowerCase() === "country");
