@@ -174,7 +174,7 @@ export const putPlaylistThunk = (playlist, playlistId) => async (dispatch) => {
         })
 
         if(res.ok) {
-            dispatch(putPlaylist(data))
+            dispatch(putPlaylist(res))
             return res
         } else {
             return res
