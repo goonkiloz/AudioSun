@@ -1,0 +1,22 @@
+.firstName {
+    width: 204px;
+}
+
+.lastName {
+    width: 205px;
+}
+
+.email {
+    width: 243px;
+}
+.password {
+    width: 211px;
+}
+.confirmPassword {
+    width: 150px;
+}
+
+.username {
+    width: 210px;
+    margin-right: 0px
+}

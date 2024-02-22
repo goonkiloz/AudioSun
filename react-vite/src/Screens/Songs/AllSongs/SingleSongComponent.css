@@ -1,0 +1,81 @@
+.songContainer img {
+    width: 180px;
+    border: 1px solid #8c8c8c;
+    border-radius: 2px;
+    z-index: auto;
+}
+
+.songContainer a {
+    text-decoration: none;
+    color: black
+}
+
+.img-buttons-container {
+    position: relative;
+    display: grid;
+}
+
+.play-pause-image {
+    position: absolute;
+    opacity: .75;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+.no-bg-button {
+    all: unset;
+    cursor: pointer;
+}
+
+.options-menu {
+    position: absolute;
+    right: 5px;
+    bottom: -5px;
+}
+
+.options-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 90%;
+    right: -30%;
+    list-style-type: none;
+}
+
+.options-dropdown button {
+    width: 150px;
+}
+
+.img-buttons-container:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0%;
+    width: 100%;
+    bottom: 5px;
+    background: linear-gradient(to bottom, transparent 40%, black 180%);
+}
+
+.img-buttons-container:hover:before {
+    height: 45%;
+}
+
+.options-buttons button {
+    display: in-line;
+    padding: 5px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px
+}
+
+.options-buttons button:hover {
+    background-color: #ff3300;
+}

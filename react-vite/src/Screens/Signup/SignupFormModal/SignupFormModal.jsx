@@ -47,10 +47,11 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {errors.server && <p className="error">{errors.server}</p>}
       <form onSubmit={handleSubmit}>
-      <label>
+        <label>
           First Name
           <input
             type="text"
+            className="firstName"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -61,6 +62,7 @@ function SignupFormModal() {
           Last Name
           <input
             type="text"
+            className="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -71,6 +73,7 @@ function SignupFormModal() {
           Email
           <input
             type="text"
+            className="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -81,6 +84,7 @@ function SignupFormModal() {
           Username
           <input
             type="text"
+            className="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -90,6 +94,7 @@ function SignupFormModal() {
         <label>
           Password
           <input
+            className="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -101,6 +106,7 @@ function SignupFormModal() {
           Confirm Password
           <input
             type="password"
+            className="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required

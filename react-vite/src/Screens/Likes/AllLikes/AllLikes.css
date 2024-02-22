@@ -10,15 +10,16 @@
 
 .likesContainer .filled {
     color:#ff5500;
-    font-size: 20px;
+    font-size: 25px;
 }
 .likesContainer .empty {
     color: #8c8c8c;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .like-count {
     margin-left: 10px;
+    font-size: 20px;
 }
 
 .user-id-map {

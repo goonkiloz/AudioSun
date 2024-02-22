@@ -37,7 +37,6 @@ const removeComment = (commentId) => {
 export const getCommentsThunk = (songId) => async (dispatch) => {
   try {
     const res = await fetch(`/api/songs/${songId}/comments`);
-    // console.log(`res`, res);
     if (res.ok) {
       const data = await res.json();
       dispatch(loadComments(data.comments));
@@ -46,7 +45,6 @@ export const getCommentsThunk = (songId) => async (dispatch) => {
     throw res;
   } catch (e) {
     const data = await e.json()
-    console.log(data)
     return data;
   }
 };
@@ -71,7 +69,6 @@ export const postCommentThunk = (comment, songId) => async (dispatch) => {
     throw res;
   } catch (e) {
     const data = await e.json()
-    console.log(data)
     return data;
   }
 };
@@ -87,7 +84,6 @@ export const editCommentThunk =
         }),
       });
       if (res.ok) {
-        // console.log(res);
         const data = await res.json();
         dispatch(editComment(data));
         dispatch(getCommentsThunk(songId));
@@ -96,7 +92,6 @@ export const editCommentThunk =
       throw res;
     } catch (e) {
       const data = await e.json()
-      console.log(data)
       return data;
     }
   };
@@ -109,14 +104,11 @@ export const deleteCommentThunk = (commentId) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(removeComment(commentId));
-      console.log("is load comments called?");
-      // dispatch(getCommentsThunk(songId));
       return data;
     }
     throw res;
   } catch (e) {
     const data = await e.json()
-    console.log(data)
     return data;
   }
 };

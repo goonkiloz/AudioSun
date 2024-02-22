@@ -1,9 +1,7 @@
 import { useState } from "react";
-// import { thunkLogin } from "../../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { getSongsThunk, putSongThunk } from "../../../redux/songs";
-// import "./LoginForm.css";
+import { putSongThunk } from "../../../redux/songs";
 
 function EditSongModal(song) {
     song = song.song;
@@ -12,7 +10,7 @@ function EditSongModal(song) {
     const [title, setTitle] = useState(song.title);
     const [genre, setGenre] = useState(song.genre);
     const [description, setDescription] = useState(song.description);
-    const [privacy, setPrivacy] = useState(song.privacy);
+    const [privacy] = useState(song.privacy);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
@@ -33,12 +31,9 @@ function EditSongModal(song) {
         };
 
         const res = await dispatch(putSongThunk(updatedSong, songId))
-        console.log("RES?????", res);
 
         if (!res.id) {
-            console.log("res not ok???");
             setValidationErrors(res);
-            console.log("errors?", validationErrors);
         } else {
             closeModal()
         }
@@ -51,58 +46,74 @@ function EditSongModal(song) {
 
     return (
         <div className='edit-song modalContainer'>
-            <div className="header">
-                <h1>Edit {song.title}</h1>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit} className="formContainer">
-                    <label>Title
-                        <input
-                            type="text"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.title && hasSubmitted &&
-                        <p className="error">{validationErrors.title}</p>}
-                    <label>Genre
-                        <input
-                            type="text"
-                            placeholder="Genre"
-                            value={genre}
-                            onChange={(e) => setGenre(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.genre && hasSubmitted &&
-                        <p className="error">{validationErrors.genre}</p>}
-                    <label>Description
-                        <input
-                            type="text"
-                            placeholder="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </label>
-                    {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
-                    {/* <label>Privacy
-                        <input
-                            type="checkbox"
-                            value={privacy}
-                            onChange={(e) => setPrivacy(e.target.value)}
-                        />
-                    </label> */}
-                    {/* {validationErrors.privacy && hasSubmitted &&
-                        <p className="error">{validationErrors.privacy}</p>} */}
-                    <button>Submit</button>
-                    <button className='cancel-submit-button'
-                        onClick={handleCancelSubmit}
+            <h1>Edit {song.title}</h1>
+            <form onSubmit={handleSubmit}>
+                <label>Title
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </label>
+                {validationErrors.title && hasSubmitted &&
+                    <p className="error">{validationErrors.title}</p>}
+                <label>Genre
+                    <select name="genres"
+                        value={genre}
+                        onChange={(e) => setGenre(e.target.value)}
                     >
-                        Cancel
-                    </button>
-                </form>
-            </div>
+                        <option value="">--Please choose an option--</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="R&B">R&B</option>
+                        <option value="Country">Country</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Classical">Classical</option>
+                        <option value="Reggae">Reggae</option>
+                        <option value="Folk">Folk</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Indie">Indie</option>
+                        <option value="Punk">Punk</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="Funk">Funk</option>
+                        <option value="Soul">Soul</option>
+                        <option value="Gospel">Gospel</option>
+                        <option value="Disco">Disco</option>
+                        <option value="Techno">Techno</option>
+                    </select>
+                </label>
+                {validationErrors.genre && hasSubmitted &&
+                    <p className="error">{validationErrors.genre}</p>}
+                <label>Description
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </label>
+                {validationErrors.description && hasSubmitted &&
+                    <p className="error">{validationErrors.description}</p>}
+                {/* <label>Privacy
+                    <input
+                        type="checkbox"
+                        value={privacy}
+                        onChange={(e) => setPrivacy(e.target.value)}
+                    />
+                </label> */}
+                {/* {validationErrors.privacy && hasSubmitted &&
+                    <p className="error">{validationErrors.privacy}</p>} */}
+                <button>Submit</button>
+                <button className='cancel-submit-button'
+                    onClick={handleCancelSubmit}
+                >
+                    Cancel
+                </button>
+            </form>
         </div>
     );
 }

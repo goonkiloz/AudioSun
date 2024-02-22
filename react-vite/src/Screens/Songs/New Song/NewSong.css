@@ -1,0 +1,22 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: 	#ffffff;
+    margin-top: 10px;
+}
+
+.formContainer input,
+.formContainer textarea {
+    width: 99%;
+}
+
+
+.formContainer input[type="file"]:hover {
+    cursor: pointer;
+}
+
+
+.new-song-form-submit {
+    margin-bottom: 10px;
+}

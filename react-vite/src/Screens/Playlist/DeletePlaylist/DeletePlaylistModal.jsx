@@ -40,14 +40,14 @@ function DeletePlaylist({ playlistId }) {
                 // type='button'
                 onClick={handleSubmit}
             >
-                Yes (Delete playlist)
+                Yes
             </button>
             <button
                 className='delete-playlist cancel-button'
                 // type='button'
                 onClick={handleCancel}
             >
-                No (Keep playlist)
+                No
             </button>
         </div>
     )

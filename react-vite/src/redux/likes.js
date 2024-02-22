@@ -54,7 +54,6 @@ export const postLikeThunk = (songId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-    console.log(`e`, e);
     return e;
   }
 };
@@ -65,7 +64,7 @@ export const removeLikeThunk = (likeId) => async (dispatch) => {
     const res = await fetch(`/api/likes/${likeId}`, {
       method: "DELETE",
     });
-    console.log(res)
+
     if (res.ok) {
       const data = await res.json();
       dispatch(removeLike(likeId));

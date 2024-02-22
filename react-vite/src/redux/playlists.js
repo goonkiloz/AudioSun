@@ -152,12 +152,10 @@ export const postPlaylistThunk = (playlist) => async (dispatch) => {
         })
 
         if(res.ok) {
-            // console.log(res)
             const data = await res.json()
             dispatch(postPlaylist(data))
             return res
         } else {
-            // console.log(res)
             return res
         }
 
@@ -176,12 +174,9 @@ export const putPlaylistThunk = (playlist, playlistId) => async (dispatch) => {
         })
 
         if(res.ok) {
-            // console.log(res)
-            const data = await res.json()
             dispatch(putPlaylist(data))
             return res
         } else {
-            // console.log(res)
             return res
         }
 

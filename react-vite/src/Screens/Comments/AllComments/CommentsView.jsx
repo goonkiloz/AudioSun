@@ -12,7 +12,6 @@ import NewComment from "../NewComments/NewComment";
 const CommentsView = (song) => {
     const currentSong = song.song
     const currentUser = useSelector(state => state.session.user)
-    // console.log(`what is the current song`, currentSong)
     const comments = useSelector(state => state.comments?.allComments)
 
     const dispatch = useDispatch();
@@ -39,25 +38,28 @@ const CommentsView = (song) => {
         <div>
 
             {(currentUser) && <NewComment song={song} />}
-            <h2>Comments:</h2>
+            <h3>{comments.length> 1 ? comments.length + ' Comments' : '1 Comment'} </h3>
             <div className='commentsContainer'>
                 {comments.map(comment => (
                     <div key={comment.id} className='commentBox'>
                         <div>{comment.comment_text}</div>
 
                         {currentUser && (currentUser.id === comment.user_id) && (
-                            <div>
+                        <div className="comment-button-container">
+                            <div className="comment-delete-button">
                                 <OpenModalButton
                                 modalComponent={<RemoveComment commentId={comment.id}/>}
-                                buttonText='Delete comment'
+                                buttonText='Delete'
                                 />
+                            </div>
+                            <div className="comment-edit-button">
                                 <OpenModalButton
                                 modalComponent={<EditComment comment={comment} songId={currentSong.id} />}
-                                buttonText='Edit comment'
+                                buttonText='Edit'
                                 />
                             </div>
 
-                        )}
+                        </div>)}
                     </div>
                 ))}
 

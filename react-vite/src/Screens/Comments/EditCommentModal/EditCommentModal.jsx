@@ -5,7 +5,6 @@ import './EditCommentModal.css'
 import { editCommentThunk } from '../../../redux/comments';
 
 function EditComment({ comment, songId }) {
-    //console.log(spotId)
     const dispatch = useDispatch();
     const commentText = comment.comment_text
     const commentId = comment.id
@@ -13,7 +12,6 @@ function EditComment({ comment, songId }) {
     const [validationErrors, setValidationErrors] = useState({});
     const [newComment, setNewComment] = useState(commentText);
     const { closeModal } = useModal();
-    //console.log(spotId)
 
     useEffect(() => {
         setValidationErrors({});
@@ -30,12 +28,10 @@ function EditComment({ comment, songId }) {
 
         const res = await dispatch(editCommentThunk(comment, commentId, songId));
 
-        console.log(res)
 
         if (!res.id) {
             setValidationErrors(res);
         } else {
-            console.log(`is this called?`)
             closeModal()
         }
 
