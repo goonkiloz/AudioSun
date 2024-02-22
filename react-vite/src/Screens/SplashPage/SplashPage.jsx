@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import SingleSongComponent from "../Songs/AllSongs/SingleSongComponent";
 import { useEffect } from "react";
 import { getSongsThunk } from "../../redux/songs";
+import "./SplashPage.css"
 
 const SplashPage = () => {
     const dispatch = useDispatch();
@@ -14,10 +15,8 @@ const SplashPage = () => {
     }, [dispatch]);
 
     return (
-        <div className="songsview-outer-container">
-            <p>
-                <h1>Welcome to Audiosun</h1>
-            </p>
+        <div className="splash-page-container">
+            <img className='splash-img' src="/splash.png" alt="splash" />
             <h1>Most Recent Songs</h1>
             <div className="songsContainer">
                 {mostRecentSongs?.map((song) => (
@@ -32,6 +31,15 @@ const SplashPage = () => {
                     </div>
                 ))}
             </div>
+            <footer className="splash-page-footer">
+                <p>©2024, developed by Brendan, Eddie and Joel for educational purpose.</p>
+                <div>
+                    <a href="https://github.com/goonkiloz">Brendan&apos;s Github | </a>
+                    <a href="https://github.com/edison914">Eddie&apos;s Github | </a>
+                    <a href="https://github.com/urfavoritejoel">Joel&apos;s Github</a>
+                </div>
+
+            </footer>
         </div>
     )
 };
