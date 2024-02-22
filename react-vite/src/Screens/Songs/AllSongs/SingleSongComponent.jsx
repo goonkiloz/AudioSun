@@ -101,13 +101,13 @@ const SingleSongComponent = (song) => {
                                     </button>
                                     {showMenu && (
                                         <ul ref={ulRef} className="options-dropdown">
-                                            <li>
+                                            <li className="options-buttons">
                                                 <OpenModalButton
                                                     modalComponent={<AddSong songId={song?.id} />}
                                                     buttonText={'Add to Playlist'}
                                                 />
                                             </li>
-                                            <li>
+                                            <li className="options-buttons">
                                                 <NavLink to={`/songs/${song?.id}`} className={"title"}>
                                                     <button>Go to Song Page</button>
                                                 </NavLink>
