@@ -20,15 +20,15 @@
 }
 
 .profile-dropdown li {
-    margin: 3px;
     text-align: center;
 }
 
 .profile-dropdown button {
     width: 100px;
-    height: 25px;
+    height: 30px;
     border: 1px solid  #8c8c8c;
     border-radius: 3px;
+    margin: 5px
 }
 .profile-dropdown button:hover {
     background-color: 	#ff5500;
