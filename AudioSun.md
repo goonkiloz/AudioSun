@@ -2,6 +2,13 @@
 
 AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simulates the basic functionality of the music site - 'SxxxdCloud'. The app was devleoped using Flask as the backend, and React.js as the frontend. The use of Vue.js as the primary front-end tooling and build system.
 
+![SplashPage](img/AudioSunLanding.png)
+![LoginModal](img/AudioSunLogin.png)
+![AllSongs](img/AudioSunSongs.png)
+![SongDetail](img/AudioSunSongDetail.png)
+![AllPlaylists](img/AudioSunPlaylists.png)
+![PlaylistDetail](img/AudioSunPlaylistDetails.png)
+
 ## MVP - Feature & Implmentation
 
 **Sign-up and Sign-in**
