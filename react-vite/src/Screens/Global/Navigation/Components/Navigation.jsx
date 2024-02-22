@@ -15,7 +15,7 @@ function Navigation() {
             <img className='navbar-logo' src="/logo.png" alt="Home" />
           </NavLink>
 
-          <NavLink className='navbar-home' to="/">
+          <NavLink className='navbar-home' to="/songs">
             Home
           </NavLink>
 
@@ -31,7 +31,7 @@ function Navigation() {
           </form>
 
           <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
-          <NavLink className='navbar-songs' to="/songs">Songs</NavLink>
+          <NavLink className='navbar-songs' to="/profile">My Songs</NavLink>
           <NavLink className='navbar-new-song' to='/songs/new'>Upload</NavLink>
 
           <div className="navbar-profile-container">
