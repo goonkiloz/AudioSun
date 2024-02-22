@@ -33,23 +33,21 @@ const SingleSongPage = () => {
 
     return (
         <div className="single-song-page-container">
-            <div className="single-song-upper-container">
-                <div className="single-song-upper-section">
-                    <img className='song-img' src={song.song_image} />
-                    <div className="song-detail-view">
-                        <h2>Title: {song.title}</h2>
-                        <LikeOrRemoveLike song={song} />
-                        <h3>Description: {song.description}</h3>
-                        <h3>Genre: {song.genre}</h3>
-                        <h3>Artist: {song.artist.username}</h3>
-                        <button onClick={() => {
-                            // setIsPlaying(false);
-                            // setCurrentSong(null)
-                            setCurrentSong(song);
-                            // setTimeProgress(0);
-                            // setIsPlaying(true);
-                        }}>Play</button>
-                    </div>
+            <div className="single-song-upper-section">
+                <img className='song-img' src={song.song_image} />
+                <div className="song-detail-view">
+                    <h2>Title: {song.title}</h2>
+                    <LikeOrRemoveLike song={song} />
+                    <h3>Description: {song.description}</h3>
+                    <h3>Genre: {song.genre}</h3>
+                    <h3>Artist: {song.artist.username}</h3>
+                    <button onClick={() => {
+                        // setIsPlaying(false);
+                        // setCurrentSong(null)
+                        setCurrentSong(song);
+                        // setTimeProgress(0);
+                        // setIsPlaying(true);
+                    }}>Play</button>
                 </div>
             </div>
 
