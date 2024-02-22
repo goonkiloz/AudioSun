@@ -1,16 +1,24 @@
-import { memo, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import { deleteSongThunk } from '../../../redux/songs';
+import { PlayerContext } from "../../../context/PlayerContext";
 
 function DeleteSong({ songId }) {
     const dispatch = useDispatch();
+    const { currentSong, setCurrentSong, setIsPlaying, isPlaying, setTimeProgress } = useContext(PlayerContext);
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (currentSong?.id === songId) {
+            console.log("called");
+            setCurrentSong('');
+            setTimeProgress(0);
+            setIsPlaying(false);
+        }
         return dispatch(deleteSongThunk(songId))
             .then(closeModal)
             .catch(async (res) => {
