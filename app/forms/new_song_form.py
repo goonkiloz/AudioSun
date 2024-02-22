@@ -1,10 +1,33 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms import StringField, BooleanField, TextAreaField
+from wtforms import StringField, BooleanField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length
 from app.api.aws_helpers import ALLOWED_SONG_EXTENSIONS
 
 extension_joined = ", ".join(ALLOWED_SONG_EXTENSIONS)
+
+genres = [
+    "Pop",
+    "Rock",
+    "Hip Hop",
+    "R&B",
+    "Country",
+    "Jazz",
+    "Electronic",
+    "Classical",
+    "Reggae",
+    "Folk",
+    "Blues",
+    "Metal",
+    "Indie",
+    "Punk",
+    "Alternative",
+    "Funk",
+    "Soul",
+    "Gospel",
+    "Disco",
+    "Techno"
+]
 
 class NewSongForm(FlaskForm):
     title = StringField('Title',
@@ -15,7 +38,8 @@ class NewSongForm(FlaskForm):
     song_image = FileField('Song Image', validators=[
                             FileRequired(message="Please select a image to upload"),
                             FileAllowed(["jpg", 'png', 'jpeg'])])
-    genre = StringField('Genre',
+    genre = SelectField('Genre',
+                        choices=[genres],
                         validators=[
                             DataRequired(),
                             Length(max=50, message="Genre cannot be longer than 50 characters")
