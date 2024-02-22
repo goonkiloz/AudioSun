@@ -66,18 +66,38 @@ function NewSongForm() {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                         {validationErrors.title && hasSubmitted &&
-                        <p className="error">{validationErrors.title}</p>}
+                            <p className="error">{validationErrors.title}</p>}
                     </label>
 
-                    <label>Genre
-                        <input
-                            type="text"
-                            placeholder="Genre"
+                    <label>Choose a Genre:
+                        <select name="genres"
                             value={genre}
                             onChange={(e) => setGenre(e.target.value)}
-                        />
+                        >
+                            <option value="">--Please choose an option--</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Hip Hop">Hip Hop</option>
+                            <option value="R&B">R&B</option>
+                            <option value="Country">Country</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Electronic">Electronic</option>
+                            <option value="Classical">Classical</option>
+                            <option value="Reggae">Reggae</option>
+                            <option value="Folk">Folk</option>
+                            <option value="Blues">Blues</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Indie">Indie</option>
+                            <option value="Punk">Punk</option>
+                            <option value="Alternative">Alternative</option>
+                            <option value="Funk">Funk</option>
+                            <option value="Soul">Soul</option>
+                            <option value="Gospel">Gospel</option>
+                            <option value="Disco">Disco</option>
+                            <option value="Techno">Techno</option>
+                        </select>
                         {validationErrors.genre && hasSubmitted &&
-                        <p className="error">{validationErrors.genre}</p>}
+                            <p className="error">{validationErrors.genre}</p>}
                     </label>
 
                     <label>Description
@@ -87,7 +107,7 @@ function NewSongForm() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                         {validationErrors.description && hasSubmitted &&
-                        <p className="error">{validationErrors.description}</p>}
+                            <p className="error">{validationErrors.description}</p>}
                     </label>
 
                     <label>Upload File (jpg)
@@ -97,7 +117,7 @@ function NewSongForm() {
                             onChange={(e) => setSongImg(e.target.files[0])}
                         />
                         {validationErrors.song_image && hasSubmitted &&
-                        <p className="error">{validationErrors.song_image}</p>}
+                            <p className="error">{validationErrors.song_image}</p>}
                     </label>
 
                     <label>Upload File (mp3)
@@ -107,7 +127,7 @@ function NewSongForm() {
                             onChange={(e) => setFilePath(e.target.files[0])}
                         />
                         {validationErrors.file_path && hasSubmitted &&
-                        <p className="error">{validationErrors.file_path}</p>}
+                            <p className="error">{validationErrors.file_path}</p>}
                     </label>
 
                     {/* <label>Privacy
@@ -129,7 +149,7 @@ function NewSongForm() {
                         type="button"
                         onClick={handleCancelSubmit}
                     >
-                            Cancel
+                        Cancel
                     </button>
 
                     {(songLoading) && <p>Loading...</p>}
