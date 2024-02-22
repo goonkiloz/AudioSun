@@ -7,6 +7,11 @@ function Navigation() {
 
   const currentUser = useSelector(state => state.session.user)
 
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    alert(`Feature to come later!`)
+  }
+
   return (
     <div className="page-container">
         <div className="navbar-container">
@@ -15,7 +20,7 @@ function Navigation() {
             <img className='navbar-logo' src="/logo.png" alt="Home" />
           </NavLink>
 
-          <NavLink className='navbar-home' to="/songs">
+          <NavLink className='navbar-home' to="/">
             Home
           </NavLink>
 
@@ -25,13 +30,17 @@ function Navigation() {
             placeholder="Search..."
             value='Feature coming soon'
             />
-            <button type="submit">
+            <button
+              type="submit"
+              onClick={handleOnClick}
+
+            >
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
 
           <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
-          <NavLink className='navbar-songs' to="/profile">My Songs</NavLink>
+          <NavLink className='navbar-songs' to="/songs">Songs</NavLink>
           <NavLink className='navbar-new-song' to='/songs/new'>Upload</NavLink>
 
           <div className="navbar-profile-container">

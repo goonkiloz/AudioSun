@@ -15,3 +15,8 @@
 .formContainer input[type="file"]:hover {
     cursor: pointer;
 }
+
+
+.new-song-form-submit {
+    margin-bottom: 10px;
+}

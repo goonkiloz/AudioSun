@@ -18,7 +18,6 @@ function NewSongForm() {
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [songLoading, setSongLoading] = useState(false);
 
-
     if (!user) return <h2>You need to sign in to add a new song</h2>;
 
     const handleSubmit = async (e) => {
@@ -46,6 +45,10 @@ function NewSongForm() {
             console.log("??? run ???");
             navigate(`/songs/${res.id}`)
         }
+    }
+
+    const handleCancelSubmit = () => {
+        navigate(`/profile`)
     }
 
     return (
@@ -119,8 +122,18 @@ function NewSongForm() {
                     {/* {validationErrors.privacy && hasSubmitted &&
                         <p className="error">{validationErrors.privacy}</p>} */}
                     <button
+                        type="submit"
+                        className="new-song-form-submit"
                         disabled={isButtonDisabled}
                     >Submit</button>
+
+                    <button
+                        type="button"
+                        onClick={handleCancelSubmit}
+                    >
+                            Cancel
+                    </button>
+
                     {(songLoading) && <p>Loading...</p>}
                 </form>
             </div>
