@@ -39,7 +39,7 @@ const CommentsView = (song) => {
         <div>
 
             {(currentUser) && <NewComment song={song} />}
-            <h2>Comments:</h2>
+            <h3>{comments.length} Comments</h3>
             <div className='commentsContainer'>
                 {comments.map(comment => (
                     <div key={comment.id} className='commentBox'>
