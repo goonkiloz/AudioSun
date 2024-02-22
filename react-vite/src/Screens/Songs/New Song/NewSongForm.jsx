@@ -110,7 +110,7 @@ function NewSongForm() {
                             <p className="error">{validationErrors.description}</p>}
                     </label>
 
-                    <label>Upload File (jpg)
+                    <label>Upload Song Cover (jpg)
                         <input
                             type="file"
                             // accept="mp3/*"
@@ -120,7 +120,7 @@ function NewSongForm() {
                             <p className="error">{validationErrors.song_image}</p>}
                     </label>
 
-                    <label>Upload File (mp3)
+                    <label>Upload Song File (mp3)
                         <input
                             type="file"
                             // accept="mp3/*"
