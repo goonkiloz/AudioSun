@@ -5,13 +5,11 @@ import './RemoveCommentModal.css'
 import { deleteCommentThunk } from '../../../redux/comments';
 
 function RemoveComment ({commentId}) {
-    //console.log(spotId)
     const dispatch = useDispatch();
     //const sessionUser = useSelector((state) => state.session.user);
 
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
-    //console.log(spotId)
     const handleConfirmSubmit = (e) => {
         e.preventDefault();
         setErrors({});
@@ -20,11 +18,9 @@ function RemoveComment ({commentId}) {
           .then(closeModal)
           .catch(async (res) => {
             //const data = await res.json();
-            //console.log(data)
             if (res && res.message) {
                 setErrors(res);
             }
-            //console.log(errors)
         });
     };
     const handleCancelSubmit = (e) => {

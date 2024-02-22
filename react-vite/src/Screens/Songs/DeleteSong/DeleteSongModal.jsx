@@ -14,7 +14,6 @@ function DeleteSong({ songId }) {
         e.preventDefault();
 
         if (currentSong?.id === songId) {
-            console.log("called");
             setCurrentSong('');
             setTimeProgress(0);
             setIsPlaying(false);

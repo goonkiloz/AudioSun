@@ -65,7 +65,6 @@ export const getSingleSongThunk = (songId) => async (dispatch) => {
     }
     throw res;
   } catch (e) {
-    console.log(`what is e`, e);
     const data = await e.json();
     return data;
   }
@@ -125,10 +124,8 @@ export const postSongThunk = (song) => async (dispatch) => {
     });
 
     if (res.ok) {
-      // console.log(res)
       const data = await res.json();
       dispatch(postSong(data));
-      // dispatch(getCurrentUserSongsThunk());
       return data;
     }
     throw res;

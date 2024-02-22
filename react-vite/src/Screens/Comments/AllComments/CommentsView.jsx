@@ -12,7 +12,6 @@ import NewComment from "../NewComments/NewComment";
 const CommentsView = (song) => {
     const currentSong = song.song
     const currentUser = useSelector(state => state.session.user)
-    // console.log(`what is the current song`, currentSong)
     const comments = useSelector(state => state.comments?.allComments)
 
     const dispatch = useDispatch();
