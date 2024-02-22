@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
-    IoPlayBackSharp,
-    IoPlayForwardSharp,
-    IoPlaySkipBackSharp,
-    IoPlaySkipForwardSharp,
     IoPlaySharp,
     IoPauseSharp,
 } from 'react-icons/io5';
 import { useContext, useRef, useCallback } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
+
+// add the following imports later from react-icons/io5: IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipForwardSharp
 
 const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
     const { isPlaying, setIsPlaying, currentSong } = useContext(PlayerContext);
@@ -40,13 +38,13 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
         playAnimationRef.current = requestAnimationFrame(repeat)
     }, [isPlaying, audioRef, repeat])
 
-    const skipForward = () => { };
+    // const skipForward = () => { };
 
-    const skipBackward = () => { };
+    // const skipBackward = () => { };
 
-    const handlePrevious = () => { };
+    // const handlePrevious = () => { };
 
-    const handleNext = () => { };
+    // const handleNext = () => { };
 
     return (
         <div className="controls-wrapper">
