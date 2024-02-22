@@ -18,4 +18,4 @@ export default function PlayerProvider({ children }) {
             {children}
         </PlayerContext.Provider>
     );
-};
+}

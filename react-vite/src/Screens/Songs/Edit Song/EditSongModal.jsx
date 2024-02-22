@@ -1,9 +1,7 @@
 import { useState } from "react";
-// import { thunkLogin } from "../../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { getSongsThunk, putSongThunk } from "../../../redux/songs";
-// import "./LoginForm.css";
+import { putSongThunk } from "../../../redux/songs";
 
 function EditSongModal(song) {
     song = song.song;
@@ -12,7 +10,7 @@ function EditSongModal(song) {
     const [title, setTitle] = useState(song.title);
     const [genre, setGenre] = useState(song.genre);
     const [description, setDescription] = useState(song.description);
-    const [privacy, setPrivacy] = useState(song.privacy);
+    const [privacy] = useState(song.privacy);
     const [validationErrors, setValidationErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
@@ -33,12 +31,9 @@ function EditSongModal(song) {
         };
 
         const res = await dispatch(putSongThunk(updatedSong, songId))
-        console.log("RES?????", res);
 
         if (!res.id) {
-            console.log("res not ok???");
             setValidationErrors(res);
-            console.log("errors?", validationErrors);
         } else {
             closeModal()
         }

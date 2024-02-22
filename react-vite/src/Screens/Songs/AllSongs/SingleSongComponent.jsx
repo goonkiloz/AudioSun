@@ -4,8 +4,6 @@ import { memo, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
-import EditSongModal from "../Edit Song/EditSongModal";
-import DeleteSongModal from "../DeleteSong/DeleteSongModal";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -49,7 +47,7 @@ const SingleSongComponent = (song) => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu, isHovering]);
 
-    const closeMenu = () => setShowMenu(false);
+    // const closeMenu = () => setShowMenu(false);
 
     return (
         <div className="songContainer">
