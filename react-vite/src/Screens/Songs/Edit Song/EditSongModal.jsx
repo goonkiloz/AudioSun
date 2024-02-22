@@ -59,12 +59,32 @@ function EditSongModal(song) {
                 {validationErrors.title && hasSubmitted &&
                     <p className="error">{validationErrors.title}</p>}
                 <label>Genre
-                    <input
-                        type="text"
-                        placeholder="Genre"
+                    <select name="genres"
                         value={genre}
                         onChange={(e) => setGenre(e.target.value)}
-                    />
+                    >
+                        <option value="">--Please choose an option--</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="R&B">R&B</option>
+                        <option value="Country">Country</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Classical">Classical</option>
+                        <option value="Reggae">Reggae</option>
+                        <option value="Folk">Folk</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Indie">Indie</option>
+                        <option value="Punk">Punk</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="Funk">Funk</option>
+                        <option value="Soul">Soul</option>
+                        <option value="Gospel">Gospel</option>
+                        <option value="Disco">Disco</option>
+                        <option value="Techno">Techno</option>
+                    </select>
                 </label>
                 {validationErrors.genre && hasSubmitted &&
                     <p className="error">{validationErrors.genre}</p>}

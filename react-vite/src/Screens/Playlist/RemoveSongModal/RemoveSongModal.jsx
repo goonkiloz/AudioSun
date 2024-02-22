@@ -36,7 +36,7 @@ function RemoveSong({songId}){
     };
 
     return (
-        <div className="remove-song ModalContainer">
+        <div className="remove-song modalContainer">
             <h1>Confirm Remove</h1>
 
             {errors.message && (
