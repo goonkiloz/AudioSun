@@ -17,6 +17,10 @@ function NewPlaylistForm() {
 
     if (!user) return <Navigate to="/login" replace={true} />
 
+    const handleCancelSubmit = () => {
+        navigate(`/playlists/current`)
+    }
+
     const handleSubmit = async (e) => {
         console.log(playlistImage)
         e.preventDefault()
@@ -41,9 +45,6 @@ function NewPlaylistForm() {
                 navigate(`/playlists/current`)
             }
         }
-
-
-
 
     }
 
@@ -89,8 +90,16 @@ function NewPlaylistForm() {
                         <p className="error">{validationErrors.playlist_image}</p>}
 
                         <button
+                            className="remove-playlist-confirm-button"
                             disabled={isButtonDisabled}
                         >Submit</button>
+
+                        <button
+                            type="button"
+                            onClick={handleCancelSubmit}
+                        >
+                            Cancel
+                        </button>
                     </form>
                 </div>
             </div>

@@ -7,6 +7,11 @@ function Navigation() {
 
   const currentUser = useSelector(state => state.session.user)
 
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    alert(`Feature to come later!`)
+  }
+
   return (
     <div className="page-container">
         <div className="navbar-container">
@@ -25,7 +30,11 @@ function Navigation() {
             placeholder="Search..."
             value='Feature coming soon'
             />
-            <button type="submit" disabled>
+            <button
+              type="submit"
+              onClick={handleOnClick}
+
+            >
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
