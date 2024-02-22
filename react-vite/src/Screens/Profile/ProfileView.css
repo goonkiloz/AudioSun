@@ -3,10 +3,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: 	#ffffff
+    background-color: #ffffff
 }
 
-.current-user-songs-map{
+.current-user-songs-map {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -26,7 +26,7 @@
     margin-top: 10px;
 }
 
-.current-user-song-buttons button{
+.current-user-song-buttons button {
     display: in-line;
     width: 44%;
     padding: 10px;

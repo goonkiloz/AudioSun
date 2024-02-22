@@ -43,7 +43,7 @@
     flex-direction: column;
     align-items: flex-start;
     top: 90%;
-    right: 0;
+    right: -30%;
     list-style-type: none;
 }
 
@@ -62,5 +62,20 @@
 }
 
 .img-buttons-container:hover:before {
-    height: 30%;
+    height: 45%;
+}
+
+.options-buttons button {
+    display: in-line;
+    padding: 5px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px
+}
+
+.options-buttons button:hover {
+    background-color: #ff3300;
 }
