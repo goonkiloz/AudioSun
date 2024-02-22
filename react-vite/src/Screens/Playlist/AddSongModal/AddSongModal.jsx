@@ -8,7 +8,7 @@ import '../../../index.css'
 
 function AddSong({songId}) {
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const [ playlists, setPlaylists ] = useState([])
     const { closeModal } = useModal()
     const currentUserPlaylists = useSelector((state) => state.playlists?.currentUserPlaylists)
