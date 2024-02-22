@@ -22,8 +22,8 @@
 }
 
 .song-img {
-    min-width: 400px;
-    max-height: 400px;
+    height: 400px;
+    width: 580px;
     border-radius: 5px;
     margin: 10px 0;
 }
@@ -35,8 +35,9 @@
 }
 
 .single-song-comment-view {
-    min-width: 600px;
+    width: 600px;
     border-right: 1px solid #c9c8c8;
+    margin-left: 10px
 }
 
 .single-song-like-view {
@@ -57,6 +58,6 @@
     font-weight: bold;
 }
 
-.modalContainer button:hover {
+.song-detail-view button:hover {
     background-color: #ff3300;
 }

@@ -24,7 +24,7 @@
 
 .comment-form button {
     width: 100px;
-    margin: 10px;
+    margin: 10px 0 10px 10px;
     background-color:#ff5500;
     color:white;
     border-radius: 5px;
