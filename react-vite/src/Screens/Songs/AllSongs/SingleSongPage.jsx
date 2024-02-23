@@ -17,7 +17,6 @@ const SingleSongPage = () => {
     const [doesExist, setDoesExist] = useState(true)
     const song = useSelector(state => state.songs.byId[songId])
     const { setCurrentSong } = useContext(PlayerContext);
-    let resOk = true;
 
     // useEffect(() => {
     //     const fetchData = async () => {
