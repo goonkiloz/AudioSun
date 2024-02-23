@@ -11,11 +11,18 @@
     resize: none;
     border-radius: 5px;
     padding: 10px;
+    border: 2px solid #ccc;
 
+}
+
+.comment-form textarea::placeholder {
+    color: #999;
+    font-style: italic;
 }
 
 .comment-form textarea:focus {
     outline: none;
+    border-color: #ff5500
 }
 .review-form-error{
     margin: 5px 0;
@@ -28,6 +35,7 @@
     background-color:#ff5500;
     color:white;
     border-radius: 5px;
+    border: none;
 }
 
 .comment-form button:disabled {

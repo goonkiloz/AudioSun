@@ -12,7 +12,7 @@ def remove_like_for_song(like_id):
     """
 
     current_like = Like.query.get(like_id)
-    print(current_like)
+    # print(current_like)
     if not current_like:
         return {'error': 'no like was found'}, 404
 

@@ -29,7 +29,7 @@ def update_comment(comment_id):
         current_comment.comment_text=form.data['comment_text']
         db.session.commit()
         return current_comment.to_dict()
-    
+
     return form.errors, 401
 
 #Eddie delete a comment from a song
@@ -41,7 +41,7 @@ def delete_comment(comment_id):
     only when the comment belongs to current user
     """
     current_comment = Comment.query.get(comment_id)
-    print(current_comment)
+    # print(current_comment)
 
     #Check if there are any comments for the current song_id
     if not current_comment:
