@@ -74,7 +74,7 @@ def new_song():
         db.session.add(new_song)
         db.session.commit()
         return new_song.to_dict()
-    print(form.errors)
+    # print(form.errors)
     return form.errors, 401
 
 
@@ -113,7 +113,7 @@ def delete_song(id):
     """
     song = Song.query.get(id)
     delete = remove_file_from_s3(song.file_path)
-    print(delete)
+    # print(delete)
 
     #Check if song exists
     if not song:
