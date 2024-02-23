@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length, AnyOf
+from wtforms.validators import DataRequired, Length, AnyOf, ValidationError
 
 genres = [
     "Pop",
@@ -26,9 +26,15 @@ genres = [
 ]
 
 class EditSongForm(FlaskForm):
+    def no_white_space(FlaskForm, field):
+        if field.data and field.data.startswith(' '):
+            raise ValidationError('Content should not start with whitespace.')
+        if field.data and field.data.endswith(' '):
+            raise ValidationError('Content should not end with whitespace.')
     title = StringField('Title', validators=[
                             DataRequired(),
-                            Length(max=50, message="Title cannot be longer than 50 characters")
+                            Length(max=50, message="Title cannot be longer than 50 characters"),
+                            no_white_space
                             ])
     genre = StringField('Genre',
                         validators=[
@@ -36,6 +42,7 @@ class EditSongForm(FlaskForm):
                             ])
     description = StringField('Description', validators=[
                             DataRequired(),
-                            Length(max=255, message="Description cannot be longer than 255 characters")
+                            Length(max=255, message="Description cannot be longer than 255 characters"),
+                            no_white_space
                             ])
     submit = SubmitField('Edit Song')
