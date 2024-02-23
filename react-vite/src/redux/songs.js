@@ -55,18 +55,31 @@ export const getSongsThunk = () => async (dispatch) => {
 };
 
 export const getSingleSongThunk = (songId) => async (dispatch) => {
-  try {
-    const res = await fetch(`/api/songs/${songId}`);
+  // try {
+  //   const res = await fetch(`/api/songs/${songId}`);
 
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(getSingleSong(data));
-      return data;
+  //   if (res.ok) {
+  //     const data = await res.json();
+  //     dispatch(getSingleSong(data));
+  //     return data;
+  //   }
+  //   throw res;
+  // } catch (e) {
+  //   const data = await e.json();
+  //   return data;
+  // }
+  try {
+    const res = await fetch(`/api/songs/${songId}`)
+
+
+    if (!res.ok) {
+      return res
     }
-    throw res;
+    const data = await res.json()
+    dispatch(getSingleSong(data))
+    return res
   } catch (e) {
-    const data = await e.json();
-    return data;
+    return e;
   }
 };
 

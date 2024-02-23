@@ -3,33 +3,53 @@ import CommentsView from "../../Comments/AllComments/CommentsView"
 import { getSingleSongThunk } from "../../../redux/songs";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect, useContext } from "react";
+import { memo, useEffect, useContext, useState } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import AllLikesView from "../../Likes/AllLikes/AllLikesView";
 import LikeOrRemoveLike from "../../Likes/AllLikes/LikeOrRemoveLike";
 import './SingleSongPage.css'
+import NotFoundPage from "../../NotFound"
+
 const SingleSongPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { songId } = useParams();
+    const [doesExist, setDoesExist] = useState(true)
     const song = useSelector(state => state.songs.byId[songId])
     const { setCurrentSong } = useContext(PlayerContext);
 
+    // useEffect(() => {
+    //     const fetchData = async () => {
+
+    //         const res = await dispatch(getSingleSongThunk(songId))
+    //         // if (Number(songId) !== songId) navigate('/*')
+    //         if (res.error) {
+    //             //console.error("Error fetching song:", res)
+    //             navigate('/*')
+    //         }
+    //         console.log(res);
+    //     };
+
+    //     fetchData();
+
+    // }, [dispatch, songId, navigate]);
+
     useEffect(() => {
-        const fetchData = async () => {
-
+        async function startDispatching() {
             const res = await dispatch(getSingleSongThunk(songId))
-            if (res.error) {
-                //console.error("Error fetching song:", res)
-                navigate('/*')
+            if (!res.ok) {
+                // navigate('/*')
+                setDoesExist(false)
             }
-        };
+        }
 
-        fetchData();
+        startDispatching()
+    }, [dispatch, songId, navigate])
 
-    }, [dispatch, songId, navigate]);
+    if (!doesExist) return <NotFoundPage />
 
-    if (!song) return <h2>Loading...</h2>
+    if (!song) return <h1>Loading...</h1>
+
 
     return (
         <div className="single-song-page-container">
