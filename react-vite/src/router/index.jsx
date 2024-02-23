@@ -19,14 +19,6 @@ export const router = createBrowserRouter([
         path: "/",
         element: <SplashPage />
       },
-      // {
-      //   path: "login",
-      //   element: <LoginFormPage />,
-      // },
-      // {
-      //   path: "signup",
-      //   element: <SignupFormPage />,
-      // },
       {
         path: "songs",
         element: <SongsView />
@@ -62,7 +54,7 @@ export const router = createBrowserRouter([
       {
         path: "*",
         element: <NotFoundPage />
-      }
+      },
     ],
   },
 ]);
