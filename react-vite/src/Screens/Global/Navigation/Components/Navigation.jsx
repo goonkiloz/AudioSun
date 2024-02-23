@@ -7,10 +7,10 @@ function Navigation() {
 
   const currentUser = useSelector(state => state.session.user)
 
-  const handleOnClick = (e) => {
-    e.preventDefault();
-    alert(`Feature to come later!`)
-  }
+  // const handleOnClick = (e) => {
+  //   e.preventDefault();
+  //   alert(`Feature to come later!`)
+  // }
 
   return (
     <div className="page-container">
@@ -24,7 +24,7 @@ function Navigation() {
             Home
           </NavLink>
 
-          <form className="navbar-search">
+          {/* <form className="navbar-search">
             <input
             type="text"
             placeholder="Search..."
@@ -37,14 +37,14 @@ function Navigation() {
             >
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
-          </form>
+          </form> */}
 
           <NavLink className='navbar-playlists' to="/playlists">Playlists</NavLink>
           <NavLink className='navbar-songs' to="/songs">Songs</NavLink>
           <NavLink className='navbar-new-song' to='/songs/new'>Upload</NavLink>
 
           <div className="navbar-profile-container">
-            {currentUser && <div className="username">{currentUser.username}</div>}
+            {currentUser && <div className="nav-username">{currentUser.username}</div>}
             <ProfileButton className='navbar-profile'/>
           </div>
 
