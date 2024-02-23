@@ -3,27 +3,31 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from '../../Global/OpenModalButton/OpenModalButton';
 import RemoveSong from '../RemoveSongModal'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import './PlaylistsView.css'
+import NotFoundPage from '../../NotFound'
 
 
 const SinglePlaylistView = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const { playlistId } = useParams();
+    const [doesExist, setDoesExist ] = useState(true)
     const currentUser = useSelector(state => state?.session?.user)
     const playlist = useSelector((state) => state?.playlists?.currentPlaylist)
 
     useEffect(() => {
         async function startDispatching() {
             const res = await dispatch(getPlaylistThunk(playlistId))
+
             if(!res.ok) {
-                navigate('/*')
+                setDoesExist(false)
             }
         }
-
         startDispatching()
     }, [dispatch, playlistId, navigate])
+
+    if(!doesExist) return <NotFoundPage />
 
     if(!playlist) return <h1>Loading ...</h1>
 
