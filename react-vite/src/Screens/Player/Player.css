@@ -89,3 +89,76 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]:active::-moz-range-thumb {
     transform: scale(1.2);
 }
+
+
+/* .player-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.inner {
+    display: flex;
+    align-items: center;
+}
+
+.inner div {
+    margin: 0;
+}
+
+.player-box {
+    display: flex;
+    justify-content: center
+}
+
+.player-name {
+    margin: 10px;
+}
+
+.audio-info {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.song-info {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: fit-content;
+    max-width: 300px;
+}
+
+.song-info span {
+    height: 20px;
+    padding: 0 5px;
+}
+
+.controls-wrapper {
+    margin: 0 10px;
+}
+
+.controls button {
+    display: in-line;
+    padding: 5px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+    margin: 15px;
+}
+
+.controls button:hover {
+    background-color: #ff3300;
+}
+
+.progress {
+    width: 550px
+}
+
+.audio-icon {
+    margin: 0 10px;
+}

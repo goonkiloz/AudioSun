@@ -21,8 +21,9 @@ const Player = () => {
 
     return (
         <span className="player-box">
-            <h2>Player</h2>
+
             <div className="inner">
+                <h2 className="player-name">Player</h2>
                 <DisplayTrack
                     currentSong={{ currentSong }}
                     audioRef={audioRef}
