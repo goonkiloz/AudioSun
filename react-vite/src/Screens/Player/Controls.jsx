@@ -58,7 +58,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
 
                 <button
                     onClick={togglePlayPause}
-                    disabled={currentSong === '' ? true : false}>
+                    disabled={currentSong === undefined ? true : false}>
                     {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
                 </button>
                 {/* <button onClick={skipForward}>

@@ -13,7 +13,7 @@ const SingleSongComponent = (song) => {
     // const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.session.user)
-    const { currentSong, setCurrentSong, setIsPlaying, isPlaying } = useContext(PlayerContext);
+    const { currentSong, setCurrentSong, setIsPlaying, isPlaying, playOneSong } = useContext(PlayerContext);
     const [isHovering, setIsHovering] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
@@ -75,8 +75,7 @@ const SingleSongComponent = (song) => {
                                 className="no-bg-button play-button"
                                 onClick={() => {
                                     if (!isPlaying || currentSong !== song) {
-                                        setCurrentSong(song);
-                                        setIsPlaying(true);
+                                        playOneSong(song);
                                     } else {
                                         setIsPlaying(false);
                                     }
