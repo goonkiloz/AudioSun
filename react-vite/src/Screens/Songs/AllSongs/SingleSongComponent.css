@@ -79,3 +79,8 @@
 .options-buttons button:hover {
     background-color: #ff3300;
 }
+
+.song-title {
+    font-weight: bold;
+    margin: 0px
+}

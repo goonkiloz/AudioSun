@@ -38,6 +38,24 @@
     margin: 5px
 }
 
-.current-user-song-buttons button:hover {
+.current-user-song-buttons button:hover,
+.add-song-confirm-button:hover {
     background-color: #ff3300;
+}
+
+.current-user-no-song-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-song-confirm-button {
+    display: in-line;
+    padding: 15px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px
 }
