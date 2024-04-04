@@ -11,6 +11,7 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
         progressBarRef.current.max = seconds;
     };
 
+    console.log(currentSong.song_image)
 
     const testFunc = () => {
         if (songIndex < songQueue.length - 1) {
@@ -36,15 +37,15 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
             <div className="audio-info">
                 <div className="audio-image">
                     {/* CONDITIONALLY RENDER SONG IMAGE OR MUSIC NOTE */}
-                    {/* {currentSong.thumbnail ? (
-                        <img src={currentSong.thumbnail} alt="audio avatar" />
-                    ) : ( */}
+                    {currentSong.song_image ? (
+                        <img src={currentSong.song_image} alt="audio avatar" />
+                    ) : (
                     <div className="icon-wrapper">
                         <span className="audio-icon">
                             <BsMusicNoteBeamed />
                         </span>
                     </div>
-                    {/* )} */}
+                    )}
                 </div>
                 <div className="song-info">
                     <span className="title">{currentSong?.currentSong?.title}</span>
