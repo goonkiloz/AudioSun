@@ -6,7 +6,7 @@ import ProgressBar from "./ProgressBar";
 import "./Player.css"
 
 const Player = () => {
-    const { currentSong, timeProgress, setTimeProgress, setIsPlaying } = useContext(PlayerContext);
+    const { currentSong, setCurrentSong, timeProgress, setTimeProgress, setIsPlaying, songQueue, songIndex, setSongIndex } = useContext(PlayerContext);
     // const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef();
@@ -16,7 +16,7 @@ const Player = () => {
         setIsPlaying(false)
         setTimeProgress(0);
         setDuration(0);
-        if (currentSong !== '') setIsPlaying(true);
+        if (currentSong !== undefined) setIsPlaying(true);
     }, [currentSong, setIsPlaying, setTimeProgress]);
 
     return (
@@ -28,6 +28,10 @@ const Player = () => {
                     audioRef={audioRef}
                     setDuration={setDuration}
                     progressBarRef={progressBarRef}
+                    songIndex={songIndex}
+                    setSongIndex={setSongIndex}
+                    songQueue={songQueue}
+                    setCurrentSong={setCurrentSong}
                 />
                 <Controls
                     audioRef={audioRef}
@@ -38,7 +42,12 @@ const Player = () => {
                     progressBarRef={progressBarRef}
                     audioRef={audioRef}
                     timeProgress={timeProgress}
-                    duration={duration} />
+                    setTimeProgress={setTimeProgress}
+                    duration={duration}
+                    songIndex={songIndex}
+                    setSongIndex={setSongIndex}
+                    songQueue={songQueue}
+                    setCurrentSong={setCurrentSong} />
             </div>
         </span>
     )
