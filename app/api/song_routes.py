@@ -173,7 +173,7 @@ def get_likes_for_song(song_id):
 
     if not current_song_likes:
         return {'likes': []}
-
+    print([like.to_dict() for like in current_song_likes])
     return {'likes': [like.to_dict() for like in current_song_likes]}
 
 
