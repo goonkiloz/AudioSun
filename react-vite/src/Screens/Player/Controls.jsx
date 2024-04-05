@@ -8,8 +8,7 @@ import { PlayerContext } from "../../context/PlayerContext";
 
 // add the following imports later from react-icons/io5: IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipForwardSharp
 
-const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
-    const { isPlaying, setIsPlaying, currentSong } = useContext(PlayerContext);
+const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, isPlaying, setIsPlaying, currentSong }) => {
     const playAnimationRef = useRef();
 
     const repeat = useCallback(() => {
@@ -26,17 +25,17 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
     }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
     const togglePlayPause = () => {
-        setIsPlaying((prev) => !prev)
+        setIsPlaying(prev => !prev)
     }
 
     useEffect(() => {
-        if (isPlaying) {
+        if (isPlaying === true) {
             audioRef.current.play();
         } else {
             audioRef.current.pause();
         }
         playAnimationRef.current = requestAnimationFrame(repeat)
-    }, [isPlaying, audioRef, repeat])
+    }, [isPlaying, repeat])
 
     // const skipForward = () => { };
 

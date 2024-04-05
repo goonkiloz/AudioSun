@@ -1,5 +1,5 @@
 import "./SingleSongComponent.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { memo, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext } from "../../../context/PlayerContext";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -8,13 +8,15 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import AddSong from "../../Playlist/AddSongModal";
+import { addToQueueThunk, pauseQueueThunk, playCurrentThunk, playOneThunk } from "../../../redux/queue";
 
 const SingleSongComponent = (song) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
-  const { currentSong, setIsPlaying, isPlaying, playOneSong } =
-    useContext(PlayerContext);
+  const songQueue = useSelector(state => state.queue.songs);
+  const queuePlaying = useSelector(state => state.queue.playing);
+  const queueCurrentSong = useSelector(state => state.queue.currentSong);
   const [isHovering, setIsHovering] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -32,6 +34,26 @@ const SingleSongComponent = (song) => {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
+
+  const handlePlayPause = async () => {
+    if (queueCurrentSong === song) {
+      if (queuePlaying === true) {
+        await dispatch(pauseQueueThunk([song]));
+        console.log(queuePlaying);
+      } else {
+        await dispatch(playCurrentThunk([song]));
+      }
+    } else {
+      await dispatch(playOneThunk([song]));
+      console.log("play one: ", songQueue);
+    };
+  };
+
+  const handleAddToQueue = async () => {
+    console.log("before add to queue: ", songQueue);
+    await dispatch(addToQueueThunk([song]))
+    console.log("after add to queue: ", songQueue);
+  }
 
   useEffect(() => {
     if (!isHovering) setShowMenu(false);
@@ -73,15 +95,9 @@ const SingleSongComponent = (song) => {
             >
               <button
                 className="no-bg-button play-button"
-                onClick={() => {
-                  if (!isPlaying || currentSong !== song) {
-                    playOneSong(song);
-                  } else {
-                    setIsPlaying(false);
-                  }
-                }}
+                onClick={handlePlayPause}
               >
-                {!isPlaying || currentSong !== song ? (
+                {!queuePlaying || queueCurrentSong !== song ? (
                   <FaPlay className="play-pause-image" />
                 ) : (
                   <FaPause className="play-pause-image" />
@@ -94,31 +110,33 @@ const SingleSongComponent = (song) => {
                 size: "22px",
               }}
             >
-              {user && (
-                <>
-                  <button
-                    className="no-bg-button options-menu"
-                    onClick={toggleMenu}
-                    alt={"Options"}
-                  >
-                    <HiOutlineDotsHorizontal />
-                  </button>
-                  {showMenu && (
-                    <ul ref={ulRef} className="options-dropdown">
-                      <li className="options-buttons">
-                        <OpenModalButton
-                          modalComponent={<AddSong songId={song?.id} />}
-                          buttonText={"Add to Playlist"}
-                        />
-                      </li>
-                      <li className="options-buttons">
-                        <NavLink to={`/songs/${song?.id}`} className={"title"}>
-                          <button>Go to Song Page</button>
-                        </NavLink>
-                      </li>
-                    </ul>
-                  )}
-                </>
+              <button
+                className="no-bg-button options-menu"
+                onClick={toggleMenu}
+                alt={"Options"}
+              >
+                <HiOutlineDotsHorizontal />
+              </button>
+              {showMenu && (
+                <ul ref={ulRef} className="options-dropdown">
+                  {user &&
+                    <li className="options-buttons">
+                      <OpenModalButton
+                        modalComponent={<AddSong songId={song?.id} />}
+                        buttonText={"Add to Playlist"}
+                      />
+                    </li>
+                  }
+                  <li className="options-buttons">
+                    <button onClick={handleAddToQueue}>Play After</button>
+                  </li>
+                  <li className="options-buttons">
+                    <NavLink to={`/songs/${song?.id}`} className={"title"}>
+                      <button>Go to Song Page</button>
+                    </NavLink>
+                  </li>
+
+                </ul>
               )}
             </IconContext.Provider>
           </>
