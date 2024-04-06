@@ -4,20 +4,30 @@ import Controls from "./Controls";
 import DisplayTrack from "./DisplayTrack";
 import ProgressBar from "./ProgressBar";
 import "./Player.css"
+import { useSelector } from "react-redux";
 
 const Player = () => {
-    const { currentSong, setCurrentSong, timeProgress, setTimeProgress, setIsPlaying, songQueue, songIndex, setSongIndex } = useContext(PlayerContext);
-    // const [timeProgress, setTimeProgress] = useState(0);
+    // const { currentSong, setCurrentSong, timeProgress, setTimeProgress, isPlaying, setIsPlaying, songIndex, setSongIndex } = useContext(PlayerContext);
+    const [currentSong, setCurrentSong] = useState(undefined);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [songIndex, setSongIndex] = useState(0);
+    const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
+    const songQueue = useSelector(state => state.queue.songs);
+    const queuePlaying = useSelector(state => state.queue.playing);
+    const queueCurrentSong = useSelector(state => state.queue.currentSong);
     const audioRef = useRef();
     const progressBarRef = useRef();
 
     useEffect(() => {
-        setIsPlaying(false)
         setTimeProgress(0);
         setDuration(0);
-        if (currentSong !== undefined) setIsPlaying(true);
-    }, [currentSong, setIsPlaying, setTimeProgress]);
+        setCurrentSong(queueCurrentSong);
+    }, [songQueue, songIndex]);
+
+    useEffect(() => {
+        setIsPlaying(queuePlaying);
+    }, [queuePlaying])
 
     return (
         <span className="player-box">
@@ -31,14 +41,16 @@ const Player = () => {
                     progressBarRef={progressBarRef}
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
-                    songQueue={songQueue}
                     setCurrentSong={setCurrentSong}
                 />
                 <Controls
                     audioRef={audioRef}
                     progressBarRef={progressBarRef}
                     duration={duration}
-                    setTimeProgress={setTimeProgress} />
+                    setTimeProgress={setTimeProgress}
+                    isPlaying={isPlaying}
+                    setIsPlaying={setIsPlaying}
+                    currentSong={currentSong} />
                 <ProgressBar
                     progressBarRef={progressBarRef}
                     audioRef={audioRef}
@@ -47,7 +59,6 @@ const Player = () => {
                     duration={duration}
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
-                    songQueue={songQueue}
                     setCurrentSong={setCurrentSong} />
             </div>
         </span>
