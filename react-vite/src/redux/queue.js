@@ -4,6 +4,7 @@ const PLAY_ONE = "queue/playOne";
 const PLAY_CURRENT = "queue/playCurrent";
 const PAUSE_QUEUE = "queue/pause";
 const DELETE_FROM_QUEUE = "queue/delete";
+const PLAY_NEXT = "queue/playNext"
 
 const addToQueue = (songs) => {
     return {
@@ -19,17 +20,15 @@ const playOne = (song) => {
     }
 };
 
-const playCurrent = (song) => {
+const playCurrent = () => {
     return {
         type: PLAY_CURRENT,
-        payload: song,
     }
 };
 
-const pauseQueue = (song) => {
+const pauseQueue = () => {
     return {
         type: PAUSE_QUEUE,
-        payload: song,
     }
 };
 
@@ -37,6 +36,12 @@ const deleteFromQueue = (songId) => {
     return {
         type: DELETE_FROM_QUEUE,
         payload: songId,
+    }
+};
+
+const playNext = () => {
+    return {
+        type: PLAY_NEXT,
     }
 };
 
@@ -49,16 +54,20 @@ export const playOneThunk = (song) => async (dispatch) => {
     dispatch(playOne(song));
 };
 
-export const playCurrentThunk = (song) => async (dispatch) => {
-    dispatch(playCurrent(song));
+export const playCurrentThunk = () => async (dispatch) => {
+    dispatch(playCurrent());
 };
 
-export const pauseQueueThunk = (song) => async (dispatch) => {
-    dispatch(pauseQueue(song));
+export const pauseQueueThunk = () => async (dispatch) => {
+    dispatch(pauseQueue());
 };
 
 export const deleteFromQueueThunk = (songId) => async (dispatch) => {
     dispatch(deleteFromQueue(songId));
+};
+
+export const playNextThunk = () => async (dispatch) => {
+    dispatch(playNext());
 };
 
 const initialState = { songs: [], playing: false, currentSong: {} };
@@ -79,15 +88,18 @@ const queueReducer = (state = initialState, action) => {
         case PLAY_CURRENT:
             newState.songs = [...newState.songs]
             newState.playing = true;
-            newState.currentSong = action.payload[0];
             return newState;
         case PAUSE_QUEUE:
             newState.songs = [...newState.songs]
             newState.playing = false;
-            newState.currentSong = action.payload[0];
             return newState;
         case DELETE_FROM_QUEUE:
             newState.songs = newState.songs.filter(song => song.id !== action.payload);
+            return newState;
+        case PLAY_NEXT:
+            newState.songs = newState.songs.slice(1);
+            newState.playing = true;
+            newState.currentSong = newState.songs[0];
             return newState;
         default:
             return state;

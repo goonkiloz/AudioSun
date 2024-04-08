@@ -38,10 +38,10 @@ const SingleSongComponent = (song) => {
   const handlePlayPause = async () => {
     if (queueCurrentSong === song) {
       if (queuePlaying === true) {
-        await dispatch(pauseQueueThunk([song]));
+        await dispatch(pauseQueueThunk());
         console.log(queuePlaying);
       } else {
-        await dispatch(playCurrentThunk([song]));
+        await dispatch(playCurrentThunk());
       }
     } else {
       await dispatch(playOneThunk([song]));
@@ -50,9 +50,7 @@ const SingleSongComponent = (song) => {
   };
 
   const handleAddToQueue = async () => {
-    console.log("before add to queue: ", songQueue);
     await dispatch(addToQueueThunk([song]))
-    console.log("after add to queue: ", songQueue);
   }
 
   useEffect(() => {

@@ -42,6 +42,7 @@ const Player = () => {
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
                     setCurrentSong={setCurrentSong}
+                    songQueue={songQueue}
                 />
                 <Controls
                     audioRef={audioRef}
@@ -59,7 +60,8 @@ const Player = () => {
                     duration={duration}
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
-                    setCurrentSong={setCurrentSong} />
+                    setCurrentSong={setCurrentSong}
+                    songQueue={songQueue} />
             </div>
         </span>
     )

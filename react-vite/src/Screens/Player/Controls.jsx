@@ -1,15 +1,18 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
     IoPlaySharp,
     IoPauseSharp,
 } from 'react-icons/io5';
 import { useContext, useRef, useCallback } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
+import { pauseQueueThunk, playCurrentThunk } from "../../redux/queue";
 
 // add the following imports later from react-icons/io5: IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipForwardSharp
 
 const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, isPlaying, setIsPlaying, currentSong }) => {
     const playAnimationRef = useRef();
+    const dispatch = useDispatch();
 
     const repeat = useCallback(() => {
         const currentTime = audioRef.current.currentTime;
@@ -24,8 +27,12 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, isPlayi
         playAnimationRef.current = requestAnimationFrame(repeat);
     }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
-    const togglePlayPause = () => {
-        setIsPlaying(prev => !prev)
+    const togglePlayPause = async () => {
+        if (isPlaying) {
+            await dispatch(pauseQueueThunk());
+        } else {
+            await dispatch(playCurrentThunk());
+        }
     }
 
     useEffect(() => {
