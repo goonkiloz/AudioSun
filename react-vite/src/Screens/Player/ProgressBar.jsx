@@ -4,19 +4,6 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, setTimeProgress, 
         audioRef.current.currentTime = progressBarRef.current.value;
     }
 
-    // if (audioRef?.current?.currentTime >= Math.round(audioRef?.current?.duration)) {
-    //     if (songIndex < songQueue.length - 1) {
-    //         setSongIndex(songIndex + 1);
-    //         console.log(songIndex);
-    //         setCurrentSong(songQueue[songIndex]);
-    //     } else {
-    //         console.log("wtf", songQueue.length);
-    //         setCurrentSong(songQueue[0]);
-    //     }
-    //     progressBarRef.current.value = 0;
-    //     audioRef.current.currentTime = 0;
-    // }
-
     const formatTime = (time) => {
         if (time && !isNaN(time)) {
             const minutes = Math.floor(time / 60);

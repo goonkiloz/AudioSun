@@ -7,33 +7,58 @@ import "./Player.css"
 import { useSelector } from "react-redux";
 
 const Player = () => {
-    // const { currentSong, setCurrentSong, timeProgress, setTimeProgress, isPlaying, setIsPlaying, songIndex, setSongIndex } = useContext(PlayerContext);
-    const [currentSong, setCurrentSong] = useState(undefined);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [songIndex, setSongIndex] = useState(0);
-    const [timeProgress, setTimeProgress] = useState(0);
+    const { currentSong, setCurrentSong, timeProgress, setTimeProgress, isPlaying, setIsPlaying, songIndex, setSongIndex } = useContext(PlayerContext);
+    // const [currentSong, setCurrentSong] = useState(undefined);
+    // const [isPlaying, setIsPlaying] = useState(false);
+    // const [songIndex, setSongIndex] = useState(0);
+    // const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const songQueue = useSelector(state => state.queue.songs);
-    const queuePlaying = useSelector(state => state.queue.playing);
-    const queueCurrentSong = useSelector(state => state.queue.currentSong);
     const audioRef = useRef();
     const progressBarRef = useRef();
 
     useEffect(() => {
-        setTimeProgress(0);
-        setDuration(0);
-        setCurrentSong(queueCurrentSong);
-    }, [songQueue, songIndex]);
+        // setTimeProgress(0);
+        // setDuration(0);
+        setCurrentSong(songQueue[songIndex]);
+    }, [songQueue, songIndex, setCurrentSong, currentSong]);
 
-    useEffect(() => {
-        setIsPlaying(queuePlaying);
-    }, [queuePlaying])
+    // useEffect(() => {
+    //     setIsPlaying(queuePlaying);
+    // }, [queuePlaying])
+
+    const handleNext = () => {
+        if (songIndex >= songQueue.length - 1) {
+            setSongIndex(0);
+            setCurrentSong(songQueue[0]);
+        } else {
+            setSongIndex((prev) => prev + 1);
+            setCurrentSong(songQueue[songIndex + 1]);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (songIndex === 0) {
+            setSongIndex(songQueue.length - 1);
+            setCurrentSong(songQueue[songQueue.length - 1]);
+        } else {
+            setSongIndex((prev) => prev - 1);
+            setCurrentSong(songQueue[songIndex - 1]);
+        }
+    };
+
+    const skipForward = () => {
+        audioRef.current.currentTime += 15;
+    };
+
+    const skipBackward = () => {
+        audioRef.current.currentTime -= 15;
+    };
 
     return (
         <span className="player-box">
 
             <div className="inner">
-                <h2 className="player-name">Player</h2>
                 <DisplayTrack
                     currentSong={{ currentSong }}
                     audioRef={audioRef}
@@ -42,6 +67,8 @@ const Player = () => {
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
                     setCurrentSong={setCurrentSong}
+                    songQueue={songQueue}
+                    handleNext={handleNext}
                 />
                 <Controls
                     audioRef={audioRef}
@@ -50,7 +77,11 @@ const Player = () => {
                     setTimeProgress={setTimeProgress}
                     isPlaying={isPlaying}
                     setIsPlaying={setIsPlaying}
-                    currentSong={currentSong} />
+                    currentSong={currentSong}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    skipBackward={skipBackward}
+                    skipForward={skipForward} />
                 <ProgressBar
                     progressBarRef={progressBarRef}
                     audioRef={audioRef}
@@ -59,7 +90,8 @@ const Player = () => {
                     duration={duration}
                     songIndex={songIndex}
                     setSongIndex={setSongIndex}
-                    setCurrentSong={setCurrentSong} />
+                    setCurrentSong={setCurrentSong}
+                    songQueue={songQueue} />
             </div>
         </span>
     )

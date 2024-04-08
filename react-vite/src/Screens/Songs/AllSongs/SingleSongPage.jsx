@@ -16,7 +16,7 @@ const SingleSongPage = () => {
     const { songId } = useParams();
     const [doesExist, setDoesExist] = useState(true)
     const song = useSelector(state => state.songs.byId[songId])
-    const { setCurrentSong, playOneSong, addOneToQueue, songQueue } = useContext(PlayerContext);
+    const { setCurrentSong, playOne, addToQueue } = useContext(PlayerContext);
 
     // useEffect(() => {
     //     const fetchData = async () => {
@@ -62,11 +62,11 @@ const SingleSongPage = () => {
                     <h3>Genre: {song.genre}</h3>
                     <h3>Artist: {song.artist.username}</h3>
                     <button onClick={() => {
-                        playOneSong(song);
+                        playOne(song);
                         console.log("!!", songQueue);
                     }}>Play</button>
                     <button onClick={() => {
-                        addOneToQueue(song);
+                        addToQueue([song]);
                     }}>Add</button>
                 </div>
             </div>

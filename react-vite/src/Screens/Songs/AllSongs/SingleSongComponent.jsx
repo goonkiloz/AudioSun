@@ -8,15 +8,13 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import AddSong from "../../Playlist/AddSongModal";
-import { addToQueueThunk, pauseQueueThunk, playCurrentThunk, playOneThunk } from "../../../redux/queue";
+import { addToQueueThunk, playOneThunk } from "../../../redux/queue";
 
 const SingleSongComponent = (song) => {
+  const { currentSong, setCurrentSong, playOne, timeProgress, setTimeProgress, isPlaying, setIsPlaying, songIndex, setSongIndex } = useContext(PlayerContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
-  const songQueue = useSelector(state => state.queue.songs);
-  const queuePlaying = useSelector(state => state.queue.playing);
-  const queueCurrentSong = useSelector(state => state.queue.currentSong);
   const [isHovering, setIsHovering] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -36,23 +34,20 @@ const SingleSongComponent = (song) => {
   };
 
   const handlePlayPause = async () => {
-    if (queueCurrentSong === song) {
-      if (queuePlaying === true) {
-        await dispatch(pauseQueueThunk([song]));
-        console.log(queuePlaying);
+    if (currentSong === song) {
+      if (isPlaying) {
+        setIsPlaying(false);
       } else {
-        await dispatch(playCurrentThunk([song]));
+        setIsPlaying(true);
       }
     } else {
-      await dispatch(playOneThunk([song]));
-      console.log("play one: ", songQueue);
-    };
+      playOne(song);
+    }
   };
 
   const handleAddToQueue = async () => {
-    console.log("before add to queue: ", songQueue);
-    await dispatch(addToQueueThunk([song]))
-    console.log("after add to queue: ", songQueue);
+    await dispatch(addToQueueThunk([song]));
+    setShowMenu(false);
   }
 
   useEffect(() => {
@@ -97,7 +92,7 @@ const SingleSongComponent = (song) => {
                 className="no-bg-button play-button"
                 onClick={handlePlayPause}
               >
-                {!queuePlaying || queueCurrentSong !== song ? (
+                {!isPlaying || currentSong !== song ? (
                   <FaPlay className="play-pause-image" />
                 ) : (
                   <FaPause className="play-pause-image" />

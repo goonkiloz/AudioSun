@@ -1,7 +1,9 @@
 import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { useDispatch } from "react-redux";
 
-const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setSongIndex, setCurrentSong, songIndex, songQueue }) => {
+const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setSongIndex, setCurrentSong, songIndex, songQueue, handleNext }) => {
     let artist = {}
+    const dispatch = useDispatch();
     if (currentSong?.currentSong !== '') {
         artist = currentSong.currentSong?.artist
     }
@@ -11,19 +13,6 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
         progressBarRef.current.max = seconds;
     };
 
-    const testFunc = () => {
-        if (songIndex < songQueue.length - 1) {
-            setSongIndex(songIndex + 1);
-            console.log(songIndex);
-            setCurrentSong(songQueue[songIndex]);
-        } else {
-            console.log("wtf", songQueue.length);
-            setCurrentSong(songQueue[0]);
-        }
-        progressBarRef.current.value = 0;
-        audioRef.current.currentTime = 0;
-    };
-
     return (
         <div>
             <audio
@@ -31,7 +20,7 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
                 src={currentSong?.currentSong?.file_path}
                 ref={audioRef}
                 onLoadedMetadata={onLoadedMetadata}
-                onEnded={testFunc} />
+                onEnded={handleNext} />
             <div className="audio-info">
                 <div className="audio-image">
                     {/* CONDITIONALLY RENDER SONG IMAGE OR MUSIC NOTE */}
