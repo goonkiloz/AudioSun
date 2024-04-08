@@ -1,8 +1,7 @@
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { useDispatch } from "react-redux";
-import { pauseQueueThunk, playNextThunk } from '../../redux/queue';
 
-const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setSongIndex, setCurrentSong, songIndex, songQueue }) => {
+const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setSongIndex, setCurrentSong, songIndex, songQueue, handleNext }) => {
     let artist = {}
     const dispatch = useDispatch();
     if (currentSong?.currentSong !== '') {
@@ -14,14 +13,6 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
         progressBarRef.current.max = seconds;
     };
 
-    const handleEnded = async () => {
-        if (songQueue.length > 1) {
-            await dispatch(playNextThunk());
-        } else {
-            await dispatch(pauseQueueThunk());
-        };
-    };
-
     return (
         <div>
             <audio
@@ -29,7 +20,7 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setS
                 src={currentSong?.currentSong?.file_path}
                 ref={audioRef}
                 onLoadedMetadata={onLoadedMetadata}
-                onEnded={handleEnded} />
+                onEnded={handleNext} />
             <div className="audio-info">
                 <div className="audio-image">
                     {/* CONDITIONALLY RENDER SONG IMAGE OR MUSIC NOTE */}

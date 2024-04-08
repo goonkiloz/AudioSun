@@ -4,8 +4,9 @@
     gap: 20px;
     position: fixed;
     bottom: 0;
-    background-color: gray;
+    background-color: white;
     width: 100%;
+    border: 1px black solid;
     /* height: 50px; */
 }
 
@@ -16,7 +17,6 @@
 
 input[type="range"] {
     --range-progress: 0;
-
     -webkit-appearance: none;
     position: relative;
     background: #ccc;
@@ -138,8 +138,14 @@ input[type="range"]:active::-moz-range-thumb {
     margin: 0 10px;
 }
 
+.controls {
+    display: flex;
+}
+
 .controls button {
-    display: in-line;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
     background-color: #ff5500;
     color: white;
@@ -148,7 +154,7 @@ input[type="range"]:active::-moz-range-thumb {
     cursor: pointer;
     width: 40px;
     height: 30px;
-    margin: 15px;
+    margin: 5px;
 }
 
 .controls button:hover {
@@ -156,7 +162,11 @@ input[type="range"]:active::-moz-range-thumb {
 }
 
 .progress {
-    width: 550px
+    width: 300px
+}
+
+.progress input {
+    background-color: black;
 }
 
 .audio-icon {
