@@ -3,6 +3,7 @@
     justify-content: center;
     background-color: white;
 }
+
 .playlistViewsDiv {
     display: flex;
     flex-direction: column;
@@ -64,6 +65,7 @@
 
 .playlistDivTitle {
     margin: 0;
+    text-decoration: none;
 }
 
 .playlistDivOwner {
@@ -114,22 +116,22 @@
     row-gap: 5px;
 }
 
-.playlistSongContainer{
+.playlistSongContainer {
     background-color: black;
     border-radius: 15px;
     width: 700px;
     height: 50px;
     display: grid;
-    grid-template-columns: 55px 650px 100px ;
+    grid-template-columns: 55px 650px 100px;
     grid-template-areas:
         "img info .";
     cursor: pointer;
     margin: 5px 0;
 }
 
-.songImg{
+.songImg {
     grid-area: img;
-    margin-right:  5px;
+    margin-right: 5px;
     width: 50px;
 }
 
@@ -148,7 +150,7 @@
     margin: 0;
 }
 
-.songDivNoSongs{
+.songDivNoSongs {
     display: flex;
     flex-direction: column;
     width: 800px;
@@ -172,7 +174,7 @@
     cursor: pointer;
 }
 
-.playlistSongContainer > button {
+.playlistSongContainer>button {
     display: block;
     width: 100%;
     padding: 10px;

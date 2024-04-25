@@ -149,7 +149,9 @@ const SingleSongComponent = (song) => {
                     buttonText="Delete Song"
                 />
             } */}
-      <h3 className="song-title">{song?.title}</h3>
+      <NavLink to={`/songs/${song?.id}`} className={"title"}>
+        <h3 className="song-title">{song?.title}</h3>
+      </NavLink>
       <div>{song?.artist.username}</div>
     </div>
   );

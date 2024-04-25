@@ -114,3 +114,8 @@ body {
 html {
     background-color: black;
 }
+
+.title {
+    text-decoration: none;
+    color: black;
+}
