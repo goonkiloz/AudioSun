@@ -4,8 +4,9 @@
     gap: 20px;
     position: fixed;
     bottom: 0;
-    background-color: gray;
+    background-color: white;
     width: 100%;
+    border: 1px black solid;
     /* height: 50px; */
 }
 
@@ -16,7 +17,6 @@
 
 input[type="range"] {
     --range-progress: 0;
-
     -webkit-appearance: none;
     position: relative;
     background: #ccc;
@@ -88,4 +88,87 @@ input[type="range"]::-moz-range-thumb {
 /* dragging thumb - firefox */
 input[type="range"]:active::-moz-range-thumb {
     transform: scale(1.2);
+}
+
+
+/* .player-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.inner {
+    display: flex;
+    align-items: center;
+}
+
+.inner div {
+    margin: 0;
+}
+
+.player-box {
+    display: flex;
+    justify-content: center
+}
+
+.player-name {
+    margin: 10px;
+}
+
+.audio-info {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.song-info {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: fit-content;
+    max-width: 300px;
+}
+
+.song-info span {
+    height: 20px;
+    padding: 0 5px;
+}
+
+.controls-wrapper {
+    margin: 0 10px;
+}
+
+.controls {
+    display: flex;
+}
+
+.controls button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: #ff5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+    margin: 5px;
+}
+
+.controls button:hover {
+    background-color: #ff3300;
+}
+
+.progress {
+    width: 300px
+}
+
+.progress input {
+    background-color: black;
+}
+
+.audio-icon {
+    margin: 0 10px;
 }

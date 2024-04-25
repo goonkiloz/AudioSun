@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: 	#ffffff;
+    background-color: #ffffff;
     margin-top: 10px;
 }
 
@@ -21,6 +21,9 @@
     margin-bottom: 10px;
 }
 
+
 .new-song-sign-in {
     color: white;
+    text-align: center;
+
 }

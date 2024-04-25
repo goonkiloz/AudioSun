@@ -1,4 +1,5 @@
-const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
+const ProgressBar = ({ progressBarRef, audioRef, timeProgress, setTimeProgress, duration, songIndex, setSongIndex, songQueue, setCurrentSong }) => {
+
     const handleProgressChange = () => {
         audioRef.current.currentTime = progressBarRef.current.value;
     }

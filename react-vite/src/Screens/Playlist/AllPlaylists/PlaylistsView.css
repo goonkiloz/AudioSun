@@ -3,29 +3,34 @@
     justify-content: center;
     background-color: white;
 }
+
 .playlistViewsDiv {
     display: flex;
-    background-color: white;
     flex-direction: column;
+    justify-content: center;
     width: 1000px;
+    align-items: center;
+    background-color: #ffffff
 }
 
-.playlist-header {
+/* .playlist-header {
     align-self: flex-start;
-}
+} */
 
 .playlistContainerDiv {
     display: flex;
-    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 50px;
+    justify-content: center;
+    max-width: 1000px;
 }
 
-.singlePlaylistDiv {
+
+.SinglePlaylistDiv {
     display: flex;
-    margin-bottom: 100px;
+    justify-content: center;
     flex-direction: row;
+    margin: 10px 0;
 }
 
 .playlistInfo {
@@ -53,11 +58,14 @@
 
 .playlistComponentImg {
     width: 180px;
+    border-radius: 2px;
+    border: 1px solid #8c8c8c;
     z-index: auto;
 }
 
 .playlistDivTitle {
     margin: 0;
+    text-decoration: none;
 }
 
 .playlistDivOwner {
@@ -81,9 +89,8 @@
     bottom: -5px;
 }
 
-.SinglePlaylistDiv {
+.singlePlaylistDiv {
     display: flex;
-    margin-top: 10px;
     justify-content: center;
 }
 
@@ -91,10 +98,11 @@
 .SinglePlaylistImg {
     width: 250px;
     height: 250px;
+    border-radius: 5px;
 }
 
 .SinglePlaylistTitle {
-    margin: 0;
+    margin: 2px 0;
 }
 
 .SinglePlaylistArtist {
@@ -108,27 +116,29 @@
     row-gap: 5px;
 }
 
-.playlistSongContainer{
+.playlistSongContainer {
     background-color: black;
     border-radius: 15px;
-    width: 800px;
+    width: 700px;
     height: 50px;
     display: grid;
-    grid-template-columns: 55px 650px 100px ;
+    grid-template-columns: 55px 650px 100px;
     grid-template-areas:
         "img info .";
+    cursor: pointer;
+    margin: 5px 0;
 }
 
-.songImg{
+.songImg {
     grid-area: img;
-    margin-right:  5px;
+    margin-right: 5px;
     width: 50px;
 }
 
 .songInfo {
     grid-area: info;
     color: white;
-    cursor: pointer;
+
 
 }
 
@@ -140,7 +150,7 @@
     margin: 0;
 }
 
-.songDivNoSongs{
+.songDivNoSongs {
     display: flex;
     flex-direction: column;
     width: 800px;
@@ -164,7 +174,7 @@
     cursor: pointer;
 }
 
-.playlistSongContainer > button {
+.playlistSongContainer>button {
     display: block;
     width: 100%;
     padding: 10px;
@@ -173,4 +183,20 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.playlistBox {
+    text-align: center;
+    margin: 5px;
+    width: 182px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.SinglePlaylistInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
 }

@@ -1,16 +1,23 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
     IoPlaySharp,
     IoPauseSharp,
+    IoPlayBackSharp,
+    IoPlayForwardSharp,
+    IoPlaySkipBackSharp,
+    IoPlaySkipForwardSharp
 } from 'react-icons/io5';
 import { useContext, useRef, useCallback } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 
-// add the following imports later from react-icons/io5: IoPlayBackSharp, IoPlayForwardSharp, IoPlaySkipBackSharp, IoPlaySkipForwardSharp
 
-const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
-    const { isPlaying, setIsPlaying, currentSong } = useContext(PlayerContext);
+
+const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress,
+    isPlaying, setIsPlaying, currentSong, handleNext, handlePrevious,
+    skipForward, skipBackward }) => {
     const playAnimationRef = useRef();
+    const dispatch = useDispatch();
 
     const repeat = useCallback(() => {
         const currentTime = audioRef.current.currentTime;
@@ -25,12 +32,16 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
         playAnimationRef.current = requestAnimationFrame(repeat);
     }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
-    const togglePlayPause = () => {
-        setIsPlaying((prev) => !prev)
-    }
+    const togglePlayPause = async () => {
+        if (isPlaying) {
+            setIsPlaying(false);
+        } else {
+            setIsPlaying(true);
+        }
+    };
 
     useEffect(() => {
-        if (isPlaying) {
+        if (isPlaying === true) {
             audioRef.current.play();
         } else {
             audioRef.current.pause();
@@ -38,35 +49,27 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
         playAnimationRef.current = requestAnimationFrame(repeat)
     }, [isPlaying, audioRef, repeat])
 
-    // const skipForward = () => { };
-
-    // const skipBackward = () => { };
-
-    // const handlePrevious = () => { };
-
-    // const handleNext = () => { };
-
     return (
         <div className="controls-wrapper">
             <div className="controls">
-                {/* <button onClick={handlePrevious}>
+                <button onClick={handlePrevious}>
                     <IoPlaySkipBackSharp />
                 </button>
                 <button onClick={skipBackward}>
                     <IoPlayBackSharp />
-                </button> */}
+                </button>
 
                 <button
                     onClick={togglePlayPause}
-                    disabled={currentSong === '' ? true : false}>
+                    disabled={currentSong === undefined ? true : false}>
                     {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
                 </button>
-                {/* <button onClick={skipForward}>
+                <button onClick={skipForward}>
                     <IoPlayForwardSharp />
                 </button>
                 <button onClick={handleNext}>
                     <IoPlaySkipForwardSharp />
-                </button> */}
+                </button>
             </div>
         </div>
     )

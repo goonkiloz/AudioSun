@@ -45,7 +45,7 @@ body {
 .modalContainer .error {
     color: red;
     margin-top: 5px;
-  }
+}
 
 
 
@@ -107,4 +107,15 @@ body {
 
 .formContainer button:hover {
     background-color: #ff3300;
+}
+
+.new-song-login-required {}
+
+html {
+    background-color: black;
+}
+
+.title {
+    text-decoration: none;
+    color: black;
 }

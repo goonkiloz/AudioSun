@@ -7,8 +7,8 @@ function NewPlaylistForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    const [ title, setTitle ] = useState(" ");
-    const [ description, setDescription ] = useState(" ");
+    const [ title, setTitle ] = useState("");
+    const [ description, setDescription ] = useState("");
     const [ playlistImage, setPlaylistImage ] = useState("");
     const [isButtonDisabled, setButtonDisabled] = useState(false);
 
