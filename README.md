@@ -1,131 +1,132 @@
-# Flask React Project
+# `AudioSun`
 
-This is the starter for the Flask React project.
+AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simulates the basic functionality of the music site - 'SxxxdCloud'. The app was devleoped using Flask as the backend, and React.js as the frontend. The use of Vue.js as the primary front-end tooling and build system.
 
-## Getting started
+![SplashPage](img/AudioSunLanding.png)
+![LoginModal](img/AudioSunLogin.png)
+![AllSongs](img/AudioSunSongs.png)
+![SongDetail](img/AudioSunSongDetail.png)
+![AllPlaylists](img/AudioSunPlaylists.png)
+![PlaylistDetail](img/AudioSunPlaylistDetails.png)
 
-1. Clone this repository (only this branch).
+## MVP - Feature & Implmentation
 
-2. Install dependencies.
+**Sign-up and Sign-in**
+* The server allows the new user to sign up an account using the sign-up link in the Navigation bar when current session of the user is = 'null'. A popup modal is then shown when sign-up link is clicked. All info on the forms are required to be properly filled out in order to create a user, else the server will return errors from the Flask backend. The sign-up button is also grey out unless all info are filled out.
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+**Full CURD of Songs**
+* Users should be able to view all songs regardless of the sign-in status.
+* Users should be able to upload songs only when signed in.
+* Users should be able to update their uploaded songs only when signed in.
+* Users should be able to delete their uploaded songs only when signed in.
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+**Full CURD of Comment**
+* Users should be able to view all comments on a song regardless of sign-in status.
+* Users should be able to add a comment to a song only when signed in.
+* Users should be able to update their comment on a song only when signed in.
+* Users should be able to remove their comments from a song when signed in.
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+**Likes**
+* Users should be able to view the likes on a song regarless of signed-in status.
+* Users should be able to like a song only when signed in.
+* Users should be able to unlike a song only when signed in.
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+**Playlists**
+* Users should be able to view all of their playlists only when signed in.
+* Users should be able to add a song to one of their playlists only when signed in.
+* Users should be able to remove a song from a playlist only when signed in.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+**WaveForms - to be implemented later**
+* Users should be able to see the wave forms for a song.
 
-   ```bash
-   pipenv shell
-   ```
 
-   ```bash
-   flask db upgrade
-   ```
+**Search bar- to be implemented later**
+* Users should be able to search for songs by artist or song name.
+* Users should be able to view the results of their search.
 
-   ```bash
-   flask seed all
-   ```
 
-   ```bash
-   flask run
-   ```
+## Database Schema
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+![AudioSun (2)](img/AudioSun.png)
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
 
-## Deployment through Render.com
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+```
+Table Users {
+  id integer [primary key]
+  firstName varchar
+  lastName varchar
+  email email
+  username varchar
+  hashedPassword Hash
+  profileImage url
+  created_at timestamp
+  updated_at timestamp
+}
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+Table Songs {
+  id integer [primary key]
+  title varchar
+  genre varchar
+  description varchar
+  filePath url
+  songImage url
+  privacy boolean
+  userId integer
+  albumId varchar [null]
+  created_at timestamp
+  updated_at timestamp
+}
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+Table Albums {
+  id integer [primary key]
+  albumTitle varchar
+  year Integer
+  albumImage url
+  created_at timestamp
+  updated_at timestamp
+}
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+Table Likes {
+  id integer [primary key]
+  userId integer [null Foreign Key referencing Users.id]
+  songId integer [null Foreign Key referencing Songs.id]
+  playlistId integer [null Foreign Key referencing playlist.id]
+}
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+Table Comments {
+  id integer [primary key]
+  commentText varchar
+  userId integer [Foreign Key referencing Users.id]
+  songId integer [Foreign Key referencing Songs.id]
+  created_at timestamp
+  updated_at timestamp
+}
 
-Start by giving your application a name.
+Table Playlists {
+  id integer [primary key]
+  title varchar
+  userId integer [Foreign Key referencing Users.id]
+  created_at timestamp
+  updated_at timestamp
+}
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+Table Playlist_Songs { [Many to Many between Playlists and Songs]
+  playlistId integer [Foreign Key referencing Playlists.id]
+  songId integer [Foreign Key referencing Songs.id]
+}
 
-Select "Free" as your Instance Type.
+```
 
-### Add environment variables
+## User stories
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+As a non-registed User, I want to be able to search songs so I can find music that fits my preference.
 
-Add the following keys and values in the Render GUI form:
+As a non-registed User, I want to be able to Sign Up, so that I can share content with other users.
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+As a registered User, I want to be able to manage content I created, so I can keep my content up to date and custom to me.
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+As a registered User, I want to be able to create and manage playlists, so that I can connect with others who share my tastes.
 
-Add the following keys and values:
-
-- DATABASE_URL (copy value from the **External Database URL** field)
-
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
-
-### Deploy
-
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+As a registered User, I want to be able to comment and like other users content, so that I can help support and encourage other that add content to the community.
