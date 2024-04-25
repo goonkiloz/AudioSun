@@ -2,14 +2,11 @@
 
 AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simulates the basic functionality of the music site - 'SxxxdCloud'. The app was devleoped using Flask as the backend, and React.js as the frontend. The use of Vue.js as the primary front-end tooling and build system.
 
-![SplashPage](img/AudioSunLanding.png)
-![LoginModal](img/AudioSunLogin.png)
-![AllSongs](img/AudioSunSongs.png)
-![SongDetail](img/AudioSunSongDetail.png)
-![AllPlaylists](img/AudioSunPlaylists.png)
-![PlaylistDetail](img/AudioSunPlaylistDetails.png)
+![mp4](img/AudioSun.gif)
+
 
 ## MVP - Feature & Implmentation
+![SplashPage](img/SplashPage.png)
 
 **Sign-up and Sign-in**
 * The server allows the new user to sign up an account using the sign-up link in the Navigation bar when current session of the user is = 'null'. A popup modal is then shown when sign-up link is clicked. All info on the forms are required to be properly filled out in order to create a user, else the server will return errors from the Flask backend. The sign-up button is also grey out unless all info are filled out.
@@ -19,6 +16,11 @@ AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simul
 * Users should be able to upload songs only when signed in.
 * Users should be able to update their uploaded songs only when signed in.
 * Users should be able to delete their uploaded songs only when signed in.
+![AllSongs](img/Songs.png)
+
+![SongDetail](img/SongDetailPage.png)
+
+![PlaylistDetail](img/NewSongPage.png)
 
 **Full CURD of Comment**
 * Users should be able to view all comments on a song regardless of sign-in status.
@@ -35,6 +37,9 @@ AudioSun is a fullstack app that developed by Joel, Brenda, and Eddie that simul
 * Users should be able to view all of their playlists only when signed in.
 * Users should be able to add a song to one of their playlists only when signed in.
 * Users should be able to remove a song from a playlist only when signed in.
+![AllPlaylists](img/Playlists.png)
+
+![PlaylistDetail](img/PlaylistDetailPage.png)
 
 **WaveForms - to be implemented later**
 * Users should be able to see the wave forms for a song.
