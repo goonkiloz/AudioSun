@@ -22,9 +22,12 @@ class Like(db.Model):
     playlist = db.relationship('Playlist', back_populates='likes')
 
     def to_dict(self):
+
         return {
             'id': self.id,
             'user_id': self.user_id,
             'song_id': self.song_id,
             'playlist_id': self.playlist_id,
+            'user_first_name': self.user.first_name,
+            'user_last_name': self.user.last_name
     }

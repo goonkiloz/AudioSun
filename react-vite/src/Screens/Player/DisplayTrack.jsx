@@ -1,7 +1,9 @@
 import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { useDispatch } from "react-redux";
 
-const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef }) => {
+const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef, setSongIndex, setCurrentSong, songIndex, songQueue, handleNext }) => {
     let artist = {}
+    const dispatch = useDispatch();
     if (currentSong?.currentSong !== '') {
         artist = currentSong.currentSong?.artist
     }
@@ -14,21 +16,23 @@ const DisplayTrack = ({ currentSong, audioRef, setDuration, progressBarRef }) =>
     return (
         <div>
             <audio
+
                 src={currentSong?.currentSong?.file_path}
                 ref={audioRef}
-                onLoadedMetadata={onLoadedMetadata} />
+                onLoadedMetadata={onLoadedMetadata}
+                onEnded={handleNext} />
             <div className="audio-info">
                 <div className="audio-image">
                     {/* CONDITIONALLY RENDER SONG IMAGE OR MUSIC NOTE */}
-                    {/* {currentSong.thumbnail ? (
-                        <img src={currentSong.thumbnail} alt="audio avatar" />
-                    ) : ( */}
-                    <div className="icon-wrapper">
-                        <span className="audio-icon">
-                            <BsMusicNoteBeamed />
-                        </span>
-                    </div>
-                    {/* )} */}
+                    {currentSong.song_image ? (
+                        <img src={currentSong.song_image} alt="audio avatar" />
+                    ) : (
+                        <div className="icon-wrapper">
+                            <span className="audio-icon">
+                                <BsMusicNoteBeamed />
+                            </span>
+                        </div>
+                    )}
                 </div>
                 <div className="song-info">
                     <span className="title">{currentSong?.currentSong?.title}</span>

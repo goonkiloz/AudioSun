@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: black
+    background-color: black;
 }
 
 
@@ -13,12 +13,12 @@
     justify-content: center;
     text-align: center;
     font-size: small;
-    color:#8c8c8c;
+    color: #8c8c8c;
     margin-top: 100px;
     padding-bottom: 20px;
 }
 
-.splash-page-footer a{
+.splash-page-footer a {
     text-decoration: none;
-    color:#8c8c8c
+    color: #8c8c8c
 }

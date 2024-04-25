@@ -13,9 +13,9 @@ import { useContext } from "react";
 const SinglePlaylistComponent = ({ playlist }) => {
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate();
-    const { currentSong, setCurrentSong, setIsPlaying, isPlaying } = useContext(PlayerContext);
+    const { currentSong, setCurrentSong, setIsPlaying, isPlaying, playOnePlaylist } = useContext(PlayerContext);
     const [isHovering, setIsHovering] = useState(false)
-    const [ showMenu, setShowMenu ] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const song = playlist.songs[0]
 
@@ -59,69 +59,73 @@ const SinglePlaylistComponent = ({ playlist }) => {
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
                     >
-                    <button
-                        className="no-bg-button"
-                        onClick={() => navigate(`/playlists/${playlist?.id}`)}
-                    >
-                        <img
-                            src={playlist?.playlist_image}
-                            className="playlistComponentImg"
-                        />
-                    </button>
+                        <button
+                            className="no-bg-button"
+                            onClick={() => navigate(`/playlists/${playlist?.id}`)}
+                        >
+                            <img
+                                src={playlist?.playlist_image}
+                                className="playlistComponentImg"
+                            />
+                        </button>
 
                         {
                             isHovering
                             &&
                             <>
-                        <IconContext.Provider value={{
-                            color: "#ff5500",
-                            size: "70px"
-                        }}>
-                            <button
-                                className="no-bg-button play-button"
-                                onClick={() => {
-                                    if (!isPlaying) {
-                                        setCurrentSong(song);
-                                        setIsPlaying(true);
-                                    } else{
-                                        setIsPlaying(false);
-                                    }
+                                <IconContext.Provider value={{
+                                    color: "#ff5500",
+                                    size: "70px"
                                 }}>
-                                {!isPlaying || currentSong !== song ?
+                                    <button
+                                        className="no-bg-button play-button"
+                                        onClick={() => {
+                                            // if (!isPlaying) {
+                                            //     setCurrentSong(song);
+                                            //     setIsPlaying(true);
+                                            // } else{
+                                            //     setIsPlaying(false);
+                                            // }
+                                            playOnePlaylist(playlist.songs);
+                                        }}>
+                                        {/* {!isPlaying || currentSong !== song ?
                                     <FaPlay className="play-pause-image" />
                                     :
                                     <FaPause className="play-pause-image" />
-                                }
-                            </button>
-                        </IconContext.Provider>
-                        <IconContext.Provider value={{
-                            color: "white",
-                            size: "22px"
-                        }}>
-                            {user &&
-                                <>
-                                    <button className="no-bg-button options-menu"
-                                        onClick={toggleMenu}
-                                        alt={"Options"}>
-                                        <HiOutlineDotsHorizontal />
+                                } */}
+                                        <FaPlay className="play-pause-image" />
                                     </button>
-                                    {showMenu && (
-                                        <ul ref={ulRef} className="options-dropdown">
-                                            <li className="options-buttons">
-                                                <NavLink to={`/playlists/${playlist.id}`} className={"title"}>
-                                                    <button>Go to Playlist Page</button>
-                                                </NavLink>
-                                            </li>
-                                        </ul>
-                                    )}
-                                </>
-                            }
-                        </IconContext.Provider>
-                </>
+                                </IconContext.Provider>
+                                <IconContext.Provider value={{
+                                    color: "white",
+                                    size: "22px"
+                                }}>
+                                    {user &&
+                                        <>
+                                            <button className="no-bg-button options-menu"
+                                                onClick={toggleMenu}
+                                                alt={"Options"}>
+                                                <HiOutlineDotsHorizontal />
+                                            </button>
+                                            {showMenu && (
+                                                <ul ref={ulRef} className="options-dropdown">
+                                                    <li className="options-buttons">
+                                                        <NavLink to={`/playlists/${playlist.id}`} className={"title"}>
+                                                            <button>Go to Playlist Page</button>
+                                                        </NavLink>
+                                                    </li>
+                                                </ul>
+                                            )}
+                                        </>
+                                    }
+                                </IconContext.Provider>
+                            </>
                         }
                     </div>
                     <div>
-                        <h3 className="playlistDivTitle" >{playlist?.title}</h3>
+                        <NavLink to={`/playlists/${playlist.id}`} className={"title"}>
+                            <h3 className="playlistDivTitle" >{playlist?.title}</h3>
+                        </NavLink>
                         <p className="playlistDivOwner">{playlist?.owner?.username}</p>
                     </div>
                 </div>
