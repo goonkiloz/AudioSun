@@ -123,7 +123,9 @@ const SinglePlaylistComponent = ({ playlist }) => {
                         }
                     </div>
                     <div>
-                        <h3 className="playlistDivTitle" >{playlist?.title}</h3>
+                        <NavLink to={`/playlists/${playlist.id}`} className={"title"}>
+                            <h3 className="playlistDivTitle" >{playlist?.title}</h3>
+                        </NavLink>
                         <p className="playlistDivOwner">{playlist?.owner?.username}</p>
                     </div>
                 </div>

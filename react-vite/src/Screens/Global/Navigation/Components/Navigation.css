@@ -50,15 +50,24 @@
   color: white;
   text-decoration: none;
 }
+
 .navbar-songs {
   width: 45px;
   padding: 15px;
   color: white;
   text-decoration: none;
 }
+
 .navbar-profile-container {
   width: 80px;
   padding: 15px;
+}
+
+.navbar-profile {
+  cursor: pointer;
+  color: white;
+  display: flex;
+  gap: 5px;
 }
 
 .navbar-search {
@@ -67,11 +76,11 @@
   color: white;
 }
 
-.navbar-search input{
+.navbar-search input {
   width: 250px;
 }
 
-.navbar-search button{
+.navbar-search button {
   cursor: pointer;
 }
 
@@ -85,5 +94,5 @@
 .navbar-playlists:hover,
 .navbar-songs:hover,
 .navbar-new-song:hover {
-    background-color:#333333
+  background-color: #333333
 }

@@ -8,15 +8,15 @@ import SignupFormModal from "../Signup/SignupFormModal";
 import { useContext } from "react";
 import './ProfileButton.css';
 import { PlayerContext } from "../../context/PlayerContext";
+import { FiMenu } from "react-icons/fi";
 
-function ProfileButton() {
+function ProfileButton({ user }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
+  // const user = useSelector((state) => state.session.user);
   const ulRef = useRef();
   const { setCurrentSong } = useContext(PlayerContext);
-
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
@@ -48,9 +48,11 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <div className='navbar-profile'
+        onClick={toggleMenu}>
+        {user ? user.username : 'Menu'}
+        <FiMenu color="white" size={'20px'} />
+      </div>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
