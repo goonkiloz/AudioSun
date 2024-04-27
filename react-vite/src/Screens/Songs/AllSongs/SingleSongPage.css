@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: row;
     padding: 10px 20px;
-    background-color: #3e3d3d;
+    background-color: #121212;
     color: white;
 }
 
@@ -37,23 +37,28 @@
 .single-song-comment-view {
     width: 600px;
     border-right: 1px solid #c9c8c8;
-    margin-left: 10px
+    margin-left: 10px;
+    color: white
 }
 
 .single-song-like-view {
     margin: 0 20px;
 }
 
+.single-song-like-view h2{
+    color: white;
+}
+
 .song-detail-view button {
     display: block;
-    width: 100px;
+    width: 200px;
     padding: 10px;
     background-color: #ff5500;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: medium;
     font-weight: bold;
 }

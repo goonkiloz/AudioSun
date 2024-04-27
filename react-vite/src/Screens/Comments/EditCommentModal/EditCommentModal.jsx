@@ -45,7 +45,7 @@ function EditComment({ comment, songId }) {
 
     return (
         <div className='edit-comment modalContainer'>
-            <h1 className='title'>Update Your Comment</h1>
+            <h1 className='edit-comment-h1'>Update Your Comment</h1>
 
             {validationErrors && (
                 <p className='comment form-error'>{validationErrors.comment_text}</p>
