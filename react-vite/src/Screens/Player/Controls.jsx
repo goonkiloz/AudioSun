@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
     IoPlaySharp,
@@ -6,7 +6,7 @@ import {
     IoPlayBackSharp,
     IoPlayForwardSharp,
     IoPlaySkipBackSharp,
-    IoPlaySkipForwardSharp
+    IoPlaySkipForwardSharp,
 } from 'react-icons/io5';
 import { useContext, useRef, useCallback } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
