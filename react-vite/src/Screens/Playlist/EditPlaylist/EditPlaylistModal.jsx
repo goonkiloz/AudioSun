@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
 import { useModal } from '../../../context/Modal';
 import { getCurrentUserPlaylistsThunk, putPlaylistThunk } from "../../../redux/playlists";
-
+import './EditPlaylist.css'
 function EditPlaylist({playlistId}){
     const dispatch = useDispatch()
 
@@ -41,7 +41,7 @@ function EditPlaylist({playlistId}){
     };
     return (
         <div className='edit-playlist modalContainer'>
-            <h1>Edit Playlist</h1>
+            <h1 className="edit-playlist-h1">Edit Playlist</h1>
             <form
                     onSubmit={handleSubmit}
                     className="playlistFormContainer"
