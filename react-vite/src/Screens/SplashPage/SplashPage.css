@@ -10,6 +10,9 @@
     margin-top: 40px;
     color: white;
 }
+.splash-img {
+    width: 100vw;
+}
 
 .splash-page-footer {
     display: flex;
