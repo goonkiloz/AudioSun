@@ -9,9 +9,11 @@
 .email {
     width: 243px;
 }
+
 .password {
     width: 211px;
 }
+
 .confirmPassword {
     width: 150px;
 }
@@ -22,6 +24,5 @@
 }
 
 .sign-up-h1 {
-    color: black;
     text-align: center;
 }

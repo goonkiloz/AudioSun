@@ -3,7 +3,7 @@
     flex-direction: column;
     max-width: 1000px;
     margin: 0 auto;
-
+    background-color: #3f3f3f;
 }
 
 
@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: row;
     padding: 10px 20px;
-    background-color: #121212;
+    background-color: #3f3f3f;
     color: white;
 }
 
@@ -45,7 +45,7 @@
     margin: 0 20px;
 }
 
-.single-song-like-view h2{
+.single-song-like-view h2 {
     color: white;
 }
 
