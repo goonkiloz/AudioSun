@@ -4,9 +4,11 @@ import Controls from "./Controls";
 import DisplayTrack from "./DisplayTrack";
 import ProgressBar from "./ProgressBar";
 import "./Player.css"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFromQueueThunk } from "../../redux/queue";
 
 const Player = () => {
+    const dispatch = useDispatch();
     const { currentSong, setCurrentSong, timeProgress, setTimeProgress, isPlaying, setIsPlaying, songIndex, setSongIndex } = useContext(PlayerContext);
     // const [currentSong, setCurrentSong] = useState(undefined);
     // const [isPlaying, setIsPlaying] = useState(false);
@@ -27,13 +29,22 @@ const Player = () => {
     //     setIsPlaying(queuePlaying);
     // }, [queuePlaying])
 
-    const handleNext = () => {
-        if (songIndex >= songQueue.length - 1) {
-            setSongIndex(0);
-            setCurrentSong(songQueue[0]);
+    const handleNext = async () => {
+        if (songQueue.length <= 1) {
+            await dispatch(deleteFromQueueThunk(currentSong.id));
+            setCurrentSong(null);
+            setDuration(0);
+            progressBarRef.current.value = 0;
+            setIsPlaying(false);
+            console.log("?????", currentSong);
         } else {
-            setSongIndex((prev) => prev + 1);
-            setCurrentSong(songQueue[songIndex + 1]);
+            if (songIndex >= songQueue.length - 1) {
+                setSongIndex(0);
+                setCurrentSong(songQueue[0]);
+            } else {
+                setSongIndex((prev) => prev + 1);
+                setCurrentSong(songQueue[songIndex + 1]);
+            }
         }
     };
 
@@ -57,41 +68,44 @@ const Player = () => {
 
     return (
         <span className="player-box">
-
             <div className="inner">
-                <DisplayTrack
-                    currentSong={{ currentSong }}
-                    audioRef={audioRef}
-                    setDuration={setDuration}
-                    progressBarRef={progressBarRef}
-                    songIndex={songIndex}
-                    setSongIndex={setSongIndex}
-                    setCurrentSong={setCurrentSong}
-                    songQueue={songQueue}
-                    handleNext={handleNext}
-                />
-                <Controls
-                    audioRef={audioRef}
-                    progressBarRef={progressBarRef}
-                    duration={duration}
-                    setTimeProgress={setTimeProgress}
-                    isPlaying={isPlaying}
-                    setIsPlaying={setIsPlaying}
-                    currentSong={currentSong}
-                    handleNext={handleNext}
-                    handlePrevious={handlePrevious}
-                    skipBackward={skipBackward}
-                    skipForward={skipForward} />
-                <ProgressBar
-                    progressBarRef={progressBarRef}
-                    audioRef={audioRef}
-                    timeProgress={timeProgress}
-                    setTimeProgress={setTimeProgress}
-                    duration={duration}
-                    songIndex={songIndex}
-                    setSongIndex={setSongIndex}
-                    setCurrentSong={setCurrentSong}
-                    songQueue={songQueue} />
+                {currentSong &&
+                    <>
+                        <DisplayTrack
+                            currentSong={{ currentSong }}
+                            audioRef={audioRef}
+                            setDuration={setDuration}
+                            progressBarRef={progressBarRef}
+                            songIndex={songIndex}
+                            setSongIndex={setSongIndex}
+                            setCurrentSong={setCurrentSong}
+                            songQueue={songQueue}
+                            handleNext={handleNext}
+                        />
+                        <Controls
+                            audioRef={audioRef}
+                            progressBarRef={progressBarRef}
+                            duration={duration}
+                            setTimeProgress={setTimeProgress}
+                            isPlaying={isPlaying}
+                            setIsPlaying={setIsPlaying}
+                            currentSong={currentSong}
+                            handleNext={handleNext}
+                            handlePrevious={handlePrevious}
+                            skipBackward={skipBackward}
+                            skipForward={skipForward} />
+                        <ProgressBar
+                            progressBarRef={progressBarRef}
+                            audioRef={audioRef}
+                            timeProgress={timeProgress}
+                            setTimeProgress={setTimeProgress}
+                            duration={duration}
+                            songIndex={songIndex}
+                            setSongIndex={setSongIndex}
+                            setCurrentSong={setCurrentSong}
+                            songQueue={songQueue} />
+                    </>
+                }
             </div>
         </span>
     )

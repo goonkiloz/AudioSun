@@ -63,11 +63,11 @@ const SingleSongPage = () => {
                     <h3>Artist: {song.artist.username}</h3>
                     <button onClick={() => {
                         playOne(song);
-                        console.log("!!", songQueue);
+                        // console.log("!!", songQueue);
                     }}>Play</button>
                     <button onClick={() => {
                         addToQueue([song]);
-                    }}>Add</button>
+                    }}>Add To Queue</button>
                 </div>
             </div>
 

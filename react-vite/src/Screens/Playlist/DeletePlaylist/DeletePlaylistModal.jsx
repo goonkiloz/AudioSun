@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import { getCurrentUserPlaylistsThunk, removePlaylistThunk } from '../../../redux/playlists';
+import './DeletePlaylist.css'
 
 function DeletePlaylist({ playlistId }) {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function DeletePlaylist({ playlistId }) {
 
     return (
         <div className='delete-playlist modalContainer'>
-            <h1>Confirm Delete Playlist</h1>
+            <h1 className="edit-playlist-h1">Confirm Delete Playlist</h1>
             {errors.message && (
                 <p className=''>{errors.message}</p>
             )}

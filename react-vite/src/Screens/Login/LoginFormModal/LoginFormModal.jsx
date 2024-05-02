@@ -33,7 +33,7 @@ function LoginFormModal() {
 
   return (
     <div className="log-in modalContainer">
-      <h1>Log In</h1>
+      <h1 className="log-in-h1">Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
