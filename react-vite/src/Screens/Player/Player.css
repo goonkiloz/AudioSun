@@ -172,3 +172,16 @@ input[type="range"]:active::-moz-range-thumb {
 .audio-icon {
     margin: 0 10px;
 }
+
+.volume {
+    display: flex;
+    align-items: center;
+}
+
+#volume-slider {
+    transform: rotateZ(270deg);
+}
+
+.volume-slider input[type=range] {
+    width: 30px;
+}

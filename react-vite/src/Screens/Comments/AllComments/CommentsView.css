@@ -23,6 +23,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    padding: 10px;
 }
 
 .comment-delete-button button:hover,

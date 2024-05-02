@@ -44,7 +44,7 @@ function SignupFormModal() {
 
   return (
     <div className='sign-up modalContainer'>
-      <h1>Sign Up</h1>
+      <h1 className='sign-up-h1'>Sign Up</h1>
       {errors.server && <p className="error">{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
