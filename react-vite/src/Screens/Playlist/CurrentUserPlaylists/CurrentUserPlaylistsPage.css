@@ -3,11 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: 	#121212
+    background-color: #121212
 }
 
 
-.current-user-playlist-map{
+.current-user-playlist-map {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -17,7 +17,8 @@
 .current-user-playlist {
     text-align: center;
     margin: 5px;
-    background-color: #ffffff;
+    background-color: #3f3f3f;
+    color: white;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
@@ -25,9 +26,9 @@
 
 
 .current-user-playlist-nav,
-.current-user-playlist-description{
+.current-user-playlist-description {
     text-decoration: none;
-    color: #353535
+    color: white
 }
 
 .current-user-playlist-description {
@@ -37,7 +38,7 @@
     margin: 10px 0;
 }
 
-.current-user-playlist img{
+.current-user-playlist img {
     min-width: 185px;
     max-width: 185px;
     height: 185px;
