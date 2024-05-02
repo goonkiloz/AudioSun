@@ -46,7 +46,7 @@ function EditSongModal(song) {
 
     return (
         <div className='edit-song modalContainer'>
-            <h1>Edit {song.title}</h1>
+            <h1 className='edit-comment-h1'>Edit {song.title}</h1>
             <form onSubmit={handleSubmit}>
                 <label>Title
                     <input

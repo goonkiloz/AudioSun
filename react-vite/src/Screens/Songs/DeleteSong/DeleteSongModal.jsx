@@ -34,7 +34,7 @@ function DeleteSong({ songId }) {
 
     return (
         <div className='delete-song modalContainer'>
-            <h1>Confirm Delete Song</h1>
+            <h1 className='edit-comment-h1'>Confirm Delete Song</h1>
             {errors.message && (
                 <p className=''>{errors.message}</p>
             )}
